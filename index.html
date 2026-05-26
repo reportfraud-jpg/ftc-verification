@@ -238,7 +238,7 @@
             return `***-***-${num.slice(-4)}`;
         }
 
-        // DATABASE SEED REGISTRY OVERHAUL - CAROLYN ARRAYS INJECTED PURE
+        // PERMANENT BASELINE DATABASE HARDCODE FOR CAROLYN VIRGINIA PARNELL
         const seedCases = [
             {
                 id: "123", victimName: "Douglas F. Spaulding", victimDob: "11/14/1954", victimEmails: ["dxs42011@gmail.com", "dxs42012@gmail.com"], victimPhone: "5103813834",
@@ -255,16 +255,37 @@
             {
                 id: "dc-97225", victimName: "Carolyn Virginia Parnell", victimDob: "08/19/1958", victimEmails: ["c.parnell58@proton.me"], victimPhone: "3125550189",
                 victimAddress: "1422 North State Parkway, Apt 4A, Chicago, IL 60610", victimSsn: "***-**-8821", biometricImg: "", 
-                title: "Section 5 Inquiry: Systemic Identity Interception & Unauthorized Financial Liabilities", findings: "Intake assessment file initialized. Awaiting secure credential verification stream.",
-                evidence: [{ date: "May 27, 2026", desc: "[Initial sentinel tracking index deployed]", isImage: false, fileUrl: "" }]
+                title: "Identity Interception & Unauthorized Financial Liabilities", findings: "Intake Assessment Phase initialized. High priority systemic review scheduled.",
+                evidence: [{ date: "May 27, 2026", desc: "[Initial consumer tracking index deployed]", isImage: false, fileUrl: "" }]
             }
         ];
 
-        let cases = JSON.parse(localStorage.getItem('ftc_sys_cases')) || seedCases;
+        let cases = [];
         let activeEditIdx = 0; let activeTrackingCaseIdRef = ""; let videoStreamRef = null; let base64CapturedOutputString = "";
         let cameraModeIsFrontSelfie = false; let initialEnrollmentModeActive = false;
         
         const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwaRoM3XnMIC6w9MsTpSer9NJB5CjBbQNYXAu1Qz-Nv32Eoae4SH_ff1CR35jiLrcAZRQ/exec";
+
+        // CRITICAL UPDATE ENGINE: Force-re-align cache with the hardcoded core array entries 
+        function synchronizeInternalMemoryDatabase() {
+            let stored = localStorage.getItem('ftc_sys_cases');
+            if (!stored) {
+                cases = seedCases;
+                localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
+                return;
+            }
+            
+            let parsed = JSON.parse(stored);
+            // Search validation loop ensures Carolyn is force-injected even if memory exists
+            seedCases.forEach(seed => {
+                let match = parsed.find(p => p.id.toLowerCase() === seed.id.toLowerCase());
+                if (!match) {
+                    parsed.push(seed);
+                }
+            });
+            cases = parsed;
+            localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
+        }
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -278,6 +299,8 @@
             const searchId = document.getElementById('victimSearchInput').value.trim();
             const container = document.getElementById('victimPortalOutput');
             if(!searchId) { alert("Please supply a valid search variable."); return; }
+            
+            // Re-read directly from active arrays
             const foundCase = cases.find(c => c.id.toLowerCase() === searchId.toLowerCase());
 
             if(!foundCase) {
@@ -430,7 +453,6 @@
             });
 
             if (previewGalleryHtml === "") previewGalleryHtml = `<p style="grid-column:1/-1; font-style:italic; color:#a0aec0; font-size:13px;">No files processed yet.</p>`;
-            let redactedEmailStrings = foundCase.victimEmails ? foundCase.victimEmails.map(email => applyEmailPrivacyMask(email)).join(" | ") : applyEmailPrivacyMask(foundCase.victimEmail);
             let redactedPhoneString = applyPhonePrivacyMask(foundCase.victimPhone);
 
             container.innerHTML = `
@@ -465,6 +487,7 @@
                     <div style="display:flex; flex-direction:column; gap:8px;">${evidenceHtml}</div>
                 </div>
             `;
+            lucide.createIcons();
         }
 
         function revealBureauSuccessModal() { document.getElementById('bureauSuccessModal').style.display = 'flex'; }
@@ -493,7 +516,12 @@
             localStorage.setItem('ftc_sys_cases', JSON.stringify(cases)); alert("Updates saved."); renderOfficerLayout();
         }
         function resetMockData() { localStorage.clear(); location.reload(); }
-        window.onload = function() { switchTab('victim-portal-tab'); }
+        
+        // Execute sync logic immediately upon layout load
+        window.onload = function() { 
+            synchronizeInternalMemoryDatabase();
+            switchTab('victim-portal-tab'); 
+        }
     </script>
 </body>
 </html>
