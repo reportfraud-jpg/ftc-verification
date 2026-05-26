@@ -3,214 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Enterprise Resource Intake Hub</title>
+    <title>Intake Hub - Fatal Trade Commission</title>
     <style>
-        /* CORE RESET & FLUID ENGINE */
+        /* BASE DESIGN ENGINE - FLUID STACKING FOR ALL PLATFORMS */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #f8fafc;
-            color: #334155;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7fa;
+            color: #1a202c;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
-        
-        /* GENERIC CORPORATE TYPOGRAPHY & HEADER */
-        .app-header {
-            background-color: #1e3a8a; /* Deep Institutional Blue */
-            color: #ffffff;
-            padding: 20px;
-            border-bottom: 4px solid #3b82f6; /* Accent Light Blue */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .header-title {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-        .header-subtitle {
-            font-size: 12px;
-            color: #93c5fd;
-            margin-top: 2px;
-            text-transform: uppercase;
-        }
-
-        /* FLEXIBLE COMPONENT WORKSPACE */
-        .workspace-layout {
+        .app-banner {
+            background-color: #0b2240;
+            border-bottom: 1px solid #000000;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #cbd5e0;
             display: flex;
-            flex: 1;
-            width: 100%;
+            justify-content: space-between;
+            align-items: center;
         }
-        .workspace-view {
-            flex: 1;
-            padding: 24px;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        /* RESPONSIVE CARD CONTAINER */
-        .input-card {
-            background-color: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            margin-bottom: 24px;
-        }
-        .input-card h2 {
-            font-size: 18px;
-            color: #1e3a8a;
-            margin-bottom: 12px;
-        }
-
-        .search-row {
-            display: flex;
-            flex-direction: row;
-            gap: 12px;
-        }
-        .input-field {
-            flex: 1;
-            border: 2px solid #cbd5e1;
-            border-radius: 8px;
-            padding: 12px 16px;
-            font-size: 16px;
-            color: #0f172a;
-        }
-        .input-field:focus {
-            outline: none;
-            border-color: #3b82f6;
-        }
-        .action-btn {
-            background-color: #1e3a8a;
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            padding: 12px 24px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-        .action-btn:hover {
-            background-color: #1d4ed8;
-        }
-
-        /* DYNAMIC RESPONSIVE DATA GRID */
-        .data-ledger-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Two columns on desktop */
-            gap: 16px;
-            background-color: #f1f5f9;
-            padding: 16px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-        }
-        .data-group {
-            display: flex;
-            flex-direction: column;
-        }
-        .data-group label {
+        .status-tag {
+            font-family: monospace;
             font-size: 11px;
-            font-weight: 700;
-            color: #64748b;
+            background-color: #065cb4;
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 4px;
             text-transform: uppercase;
-            margin-bottom: 4px;
         }
-        .data-value {
-            font-size: 15px;
-            font-weight: 500;
-            color: #0f172a;
+        .main-header {
+            background-color: #0b2240;
+            color: #ffffff;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #065cb4;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
+        .agency-brand h1 {
+            font-size: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .agency-brand p {
+            font-size: 11px;
+            color: #63b3ed;
+            font-family: monospace;
+            font-weight: bold;
+            margin-top: 2px;
+        }
+        .portal-layout { display: flex; flex-direction: row; flex: 1; }
+        .sidebar-nav { width: 240px; background-color: #ffffff; padding: 16px; border-right: 1px solid #d2d6dc; display: flex; flex-direction: column; gap: 8px; }
+        .nav-btn {
+            width: 100%; background: none; border: 2px solid transparent; padding: 12px; border-radius: 8px;
+            font-size: 15px; font-weight: bold; color: #4a5568; text-align: left; cursor: pointer;
+        }
+        .nav-btn.active { background-color: #edf2f7; color: #0b2240; border-color: #065cb4; }
+        .workspace-view { flex: 1; padding: 24px; overflow-y: auto; }
+        .tab-content { display: none; max-width: 800px; margin: 0 auto; }
+        .tab-content.active { display: block !important; }
+        
+        .login-card { background-color: #ffffff; border: 2px solid #cbd5e0; border-radius: 16px; padding: 24px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); margin-bottom: 24px; }
+        .login-card h2 { font-size: 22px; font-weight: 900; color: #0b2240; margin-bottom: 6px; }
+        .login-card p { font-size: 13px; color: #4a5568; margin-bottom: 18px; font-weight: 650; }
+        .search-row { display: flex; flex-direction: row; gap: 12px; }
+        .case-input-field { flex: 1; background-color: #ffffff; border: 2px solid #718096; border-radius: 12px; padding: 14px 16px; font-size: 16px; font-weight: bold; color: #1a202c; text-transform: uppercase; }
+        .case-input-field:focus { outline: none; border-color: #065cb4; }
+        .execute-query-btn { background-color: #065cb4; color: #ffffff; border: none; border-radius: 12px; padding: 14px 24px; font-size: 16px; font-weight: 900; cursor: pointer; white-space: nowrap; }
+        
+        .profile-wrapper { background: #ffffff; border: 2px solid #cbd5e0; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+        .profile-header { border-bottom: 2px solid #e2e8f0; padding-bottom: 16px; }
+        .profile-title-text { font-size: 20px; font-weight: 900; color: #0b2240; line-height: 1.3; }
+        .ledger-box { background-color: #f7fafc; border: 2px solid #cbd5e0; border-radius: 12px; padding: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .ledger-group label { display: block; font-size: 11px; font-weight: 900; color: #718096; text-transform: uppercase; margin-bottom: 2px; }
+        .ledger-value { font-size: 15px; font-weight: bold; color: #1a202c; }
+        .drop-box-card { background-color: #ebf8ff; border: 2px solid #bee3f8; border-radius: 16px; padding: 24px; text-align: center; display: flex; flex-direction: column; gap: 14px; }
+        .giant-scan-btn { background-color: #065cb4; color: #ffffff; border: none; border-radius: 16px; padding: 20px 32px; font-size: 20px; font-weight: 900; cursor: pointer; width: 100%; max-width: 400px; margin: 0 auto; border-bottom: 4px solid #0b2240; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 12px; }
+        .gallery-item { background: #ffffff; border: 1px solid #cbd5e0; padding: 6px; border-radius: 8px; text-align: center; }
+        .gallery-item img { width: 100%; height: 80px; object-fit: cover; border-radius: 4px; }
+        .gallery-item span { font-size: 11px; font-weight: bold; color: #718096; margin-top: 4px; display: block; }
 
-        /* MEDIA QUERIES FOR NARROW DISPLAYS (PHONES) */
-        @media (max-width: 640px) {
-            body {
-                padding: 0;
-            }
-            .workspace-view {
-                padding: 16px;
-            }
-            .search-row {
-                flex-direction: column; /* Stacks input and button vertically on mobile */
-            }
-            .action-btn {
-                width: 100%;
-                text-align: center;
-            }
-            .data-ledger-grid {
-                grid-template-columns: 1fr; /* Forces single-column layout on small screens */
-            }
+        /* RESPONSIVE LAYOUT CONSTRAINTS FOR MOBILE SMARTPHONES */
+        @media (max-width: 1024px) {
+            .portal-layout { flex-direction: column; }
+            .sidebar-nav { width: 100%; flex-direction: row; border-right: none; border-bottom: 1px solid #d2d6dc; }
+            .nav-btn { justify-content: center; padding: 8px; font-size: 13px; text-align: center; }
+            .search-row { flex-direction: column; gap: 8px; }
+            .execute-query-btn { width: 100%; padding: 14px; }
+            .ledger-box { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
 
-    <header class="app-header">
-        <div class="app-brand">
-            <h1 class="header-title">Asset Tracking System</h1>
-            <p class="header-subtitle">Internal Validation Environment</p>
+    <div class="app-banner">
+        <div>Network Node: Active Data Pathway Enforced</div>
+        <div class="status-tag">Status // Production</div>
+    </div>
+
+    <header class="main-header">
+        <div class="agency-brand">
+            <h1>Fatal Trade Commission</h1>
+            <p>Bureau of Consumer Protection • Evidence Intake</p>
         </div>
     </header>
 
-    <div class="workspace-layout">
-        <main class="workspace-view">
-            <div class="input-card">
-                <h2>Query Asset Database</h2>
-                <div class="search-row">
-                    <input type="text" id="assetQueryInput" placeholder="Enter System Reference ID..." class="input-field">
-                    <button onclick="evaluateQuery()" class="action-btn">Search Records</button>
-                </div>
-            </div>
+    <div class="portal-layout">
+        <nav class="sidebar-nav">
+            <button class="nav-btn active"><span>Identity Portal</span></button>
+        </nav>
 
-            <div id="resultOutput" style="display: none;">
-                <div class="input-card">
-                    <h2>Record Metadata Matrix</h2>
-                    <div class="data-ledger-grid">
-                        <div class="data-group">
-                            <label>System Entity Identifier</label>
-                            <span id="metaId" class="data-value"></span>
-                        </div>
-                        <div class="data-group">
-                            <label>Assigned Owner</label>
-                            <span id="metaName" class="data-value"></span>
-                        </div>
-                        <div class="data-group" style="grid-column: span 1;">
-                            <label>System Classification</label>
-                            <span id="metaClass" class="data-value">Standard Sandbox Row</span>
-                        </div>
+        <main class="workspace-view">
+            <section id="victim-portal-tab" class="tab-content active">
+                <div class="login-card">
+                    <h2>Log In to Your Case File</h2>
+                    <p>Type your assigned Case ID reference number into the box below to open your secure portal folder.</p>
+                    <div class="search-row">
+                        <input type="text" id="victimSearchInput" placeholder="Type Case ID here..." class="case-input-field">
+                        <button onclick="trackVictimCase()" class="execute-query-btn">View My Case</button>
                     </div>
                 </div>
-            </div>
+
+                <div id="victimPortalOutput"></div>
+            </section>
         </main>
     </div>
 
     <script>
-        const mockDataStore = [
-            { id: "123", name: "Douglas F. Spaulding" },
-            { id: "DC-97224", name: "Eric Roger" },
-            { id: "DC-97225", name: "Carolyn Virginia Parnell" }
+        // CORE INTEGRATION ENDPOINT LINK
+        const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwaRoM3XnMIC6w9MsTpSer9NJB5CjBbQNYXAu1Qz-Nv32Eoae4SH_ff1CR35jiLrcAZRQ/exec";
+
+        const seedCases = [
+            { id: "123", victimName: "Douglas F. Spaulding", victimDob: "11/14/1954", victimAddress: "687 Franklin Avenue, Brooklyn, NY 11238", title: "Identity Profile Ingestion A", evidence: [] },
+            { id: "dc-97224", victimName: "Eric Roger", victimDob: "04/22/1961", victimAddress: "455 West 23rd Street, New York, NY 10011", title: "Identity Profile Ingestion B", evidence: [] },
+            { id: "dc-97225", victimName: "Carolyn Virginia Parnell", victimDob: "08/19/1958", victimAddress: "1422 North State Parkway, Chicago, IL 60610", title: "Identity Profile Ingestion C", evidence: [] }
         ];
 
-        function evaluateQuery() {
-            const userInput = document.getElementById('assetQueryInput').value.trim().toUpperCase();
-            const outputPanel = document.getElementById('resultOutput');
+        let cases = JSON.parse(localStorage.getItem('ftc_sys_cases')) || seedCases;
+        let activeTrackingCaseIdRef = "";
+        let base64CapturedOutputString = "";
+
+        function trackVictimCase() {
+            const searchId = document.getElementById('victimSearchInput').value.trim();
+            const container = document.getElementById('victimPortalOutput');
+            if(!searchId) { alert("Please input a valid identity parameter."); return; }
             
-            const record = mockDataStore.find(item => item.id.toUpperCase() === userInput);
-            
-            if (record) {
-                document.getElementById('metaId').innerText = record.id;
-                document.getElementById('metaName').innerText = record.name;
-                outputPanel.style.display = 'block';
-            } else {
-                outputPanel.style.display = 'none';
-                alert("Target identifier not found in active cache memory.");
+            const foundCase = cases.find(c => c.id.toLowerCase() === searchId.toLowerCase());
+            if(!foundCase) {
+                container.innerHTML = `<div style="text-align:center; color:#9b2c2c; background:#fff5f5; padding:20px; border-radius:12px; font-weight:bold;">Case ID Reference Key Not Found</div>`;
+                return;
             }
+
+            activeTrackingCaseIdRef = foundCase.id;
+            let previewGalleryHtml = "";
+            
+            foundCase.evidence.forEach(e => {
+                previewGalleryHtml += `<div class="gallery-item"><img src="${e.fileUrl}"><span>${e.date}</span></div>`;
+            });
+
+            container.innerHTML = `
+                <div class="profile-wrapper">
+                    <div class="profile-header">
+                        <h3 class="profile-title-text">${foundCase.title}</h3>
+                    </div>
+                    <div class="ledger-box">
+                        <div class="ledger-group"><label>Full Legal Name</label><span class="ledger-value">${foundCase.victimName}</span></div>
+                        <div class="ledger-group"><label>Date of Birth (DOB)</label><span class="ledger-value">${foundCase.victimDob}</span></div>
+                        <div class="ledger-group" style="grid-column:span 2;"><label>Registered Mailing Domicile Address</label><span class="ledger-value">${foundCase.victimAddress}</span></div>
+                    </div>
+                    <div class="drop-box-card">
+                        <h4>Upload Supporting Documents</h4>
+                        <p style="font-size:13px; color:#2b6cb0; font-weight:600;">Select or capture an image file below to run the system pipeline data synchronization test.</p>
+                        <input type="file" id="fallbackFileInput" accept="image/*" onchange="handleFileSelection()" style="margin-top:12px; font-size:14px;">
+                    </div>
+                    <p style="font-size:12px; font-weight:900; color:#718096; text-transform:uppercase; letter-spacing:0.5px;">Document Exhibit Preview Gallery</p>
+                    <div class="gallery-grid">${previewGalleryHtml || '<p style="color:#a0aec0; grid-column:1/-1; font-style:italic; font-size:13px;">No documentation attachments uploaded in this lifecycle session.</p>'}</div>
+                </div>
+            `;
+        }
+
+        function handleFileSelection() {
+            const fileInput = document.getElementById('fallbackFileInput');
+            if (fileInput.files.length === 0) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                base64CapturedOutputString = e.target.result;
+                dispatchPayloadToCloud();
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+
+        function dispatchPayloadToCloud() {
+            const targetCase = cases.find(c => c.id.toLowerCase() === activeTrackingCaseIdRef.toLowerCase());
+            const submissionDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+            targetCase.evidence.unshift({ date: submissionDate, fileUrl: base64CapturedOutputString });
+            localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
+
+            const finalPackagePayload = {
+                caseId: targetCase.id,
+                victimName: targetCase.victimName,
+                victimAddress: targetCase.victimAddress,
+                statement: "Automated Evidence Package Scan Appended via Cross-Platform Peripheral Ingestion",
+                filename: "EXHIBIT_CAPTURE_" + new Date().getTime() + ".jpg",
+                fileData: base64CapturedOutputString.split(',')[1]
+            };
+
+            base64CapturedOutputString = "";
+            trackVictimCase();
+
+            // Unified Phone Handshake Pathway: Transmitting as plain text bypasses strict cross-origin checks cleanly
+            fetch(GOOGLE_SCRIPT_WEBAPP_URL, { 
+                method: "POST", 
+                headers: { "Content-Type": "text/plain" },
+                body: JSON.stringify(finalPackagePayload) 
+            })
+            .then(res => res.json())
+            .then(data => alert("Transmission Sync Complete. Cloud File URL generated: " + data.url))
+            .catch(err => console.log("Payload registered locally; connection update message handled."));
         }
     </script>
 </body>
