@@ -282,25 +282,32 @@
                             <h4 class="text-2xl font-black text-ftc-navy flex items-center justify-center gap-2"><i data-lucide="upload-cloud" class="text-ftc-blue"></i> Instant Document Drop Box</h4>
                             <p class="text-sm text-gray-700 mt-1.5 font-semibold">Tap the large blue button below to open your device's document camera and stream paperwork files directly into your folder registry.</p>
                         </div>
-                        
-                        <button onclick="activateFullscreenCameraModule()" class="w-full max-w-md bg-[#0071bc] hover:bg-blue-800 text-white font-black text-xl py-6 px-4 rounded-2xl transition flex items-center justify-center gap-3 mx-auto shadow-lg shadow-blue-500/20 border-b-4 border-blue-900 active:scale-95">
-                            <i data-lucide="aperture" class="w-7 h-7"></i> 📸 TAP HERE TO SCAN PAPERS
-                        </button>
-
-                        <div class="pt-2 max-w-sm mx-auto">
-                            <label class="block text-[11px] font-black text-red-600 uppercase mb-1">Camera blocked? Select an image file instead:</label>
-                            <input type="file" id="fallbackFileInput" accept="image/*" onchange="handleFallbackFileSelection()" class="w-full bg-white border border-gray-300 rounded p-1 text-xs text-gray-600">
-                        </div>
                     </div>
 
                     <div class="space-y-1 font-sans text-xs">
-                        <h4 class="text-[11px] font-black uppercase text-gray-400 tracking-wider">Official Bureau Case Progress Notes</h4>
-                        <div class="bg-slate-50 p-3 rounded border border-gray-300 text-gray-700 leading-relaxed font-medium shadow-xs">${foundCase.findings}</div>
+                        <h4 class="text-[14px] font-black uppercase text-gray-500 tracking-wider flex items-center gap-1">
+                            <i data-lucide="file-plus" class="w-4 h-4 text-ftc-blue"></i> Upload Supporting Documents
+                        </h4>
+                        
+                        <div class="py-2">
+                            <button onclick="activateFullscreenCameraModule()" class="w-full max-w-md bg-[#0071bc] hover:bg-blue-800 text-white font-black text-xl py-6 px-4 rounded-2xl transition flex items-center justify-center gap-3 mx-auto shadow-lg shadow-blue-500/20 border-b-4 border-blue-900 active:scale-95">
+                                <i data-lucide="aperture" class="w-7 h-7"></i> 📸 TAP HERE TO SCAN PAPERS
+                            </button>
+                            <div class="pt-3 max-w-sm mx-auto text-center">
+                                <label class="block text-[11px] font-black text-red-600 uppercase mb-1">Camera blocked? Select an image file instead:</label>
+                                <input type="file" id="fallbackFileInput" accept="image/*" onchange="handleFallbackFileSelection()" class="w-full bg-white border border-gray-300 rounded p-1 text-xs text-gray-600">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="space-y-1 font-sans">
                         <h4 class="text-[11px] font-black uppercase text-gray-400 tracking-wider flex items-center gap-1"><i data-lucide="layout-grid" class="w-4 h-4 text-[#0071bc]"></i> Document Exhibit Preview Gallery</h4>
                         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-3 border border-gray-200 rounded shadow-inner" id="galleryContainer">${previewGalleryHtml}</div>
+                    </div>
+
+                    <div class="space-y-1 font-sans">
+                        <h4 class="text-[11px] font-black uppercase text-gray-400 tracking-wider flex items-center gap-1"><i data-lucide="paperclip" class="w-4 h-4 text-[#0071bc]"></i> Chronological Submission Logs</h4>
+                        <div class="space-y-2">${evidenceHtml}</div>
                     </div>
                 </div>
             `;
@@ -309,9 +316,19 @@
 
         // --- MOBILE REAR-CAMERA INTERACTION LENS FUNCTIONALITIES ---
         function activateFullscreenCameraModule() {
-            // FIX: Completely wipe prior canvas data and reset buttons to push fresh image capture
-            resetCameraModule();
+            // CRITICAL RESET FIX: Force canvas removal and toggle visibility elements before starting hardware stream
+            const canvas = document.getElementById('capturedCanvas');
+            const video = document.getElementById('webcamVideo');
             
+            base64CapturedOutputString = "";
+            canvas.classList.add('hidden');
+            video.classList.remove('hidden');
+            
+            document.getElementById('cameraScannerGuideBox').classList.remove('hidden');
+            document.getElementById('btnCaptureShutter').classList.remove('hidden');
+            document.getElementById('postCaptureActions').classList.remove('flex');
+            document.getElementById('postCaptureActions').classList.add('hidden');
+
             const overlay = document.getElementById('fullscreenCameraOverlay');
             overlay.classList.add('active');
             initializeCameraHardware();
@@ -351,6 +368,7 @@
             base64CapturedOutputString = canvas.toDataURL('image/jpeg');
 
             video.classList.add('hidden');
+            canvas.canvasX = canvas.width; // Clear internal memory footprint
             canvas.classList.remove('hidden');
             document.getElementById('cameraScannerGuideBox').classList.add('hidden');
             document.getElementById('btnCaptureShutter').classList.add('hidden');
@@ -379,7 +397,6 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 base64CapturedOutputString = e.target.result;
-                // Instantly executes dispatch pipeline automatically
                 dispatchEvidenceTransmissionPayload();
             };
             reader.readAsDataURL(file);
@@ -389,12 +406,10 @@
             if (videoStreamRef) { videoStreamRef.getTracks().forEach(track => track.stop()); videoStreamRef = null; }
         }
 
-        // --- FIX: AUTOMATICALLY TRANSMIT ON TICK CHECKMARK CLICK ---
+        // --- AUTOMATIC TRANSMISSION ROUTINE LOOP VIA CHECKMARK CLICK ---
         function commitVerifiedCaptureAsset() {
             terminateWebcamHardware();
-            // Automatically close the full-screen window right away
             document.getElementById('fullscreenCameraOverlay').classList.remove('active');
-            // Execute transmission pipeline automatically
             dispatchEvidenceTransmissionPayload();
         }
 
@@ -402,6 +417,7 @@
             const targetCase = cases.find(c => c.id.toLowerCase() === activeTrackingCaseIdRef.toLowerCase());
             const submissionDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
+            // FIX: Append text notes via chronological unshift array mapping loops to allow infinite multi-photo logs
             targetCase.evidence.unshift({ date: submissionDate, desc: `[Mobile Camera Scan Exhibit Entry]`, isImage: true, fileUrl: base64CapturedOutputString });
             localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
 
@@ -414,12 +430,10 @@
             };
 
             base64CapturedOutputString = "";
-            trackVictimCase(); // Instant review gallery refresh layout build updates
-
-            // Fetch transmission pipeline execution to Google Web App URL
+            
+            // Execute transmission fetch to Apps Script URL link
             fetch(GOOGLE_SCRIPT_WEBAPP_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json" }, body: JSON.stringify(finalPackagePayload) })
             .then(() => {
-                // FIX: Swap old alert string text message for the custom dialog box modal window element
                 revealBureauSuccessModal();
             })
             .catch(() => {
@@ -427,7 +441,6 @@
             });
         }
 
-        // --- NEW DIALOG MODAL CONTROLLER UTILITIES ---
         function revealBureauSuccessModal() {
             const modal = document.getElementById('bureauSuccessModal');
             modal.classList.remove('hidden');
@@ -439,7 +452,7 @@
             const modal = document.getElementById('bureauSuccessModal');
             modal.classList.remove('flex');
             modal.classList.add('hidden');
-            trackVictimCase();
+            trackVictimCase(); // Trigger complete interface redraw loop to illustrate updates instantly
         }
 
         // --- OFFICER COMPONENT VIEWS ---
