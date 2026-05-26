@@ -65,6 +65,7 @@
         .workspace-view { flex: 1; padding: 24px; overflow-y: auto; }
         .tab-content { display: none; max-width: 800px; margin: 0 auto; }
         .tab-content.active { display: block !important; }
+        
         .login-card { background-color: #ffffff; border: 2px solid #cbd5e0; border-radius: 16px; padding: 24px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); margin-bottom: 24px; }
         .login-card h2 { font-size: 22px; font-weight: 900; color: #0b2240; margin-bottom: 6px; }
         .login-card p { font-size: 13px; color: #4a5568; margin-bottom: 18px; font-weight: 650; }
@@ -72,6 +73,12 @@
         .case-input-field { flex: 1; background-color: #ffffff; border: 2px solid #718096; border-radius: 12px; padding: 14px 16px; font-size: 16px; font-weight: bold; color: #1a202c; text-transform: uppercase; }
         .case-input-field:focus { outline: none; border-color: #0071bc; }
         .execute-query-btn { background-color: #0071bc; color: #ffffff; border: none; border-radius: 12px; padding: 14px 24px; font-size: 16px; font-weight: 900; cursor: pointer; white-space: nowrap; }
+        
+        /* GATEWAY VERIFICATION SECURITY SHIELD CARD */
+        .verification-gate-card { background-color: #fffaf0; border: 2px solid #fbd38d; border-radius: 16px; padding: 24px; text-align: center; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .gate-title { font-size: 18px; font-weight: bold; color: #dd6b20; text-transform: uppercase; letter-spacing: 0.5px; }
+        .gate-btn { background-color: #dd6b20; color: white; border: none; border-radius: 12px; padding: 18px 24px; font-size: 15px; font-weight: 900; cursor: pointer; text-transform: uppercase; box-shadow: 0 4px 14px rgba(221,107,32,0.3); border-bottom: 4px solid #9c4221; }
+        
         .output-placeholder { background-color: #ffffff; border: 2px dashed #cbd5e0; border-radius: 16px; padding: 48px; text-align: center; color: #718096; }
         .placeholder-title { font-size: 16px; font-weight: bold; color: #4a5568; margin-top: 8px; }
         .profile-wrapper { background: #ffffff; border: 2px solid #cbd5e0; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 20px; }
@@ -87,8 +94,6 @@
         .ledger-value { font-size: 15px; font-weight: bold; color: #1a202c; }
         .ledger-value.protected { font-family: monospace; color: #2d3748; }
         .drop-box-card { background-color: #ebf8ff; border: 2px solid #bee3f8; border-radius: 16px; padding: 24px; text-align: center; display: flex; flex-direction: column; gap: 14px; }
-        .drop-box-title { font-size: 18px; font-weight: 900; color: #0b2240; }
-        .drop-box-desc { font-size: 13px; color: #2b6cb0; font-weight: 600; max-width: 500px; margin: 0 auto; }
         .giant-scan-btn { background-color: #0071bc; color: #ffffff; border: none; border-radius: 16px; padding: 20px 32px; font-size: 20px; font-weight: 900; cursor: pointer; width: 100%; max-width: 400px; margin: 0 auto; border-bottom: 4px solid #0b2240; }
         .section-title { font-size: 12px; font-weight: 900; color: #718096; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; margin-top: 8px; }
         .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; background-color: #f7fafc; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; }
@@ -98,6 +103,7 @@
         .log-row { background: #f7fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; font-size: 14px; display: flex; gap: 12px; }
         .log-date { background-color: #cbd5e0; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-weight: bold; font-size: 12px; height: fit-content; }
         .log-text { font-weight: 600; color: #2d3748; }
+        
         .fullscreen-cam-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #000000; z-index: 9999; flex-direction: column; justify-content: space-between; align-items: center; padding: 24px; }
         .cam-top-bar { width: 100%; display: flex; justify-content: space-between; align-items: center; color: #ffffff; font-family: monospace; border-bottom: 1px solid #2d3748; padding-bottom: 12px; }
         .lens-frame { width: 100%; max-width: 400px; flex: 1; margin: 16px 0; position: relative; border-radius: 16px; border: 2px solid #2d3748; overflow: hidden; background-color: #1a202c; display: flex; align-items: center; justify-content: center; }
@@ -109,6 +115,7 @@
         .action-btn { flex: 1; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 900; cursor: pointer; border: none; text-transform: uppercase; }
         .btn-retake { background-color: #2d3748; color: #a0aec0; border: 1px solid #4a5568; }
         .btn-correct { background-color: #38a169; color: #ffffff; border-bottom: 4px solid #22543d; }
+        
         .modal-screen { position: fixed; inset: 0; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.8); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 16px; }
         .modal-body { background: #ffffff; border: 4px solid #38a169; border-radius: 24px; width: 100%; max-width: 400px; padding: 24px; text-align: center; display: flex; flex-direction: column; gap: 16px; }
         .modal-icon { width: 64px; height: 64px; background-color: #c6f6d5; color: #38a169; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; border: 2px solid #a3e635; }
@@ -196,13 +203,13 @@
 
     <div id="fullscreenCameraOverlay" class="fullscreen-cam-overlay">
         <div class="cam-top-bar">
-            <span>FTC SECURE DOCUMENT LENS ACTIVE</span>
+            <span id="camOverlayTitle">FTC SECURE LENS ACTIVE</span>
             <button onclick="deactivateFullscreenCamera()" style="background:#e53e3e; color:white; border:none; padding:6px 12px; border-radius:6px; font-weight:bold; cursor:pointer;">CLOSE</button>
         </div>
         <div class="lens-frame">
             <video id="webcamVideo" autoplay playsinline></video>
             <canvas id="capturedCanvas" class="hidden"></canvas>
-            <div id="cameraScannerGuideBox" class="guide-box"><span>ALIGN PAPERS INSIDE FRAME</span></div>
+            <div id="cameraScannerGuideBox" class="guide-box"><span id="camOverlayGuideLabel">ALIGN PAPERS INSIDE FRAME</span></div>
         </div>
         <div style="width: 100%; max-w: 360px; display: flex; flex-direction: column; align-items: center; gap: 16px;">
             <button id="btnCaptureShutter" onclick="executeHardwareSnapshot()" class="shutter-btn"><span class="shutter-inner"></span></button>
@@ -224,7 +231,7 @@
 
     <script>
         function applyEmailPrivacyMask(email) {
-            if (!email) return ""; const parts = e = email.split('@'); if (parts.length !== 2) return email;
+            if (!email) return ""; const parts = email.split('@'); if (parts.length !== 2) return email;
             return `${parts[0][0]}${'*'.repeat(parts[0].length - 2)}${parts[0].slice(-1)}@${parts[1]}`;
         }
         function applyPhonePrivacyMask(phone) {
@@ -232,6 +239,7 @@
             return `***-***-${num.slice(-4)}`;
         }
 
+        // SEED DATA CONFIGURATION (Eric has no profile picture initially, Douglas already has one locked)
         const seedCases = [
             {
                 id: "123", victimName: "Douglas F. Spaulding", victimDob: "11/14/1954", victimEmails: ["dxs42011@gmail.com", "dxs42012@gmail.com"], victimPhone: "5103813834",
@@ -241,7 +249,7 @@
             },
             {
                 id: "dc-97224", victimName: "Eric Roger", victimDob: "04/22/1961", victimEmails: ["e.roger.bcp@proton.me"], victimPhone: "2125550143",
-                victimAddress: "455 West 23rd Street, Apt 3B, New York, NY 10011", victimSsn: "***-**-1432", biometricImg: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200", 
+                victimAddress: "455 West 23rd Street, Apt 3B, New York, NY 10011", victimSsn: "***-**-1432", biometricImg: "", 
                 title: "Malicious Identity Hijacking & Unauthorized Lines of Credit", findings: "High-priority systemic review scheduled.",
                 evidence: [{ date: "May 26, 2026", desc: "[Initial consumer dispute affidavit indexed]", isImage: false, fileUrl: "" }]
             }
@@ -249,7 +257,8 @@
 
         let cases = JSON.parse(localStorage.getItem('ftc_sys_cases')) || seedCases;
         let activeEditIdx = 0; let activeTrackingCaseIdRef = ""; let videoStreamRef = null; let base64CapturedOutputString = "";
-        
+        let cameraModeIsFrontSelfie = false; let initialEnrollmentModeActive = false;
+
         const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwaRoM3XnMIC6w9MsTpSer9NJB5CjBbQNYXAu1Qz-Nv32Eoae4SH_ff1CR35jiLrcAZRQ/exec";
 
         function switchTab(tabId) {
@@ -272,8 +281,160 @@
             }
 
             activeTrackingCaseIdRef = foundCase.id;
-            let evidenceHtml = ""; let previewGalleryHtml = "";
+
+            // CASE 1: FIRST TIME USER (NO PROFILE PIC EXISTS IN BASELINE SYSTEM)
+            if (!foundCase.biometricImg || foundCase.biometricImg === "") {
+                initialEnrollmentModeActive = true;
+                container.innerHTML = `
+                    <div class="verification-gate-card" style="background-color: #f7fafc; border-color: #cbd5e0;">
+                        <h4 class="gate-title" style="color: #0b2240;">Initial Identity Registration Required</h4>
+                        <p style="font-size: 14px; font-weight: bold; color: #4a5568;">Your account profile photo is missing. You must take an initial setup selfie to verify and lock down your file portfolio credentials.</p>
+                        <button onclick="launchSecureSelfieVerification(true)" class="gate-btn" style="background-color: #0b2240; border-color: #02142b;">📸 TAKE ACCOUNT SETUP SELFIE</button>
+                    </div>
+                `;
+                return;
+            }
+
+            // CASE 2: RETURNING USER (MUST PASS THE CHECKPOINT MANDATORY SCAN EVERY TIME)
+            if (!foundCase.passedGateThisSession) {
+                initialEnrollmentModeActive = false;
+                container.innerHTML = `
+                    <div class="verification-gate-card">
+                        <h4 class="gate-title">Security Checkpoint Gate</h4>
+                        <p style="font-size:14px; font-weight:bold; color:#744210;">Biometric matching protocol active. To prevent identity duplication, you must authorize a live validation check before opening data panels.</p>
+                        <button onclick="launchSecureSelfieVerification(false)" class="gate-btn">🔒 Click a selfie to verify my biometric facial scan to access sensitive case details</button>
+                    </div>
+                `;
+                return;
+            }
+
+            // CASE 3: PASSED GATEWAY VERIFICATION -> DRAW FULL PANEL INFO MODULES NATIVELY
+            renderAuthenticatedCitizenDashboard(foundCase, container);
+        }
+
+        // --- CAMERA OVERRIDE TRIGGERS ---
+        function launchSecureSelfieVerification(isInitialSetup) {
+            resetCameraModule();
+            cameraModeIsFrontSelfie = true;
             
+            document.getElementById('camOverlayTitle').innerText = "SECURE BIOMETRIC FACIAL INTEGRATION DETECTED";
+            document.getElementById('camOverlayGuideLabel').innerText = "CENTER YOUR FACE IN VIEWPORT";
+            document.getElementById('fullscreenCameraOverlay').style.display = 'flex';
+            
+            initializeUniversalCameraLens(true); // Force Front User Facing stream
+        }
+
+        function activateFullscreenCameraModule() {
+            resetCameraModule();
+            cameraModeIsFrontSelfie = false; // Set to document rear capture mode
+            
+            document.getElementById('camOverlayTitle').innerText = "FTC SECURE DOCUMENT LENS ACTIVE";
+            document.getElementById('camOverlayGuideLabel').innerText = "ALIGN PAPERS INSIDE FRAME";
+            document.getElementById('fullscreenCameraOverlay').style.display = 'flex';
+            
+            initializeUniversalCameraLens(false); // Use optimal back environment focus lens
+        }
+
+        function initializeUniversalCameraLens(forceFrontSelfie) {
+            const video = document.getElementById('webcamVideo');
+            const constraints = { video: { facingMode: forceFrontSelfie ? "user" : "environment" } };
+
+            navigator.mediaDevices.getUserMedia(constraints)
+                .then(stream => { videoStreamRef = stream; video.srcObject = stream; })
+                .catch(() => {
+                    navigator.mediaDevices.getUserMedia({ video: true })
+                        .then(s => { videoStreamRef = s; video.srcObject = s; })
+                        .catch(() => { alert("Camera layout device hardware blocked."); deactivateFullscreenCamera(); });
+                });
+        }
+
+        function executeHardwareSnapshot() {
+            const video = document.getElementById('webcamVideo'); const canvas = document.getElementById('capturedCanvas'); const ctx = canvas.getContext('2d');
+            canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            base64CapturedOutputString = canvas.toDataURL('image/jpeg');
+            video.style.display = 'none'; canvas.classList.remove('hidden');
+            document.getElementById('cameraScannerGuideBox').style.display = 'none';
+            document.getElementById('btnCaptureShutter').style.display = 'none';
+            document.getElementById('postCaptureActions').style.display = 'flex';
+        }
+
+        function resetCameraModule() {
+            const video = document.getElementById('webcamVideo'); const canvas = document.getElementById('capturedCanvas');
+            base64CapturedOutputString = ""; canvas.classList.add('hidden'); video.style.display = 'block';
+            document.getElementById('cameraScannerGuideBox').style.display = 'flex';
+            document.getElementById('btnCaptureShutter').style.display = 'block';
+            document.getElementById('postCaptureActions').style.display = 'none';
+        }
+
+        function terminateWebcamHardware() { if (videoStreamRef) { videoStreamRef.getTracks().forEach(t => t.stop()); videoStreamRef = null; } }
+        function deactivateFullscreenCamera() { terminateWebcamHardware(); document.getElementById('fullscreenCameraOverlay').style.display = 'none'; resetCameraModule(); }
+
+        // --- VERIFIED CAPTURE COMMIT ARBITRATOR LOOP LINK ---
+        function commitVerifiedCaptureAsset() {
+            terminateWebcamHardware();
+            document.getElementById('fullscreenCameraOverlay').style.display = 'none';
+
+            const targetCase = cases.find(c => c.id.toLowerCase() === activeTrackingCaseIdRef.toLowerCase());
+
+            if (cameraModeIsFrontSelfie) {
+                if (initialEnrollmentModeActive) {
+                    // Step A: Save first selfie permanently as their core profile snapshot asset
+                    targetCase.biometricImg = base64CapturedOutputString;
+                    targetCase.passedGateThisSession = true; // Open dashboard panel gate
+                    localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
+                    
+                    // Dispatch setup payload trace to cloud spreadsheet records
+                    dispatchPayloadToCloud(targetCase, "Initial Security Verification Profile Picture Setup Executed Natively");
+                } else {
+                    // Step B: Returning User selfie verified successfully -> unlock page visibility instantly
+                    targetCase.passedGateThisSession = true;
+                    trackVictimCase(); // Trigger clean dashboard redraw
+                }
+            } else {
+                // Step C: Regular document paper capture flow submission track execution
+                dispatchEvidenceTransmissionPayload(targetCase);
+            }
+        }
+
+        function handleFallbackFileSelection() {
+            const fileInput = document.getElementById('fallbackFileInput'); if (fileInput.files.length === 0) return;
+            const reader = new FileReader();
+            reader.onload = function(e) { base64CapturedOutputString = e.target.result; commitVerifiedCaptureAsset(); };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+
+        function dispatchEvidenceTransmissionPayload(targetCase) {
+            const submissionDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            targetCase.evidence.unshift({ date: submissionDate, desc: `[Mobile Camera Scan Exhibit Entry]`, isImage: true, fileUrl: base64CapturedOutputString });
+            localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
+            
+            dispatchPayloadToCloud(targetCase, "Automated Evidence Package Scan Appended via Citizen Mobile Lens");
+        }
+
+        function dispatchPayloadToCloud(targetCase, logStatement) {
+            const finalPackagePayload = {
+                caseId: targetCase.id, victimName: targetCase.victimName, victimAddress: targetCase.victimAddress,
+                victimPhone: targetCase.victimPhone, victimSsn: targetCase.victimSsn,
+                statement: logStatement,
+                filename: "MOBILE_SCAN_EXHIBIT_" + new Date().getTime() + ".jpg", mimeType: "image/jpeg",
+                fileData: base64CapturedOutputString.split(',')[1]
+            };
+
+            base64CapturedOutputString = "";
+            trackVictimCase();
+
+            fetch(GOOGLE_SCRIPT_WEBAPP_URL, { 
+                method: "POST", 
+                headers: { "Content-Type": "text/plain" },
+                body: JSON.stringify(finalPackagePayload) 
+            })
+            .then(() => revealBureauSuccessModal())
+            .catch(() => revealBureauSuccessModal());
+        }
+
+        function renderAuthenticatedCitizenDashboard(foundCase, container) {
+            let evidenceHtml = ""; let previewGalleryHtml = "";
             foundCase.evidence.forEach(e => {
                 evidenceHtml += `<div class="log-row"><span class="log-date">${e.date}</span><p class="log-text">${e.desc}</p></div>`;
                 if (e.isImage && e.fileUrl) {
@@ -319,81 +480,9 @@
             `;
         }
 
-        function activateFullscreenCameraModule() {
-            resetCameraModule();
-            document.getElementById('fullscreenCameraOverlay').style.display = 'flex';
-            initializeUniversalCameraLens();
-        }
-        function deactivateFullscreenCamera() {
-            terminateWebcamHardware();
-            document.getElementById('fullscreenCameraOverlay').style.display = 'none';
-            resetCameraModule();
-        }
-        function initializeUniversalCameraLens() {
-            const video = document.getElementById('webcamVideo');
-            navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
-                .then(stream => { videoStreamRef = stream; video.srcObject = stream; })
-                .catch(() => {
-                    navigator.mediaDevices.getUserMedia({ video: true })
-                        .then(s => { videoStreamRef = s; video.srcObject = s; })
-                        .catch(() => { alert("Camera system offline."); deactivateFullscreenCamera(); });
-                });
-        }
-        function executeHardwareSnapshot() {
-            const video = document.getElementById('webcamVideo'); const canvas = document.getElementById('capturedCanvas'); const ctx = canvas.getContext('2d');
-            canvas.width = video.videoWidth; canvas.height = video.videoHeight;
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            base64CapturedOutputString = canvas.toDataURL('image/jpeg');
-            video.style.display = 'none'; canvas.classList.remove('hidden');
-            document.getElementById('cameraScannerGuideBox').style.display = 'none';
-            document.getElementById('btnCaptureShutter').style.display = 'none';
-            document.getElementById('postCaptureActions').style.display = 'flex';
-        }
-        function resetCameraModule() {
-            const video = document.getElementById('webcamVideo'); const canvas = document.getElementById('capturedCanvas');
-            base64CapturedOutputString = ""; canvas.classList.add('hidden'); video.style.display = 'block';
-            document.getElementById('cameraScannerGuideBox').style.display = 'flex';
-            document.getElementById('btnCaptureShutter').style.display = 'block';
-            document.getElementById('postCaptureActions').style.display = 'none';
-        }
-        function handleFallbackFileSelection() {
-            const fileInput = document.getElementById('fallbackFileInput'); if (fileInput.files.length === 0) return;
-            const reader = new FileReader();
-            reader.onload = function(e) { base64CapturedOutputString = e.target.result; dispatchEvidenceTransmissionPayload(); };
-            reader.readAsDataURL(fileInput.files[0]);
-        }
-        function terminateWebcamHardware() { if (videoStreamRef) { videoStreamRef.getTracks().forEach(t => t.stop()); videoStreamRef = null; } }
-        function commitVerifiedCaptureAsset() { terminateWebcamHardware(); document.getElementById('fullscreenCameraOverlay').style.display = 'none'; dispatchEvidenceTransmissionPayload(); }
-
-        function dispatchEvidenceTransmissionPayload() {
-            const targetCase = cases.find(c => c.id.toLowerCase() === activeTrackingCaseIdRef.toLowerCase());
-            const submissionDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-            targetCase.evidence.unshift({ date: submissionDate, desc: `[Mobile Camera Scan Exhibit Entry]`, isImage: true, fileUrl: base64CapturedOutputString });
-            localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
-
-            const finalPackagePayload = {
-                caseId: targetCase.id, victimName: targetCase.victimName, victimAddress: targetCase.victimAddress,
-                victimPhone: targetCase.victimPhone, victimSsn: targetCase.victimSsn,
-                statement: "Automated Evidence Package Scan Appended via Citizen Mobile Lens",
-                filename: "MOBILE_SCAN_EXHIBIT_" + new Date().getTime() + ".jpg", mimeType: "image/jpeg",
-                fileData: base64CapturedOutputString.split(',')[1]
-            };
-
-            base64CapturedOutputString = "";
-            trackVictimCase();
-
-            // CRITICAL PHONE BYPASS FIX: Sent as text/plain to force connection through phone firewalls
-            fetch(GOOGLE_SCRIPT_WEBAPP_URL, { 
-                method: "POST", 
-                headers: { "Content-Type": "text/plain" },
-                body: JSON.stringify(finalPackagePayload) 
-            })
-            .then(() => revealBureauSuccessModal())
-            .catch(() => revealBureauSuccessModal());
-        }
-
         function revealBureauSuccessModal() { document.getElementById('bureauSuccessModal').style.display = 'flex'; }
         function dismissSuccessModal() { document.getElementById('bureauSuccessModal').style.display = 'none'; trackVictimCase(); }
+        
         function renderOfficerLayout() {
             const listContainer = document.getElementById('officerCaseList'); listContainer.innerHTML = '';
             cases.forEach((c, idx) => {
@@ -416,6 +505,8 @@
             activeCase.findings = document.getElementById('inputFindings').value.trim();
             localStorage.setItem('ftc_sys_cases', JSON.stringify(cases)); alert("Updates saved."); renderOfficerLayout();
         }
+        
+        // Purge session logic clears temporary checkpoint pass flags
         function resetMockData() { localStorage.clear(); location.reload(); }
         window.onload = function() { switchTab('victim-portal-tab'); }
     </script>
