@@ -7,19 +7,447 @@
     
     <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/193iGXSOf2vVOFHWVY_Z_MUbdOIkKpBG7">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
     <style>
-        /* Base state: completely block independent view overlap issues */
-        .tab-content { display: none; }
-        .tab-content.active { display: block !important; }
+        /* RAW SOLID DESIGN ENGINE - FORCED VISIBILITY ON ALL PLATFORMS */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7fa;
+            color: #1a202c;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
         
-        .bg-ftc-navy { background-color: #0b2240; }
-        .bg-ftc-blue { background-color: #065CB4; }
-        .bg-ftc-light { background-color: #E6F1FD; }
+        /* OFFICIAL GOVERNMENT HEADER DESIGN */
+        .gov-banner {
+            background-color: #e2e8f0;
+            border-bottom: 1px solid #cbd5e0;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #4a5568;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .gov-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .flag-icon {
+            width: 14px;
+            height: 8px;
+            background-color: #0b2240;
+            display: inline-block;
+        }
+        .classification-tag {
+            font-family: monospace;
+            font-size: 11px;
+            background-color: #cbd5e0;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* MAIN AGENCY TOP NAV BAR */
+        .main-header {
+            background-color: #0b2240;
+            color: #ffffff;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-b: 4px solid #0071bc;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        .agency-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .seal-frame {
+            background: #ffffff;
+            padding: 4px;
+            border-radius: 4px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #cbd5e0;
+        }
+        .seal-frame img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .agency-titles h1 {
+            font-size: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+        .agency-titles p {
+            font-size: 11px;
+            color: #63b3ed;
+            font-family: monospace;
+            font-weight: bold;
+            margin-top: 2px;
+        }
+        .purge-btn {
+            background-color: rgba(155, 44, 44, 0.6);
+            border: 1px solid #9b2c2c;
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 11px;
+        }
+
+        /* SITE WORKSPACE LAYOUT PANELS */
+        .portal-layout {
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+        }
+        .sidebar-nav {
+            width: 240px;
+            background-color: #ffffff;
+            padding: 16px;
+            border-right: 1px solid #d2d6dc;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .menu-label {
+            font-size: 11px;
+            font-weight: 900;
+            color: #a0aec0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            border-bottom: 1px solid #edf2f7;
+            padding-bottom: 4px;
+        }
+        .nav-btn {
+            width: 100%;
+            background: none;
+            border: 2px solid transparent;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            color: #4a5568;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-btn:hover {
+            background-color: #edf2f7;
+        }
+        .nav-btn.active {
+            background-color: #edf2f7;
+            color: #0b2240;
+            border-color: #065CB4;
+        }
+
+        /* VIEW CONTAINER SYSTEM */
+        .workspace-view {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+        .tab-content {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .tab-content.active {
+            display: block !important;
+        }
+
+        /* ACCESSIBLE LOGIN CARD COMPONENT - FORCED VISIBLE BOX */
+        .login-card {
+            background-color: #ffffff;
+            border: 2px solid #cbd5e0;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+            margin-bottom: 24px;
+        }
+        .login-card h2 {
+            font-size: 22px;
+            font-weight: 900;
+            color: #0b2240;
+            margin-bottom: 6px;
+        }
+        .login-card p {
+            font-size: 13px;
+            color: #4a5568;
+            margin-bottom: 18px;
+            font-weight: 650;
+        }
+        .search-row {
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+        }
+        .case-input-field {
+            flex: 1;
+            background-color: #ffffff;
+            border: 2px solid #718096;
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a202c;
+            text-transform: uppercase;
+        }
+        .case-input-field:focus {
+            outline: none;
+            border-color: #0071bc;
+        }
+        .execute-query-btn {
+            background-color: #0071bc;
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 24px;
+            font-size: 16px;
+            font-weight: 900;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 4px 6px rgba(0,113,188,0.2);
+        }
+        .execute-query-btn:hover {
+            background-color: #065CB4;
+        }
+
+        /* TARGET SUBMISSION DATA RECORD OUTPUT LAYOUT */
+        .output-placeholder {
+            background-color: #ffffff;
+            border: 2px dashed #cbd5e0;
+            border-radius: 16px;
+            padding: 48px;
+            text-align: center;
+            color: #718096;
+        }
+        .placeholder-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #4a5568;
+            margin-top: 8px;
+        }
+
+        /* PROFILE SCREEN CONTAINER PARAMETERS */
+        .profile-wrapper {
+            background: #ffffff;
+            border: 2px solid #cbd5e0;
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 16px;
+        }
+        .badge-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .badge-id {
+            background-color: #0b2240;
+            color: #ffffff;
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        .badge-status {
+            background-color: #ebf8ff;
+            border: 1px solid #bee3f8;
+            color: #0071bc;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .profile-title-text {
+            font-size: 20px;
+            font-weight: 900;
+            color: #0b2240;
+            line-height: 1.3;
+        }
+        .avatar-box {
+            width: 96px;
+            height: 96px;
+            border-radius: 12px;
+            border: 4px solid #cbd5e0;
+            overflow: hidden;
+            background-color: #f7fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .avatar-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* LEDGER MATRIX SHEET STRUCTURE LAYOUT */
+        .ledger-box {
+            background-color: #f7fafc;
+            border: 2px solid #cbd5e0;
+            border-radius: 12px;
+            padding: 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .ledger-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 900;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+        .ledger-value {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1a202c;
+        }
+        .ledger-value.protected {
+            font-family: monospace;
+            color: #2d3748;
+        }
         
-        /* Immersive mobile full-screen scanner layer override */
+        /* ONE-TAP DROP BOX MECHANICS */
+        .drop-box-card {
+            background-color: #ebf8ff;
+            border: 2px solid #bee3f8;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .drop-box-title {
+            font-size: 18px;
+            font-weight: 900;
+            color: #0b2240;
+        }
+        .drop-box-desc {
+            font-size: 13px;
+            color: #2b6cb0;
+            font-weight: 600;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .giant-scan-btn {
+            background-color: #0071bc;
+            color: #ffffff;
+            border: none;
+            border-radius: 16px;
+            padding: 20px 32px;
+            font-size: 20px;
+            font-weight: 900;
+            cursor: pointer;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            box-shadow: 0 10px 15px -3px rgba(0,113,188,0.3);
+            border-bottom: 4px solid #0b2240;
+        }
+        .giant-scan-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* PREVIEW GALLERIES & LOGS */
+        .section-title {
+            font-size: 12px;
+            font-weight: 900;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 4px;
+            margin-top: 8px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            background-color: #f7fafc;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+        }
+        .gallery-item {
+            background: #ffffff;
+            border: 1px solid #cbd5e0;
+            padding: 6px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .gallery-item span {
+            font-size: 11px;
+            font-weight: bold;
+            color: #718096;
+            margin-top: 4px;
+            display: block;
+        }
+        .log-row {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: flex;
+            gap: 12px;
+        }
+        .log-date {
+            background-color: #cbd5e0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 12px;
+            height: fit-content;
+        }
+        .log-text {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        /* IMMERSIVE FULL-SCREEN OVERLAY WINDOWS */
         .fullscreen-cam-overlay {
             display: none;
             position: fixed;
@@ -31,92 +459,254 @@
             align-items: center;
             padding: 24px;
         }
-        .fullscreen-cam-overlay.active { display: flex !important; }
+        .cam-top-bar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            font-family: monospace;
+            border-bottom: 1px solid #2d3748;
+            padding-bottom: 12px;
+        }
+        .lens-frame {
+            width: 100%;
+            max-width: 400px;
+            flex: 1;
+            margin: 16px 0;
+            position: relative;
+            border-radius: 16px;
+            border: 2px solid #2d3748;
+            overflow: hidden;
+            background-color: #1a202c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #webcamVideo, #capturedCanvas {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .guide-box {
+            position: absolute;
+            width: 280px;
+            height: 200px;
+            border: 2px dashed rgba(66, 153, 225, 0.6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .guide-box span {
+            font-family: monospace;
+            color: #63b3ed;
+            font-size: 10px;
+            font-weight: bold;
+            background: rgba(0,0,0,0.7);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .shutter-btn {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            background-color: rgba(255,255,255,0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .shutter-inner {
+            width: 56px;
+            height: 56px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            display: block;
+        }
+        .action-row {
+            width: 100%;
+            max-width: 360px;
+            display: none;
+            gap: 16px;
+        }
+        .action-btn {
+            flex: 1;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 900;
+            cursor: pointer;
+            border: none;
+            text-transform: uppercase;
+        }
+        .btn-retake {
+            background-color: #2d3748;
+            color: #a0aec0;
+            border: 1px solid #4a5568;
+        }
+        .btn-correct {
+            background-color: #38a169;
+            color: #ffffff;
+            border-bottom: 4px solid #22543d;
+            box-shadow: 0 4px 6px rgba(56,161,105,0.2);
+        }
+
+        /* ACCESSIBLE MODAL WINDOW OBJECTS */
+        .modal-screen {
+            position: fixed;
+            inset: 0;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(15, 23, 42, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            padding: 16px;
+        }
+        .modal-body {
+            background: #ffffff;
+            border: 4px solid #38a169;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 400px;
+            padding: 24px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .modal-icon {
+            width: 64px;
+            height: 64px;
+            background-color: #c6f6d5;
+            color: #38a169;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            border: 2px solid #a3e635;
+        }
+        .modal-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: #0b2240;
+            text-transform: uppercase;
+        }
+        .modal-text {
+            font-size: 14px;
+            font-weight: bold;
+            color: #4a5568;
+            background-color: #f7fafc;
+            border: 1px solid #edf2f7;
+            padding: 12px;
+            border-radius: 12px;
+            line-height: 1.5;
+        }
+        .modal-close-btn {
+            width: 100%;
+            background-color: #0b2240;
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        /* RESPONSIVE LAYOUT CONSTRAINTS FOR MOBILE DEVICES */
+        @media (max-width: 1024px) {
+            .portal-layout { flex-direction: column; }
+            .sidebar-nav { width: 100%; flex-direction: row; border-right: none; border-bottom: 1px solid #d2d6dc; }
+            .menu-label { display: none; }
+            .nav-btn { justify-content: center; padding: 8px; font-size: 13px; }
+            .ledger-box { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
     </style>
 </head>
-<body class="bg-[#f4f7fa] text-gray-900 font-sans min-h-screen flex flex-col antialiased">
+<body>
 
-    <div class="bg-gray-200 border-b border-gray-300 px-6 py-2 text-xs md:text-sm text-gray-700 flex justify-between items-center font-bold shrink-0">
-        <div class="flex items-center gap-2">
-            <span class="w-3.5 h-2 bg-blue-800 inline-block rounded-xs"></span>
+    <div class="gov-banner">
+        <div class="gov-indicator">
+            <span class="flag-icon"></span>
             An official website of the United States Government. Secure Connection.
         </div>
-        <div class="font-mono text-[10px] tracking-wider uppercase bg-gray-300 px-2 py-0.5 rounded">CUI // SP-BCP</div>
+        <div class="classification-tag">CUI // SP-BCP</div>
     </div>
 
-    <header class="bg-ftc-navy text-white px-6 md:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 border-b-4 border-[#0071bc] shadow-md shrink-0">
-        <div class="flex items-center space-x-5 w-full sm:w-auto">
-            <div class="bg-white p-1 rounded shadow-md flex items-center justify-center w-14 h-14 md:w-16 md:h-16 overflow-hidden border border-gray-300 shrink-0">
-                <img src="https://lh3.googleusercontent.com/d/193iGXSOf2vVOFHWVY_Z_MUbdOIkKpBG7" alt="FTC Seal" class="w-full h-full object-contain">
+    <header class="main-header">
+        <div class="agency-brand">
+            <div class="seal-frame">
+                <img src="https://lh3.googleusercontent.com/d/193iGXSOf2vVOFHWVY_Z_MUbdOIkKpBG7" alt="FTC Seal">
             </div>
-            <div>
-                <h1 class="text-xl md:text-2xl font-serif font-black tracking-tight text-white uppercase">Federal Trade Commission</h1>
-                <p class="text-xs text-blue-200 font-mono tracking-wider uppercase font-bold">Bureau of Consumer Protection • Evidence Intake</p>
+            <div class="agency-titles">
+                <h1>Federal Trade Commission</h1>
+                <p>Bureau of Consumer Protection • Evidence Intake</p>
             </div>
         </div>
-        <button onclick="resetMockData()" class="text-xs bg-red-900/60 text-white px-3 py-1.5 rounded font-bold uppercase transition">Clear Cache</button>
+        <button onclick="resetMockData()" class="purge-btn">Clear Cache</button>
     </header>
 
-    <div class="flex flex-col lg:flex-row flex-1 overflow-hidden">
+    <div class="portal-layout">
         
-        <nav class="w-full lg:w-64 bg-white p-3 lg:p-4 border-b lg:border-b-0 lg:border-r border-gray-300 flex flex-row lg:flex-col gap-2 shadow-xs shrink-0">
-            <button onclick="switchTab('victim-portal-tab')" id="btn-victim-portal-tab" class="tab-btn flex-1 lg:flex-initial flex items-center justify-center lg:justify-start space-x-3 px-3 py-3 rounded-xl text-md font-bold text-gray-700 hover:bg-slate-100 transition border-2 border-transparent">
-                <i data-lucide="shield-check" class="w-5 h-5 text-[#0071bc]"></i> <span>Identity Portal</span>
+        <nav class="sidebar-nav">
+            <p class="menu-label">Main Menu</p>
+            <button onclick="switchTab('victim-portal-tab')" id="btn-victim-portal-tab" class="nav-btn active">
+                <i data-lucide="shield-check"></i> <span>Identity Portal</span>
             </button>
-            <button onclick="switchTab('officer-dashboard-tab')" id="btn-officer-dashboard-tab" class="tab-btn flex-1 lg:flex-initial flex items-center justify-center lg:justify-start space-x-3 px-3 py-3 rounded-xl text-md font-bold text-gray-700 hover:bg-slate-100 transition border-2 border-transparent">
-                <i data-lucide="folder-git-2" class="w-5 h-5 text-ftc-navy"></i> <span>Officer View</span>
+            <button onclick="switchTab('officer-dashboard-tab')" id="btn-officer-dashboard-tab" class="nav-btn">
+                <i data-lucide="folder-git-2"></i> <span>Officer View</span>
             </button>
         </nav>
 
-        <main class="flex-1 p-4 md:p-8 overflow-y-auto">
+        <main class="workspace-view">
 
             <section id="victim-portal-tab" class="tab-content active">
-                <div class="max-w-3xl mx-auto space-y-6">
-                    
-                    <div class="bg-white border-2 border-gray-300 rounded-2xl shadow-md p-6">
-                        <h2 class="text-xl md:text-2xl font-serif font-black text-ftc-navy flex items-center gap-2 mb-1">Log In to Your Case File</h2>
-                        <p class="text-xs text-gray-600 mb-4 font-semibold">Type your assigned Case ID reference number into the box below to open your secure portal folder.</p>
-                        <div class="flex flex-col sm:flex-row gap-3">
-                            <input type="text" id="victimSearchInput" placeholder="Type Case ID here..." class="flex-1 bg-white border-2 border-gray-400 rounded-xl px-4 py-3 text-gray-900 font-bold uppercase tracking-wider text-base shadow-inner focus:outline-none focus:border-[#0071bc]">
-                            <button onclick="trackVictimCase()" class="bg-[#0071bc] hover:bg-blue-800 text-white font-black px-6 py-3 rounded-xl text-base flex items-center justify-center gap-2 transition shadow shadow-blue-500/20"><i data-lucide="key-round" class="w-4 h-4"></i> View My Case</button>
-                        </div>
-                    </div>
-
-                    <div id="victimPortalOutput" class="bg-white border-2 border-dashed border-gray-300 rounded-2xl p-12 text-center text-gray-400">
-                        <i data-lucide="folder-search" class="w-16 h-16 mx-auto mb-3 opacity-20 text-ftc-navy"></i>
-                        <p class="text-base font-bold text-gray-500">Awaiting Valid Reference Code Entry</p>
+                
+                <div class="login-card">
+                    <h2>Log In to Your Case File</h2>
+                    <p>Type your assigned Case ID reference number into the box below to open your secure portal folder.</p>
+                    <div class="search-row">
+                        <input type="text" id="victimSearchInput" placeholder="Type Case ID here..." class="case-input-field">
+                        <button onclick="trackVictimCase()" class="execute-query-btn"><i data-lucide="key-round"></i> View My Case</button>
                     </div>
                 </div>
+
+                <div id="victimPortalOutput">
+                    <div class="output-placeholder">
+                        <i data-lucide="folder-search" style="width: 64px; height: 64px; margin: 0 auto; opacity: 0.2; color: #0b2240;"></i>
+                        <p class="placeholder-title">Awaiting Valid Reference Code Entry</p>
+                    </div>
+                </div>
+
             </section>
 
             <section id="officer-dashboard-tab" class="tab-content">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div class="bg-white border border-gray-300 rounded-xl p-4 flex flex-col justify-between">
+                <div style="background: white; border: 1px solid #cbd5e0; padding: 20px; border-radius: 12px;">
+                    <h3 style="margin-bottom: 12px; font-size: 16px; text-transform: uppercase; color: #0b2240;">Investigator Panel</h3>
+                    <div id="officerCaseList" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;"></div>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
                         <div>
-                            <h3 class="text-xs font-bold uppercase text-gray-400 tracking-wider mb-3">Registry</h3>
-                            <div id="officerCaseList" class="space-y-2"></div>
+                            <label style="font-size: 12px; font-weight: bold; display:block; margin-bottom:4px;">Agent Name</label>
+                            <input type="text" id="inputOfficerName" style="width:100%; padding:8px; border:1px solid #cbd5e0; border-radius:6px;">
                         </div>
-                    </div>
-                    <div class="lg:col-span-2 bg-white border border-gray-300 rounded-xl p-6">
-                        <h3 class="text-sm font-bold uppercase text-ftc-navy border-b border-gray-200 pb-2 mb-4">Investigator Override Panel</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                            <div>
-                                <label class="block font-bold text-gray-600 uppercase mb-1">Agent Name</label>
-                                <input type="text" id="inputOfficerName" class="w-full bg-white border border-gray-300 rounded p-2 text-gray-900">
-                            </div>
-                            <div>
-                                <label class="block font-bold text-gray-600 uppercase mb-1">Status Phase</label>
-                                <select id="inputCaseStatus" class="w-full bg-white border border-gray-300 rounded p-2 text-sm text-gray-900 focus:outline-none">
-                                    <option value="Intake Assessment Phase">Intake Assessment Phase</option>
-                                    <option value="Active Bureau Investigation">Active Bureau Investigation</option>
-                                </select>
-                            </div>
-                            <div class="sm:col-span-2">
-                                <label class="block font-bold text-gray-600 uppercase mb-1">Official Progress Summary Notes</label>
-                                <textarea id="inputFindings" rows="4" class="w-full bg-white border border-gray-300 rounded p-2 text-gray-900"></textarea>
-                            </div>
+                        <div>
+                            <label style="font-size: 12px; font-weight: bold; display:block; margin-bottom:4px;">Status Phase</label>
+                            <select id="inputCaseStatus" style="width:100%; padding:8px; border:1px solid #cbd5e0; border-radius:6px;">
+                                <option value="Intake Assessment Phase">Intake Assessment Phase</option>
+                                <option value="Active Bureau Investigation">Active Bureau Investigation</option>
+                            </select>
                         </div>
-                        <button onclick="saveOfficerUpdates()" class="mt-4 w-full bg-ftc-navy hover:bg-slate-800 text-white font-bold py-2.5 rounded transition uppercase tracking-wider font-mono">Commit Updates</button>
+                        <div>
+                            <label style="font-size: 12px; font-weight: bold; display:block; margin-bottom:4px;">Official Progress Notes Summary</label>
+                            <textarea id="inputFindings" rows="4" style="width:100%; padding:8px; border:1px solid #cbd5e0; border-radius:6px; font-family:sans-serif;"></textarea>
+                        </div>
+                        <button onclick="saveOfficerUpdates()" style="background:#0b2240; color:white; border:none; padding:12px; border-radius:6px; font-weight:bold; cursor:pointer; text-transform:uppercase;">Commit Updates</button>
                     </div>
                 </div>
             </section>
@@ -124,42 +714,36 @@
     </div>
 
     <div id="fullscreenCameraOverlay" class="fullscreen-cam-overlay">
-        <div class="w-full flex justify-between items-center text-white font-mono text-xs pb-2 border-b border-gray-800">
-            <span class="text-blue-400 font-bold uppercase tracking-wider">FTC SECURE DOCUMENT LENS ACTIVE</span>
-            <button onclick="deactivateFullscreenCamera()" class="bg-red-600 text-white px-4 py-1.5 rounded-lg font-sans font-bold text-sm">CLOSE</button>
+        <div class="cam-top-bar">
+            <span>FTC SECURE DOCUMENT LENS ACTIVE</span>
+            <button onclick="deactivateFullscreenCamera()" style="background:#e53e3e; color:white; border:none; padding:6px 12px; border-radius:6px; font-weight:bold; cursor:pointer;">CLOSE</button>
         </div>
-        <div class="w-full max-w-md flex-1 my-4 relative rounded-2xl border-2 border-gray-800 overflow-hidden bg-zinc-950 flex items-center justify-center">
-            <video id="webcamVideo" autoplay playsinline class="w-full h-full object-cover"></video>
-            <canvas id="capturedCanvas" class="w-full h-full object-cover hidden"></canvas>
-            <div id="cameraScannerGuideBox" class="absolute w-76 h-52 border-2 border-dashed border-blue-500/50 rounded-xl pointer-events-none flex items-center justify-center">
-                <span class="text-[10px] font-mono font-bold text-blue-400 uppercase tracking-widest bg-zinc-950/80 px-2 py-0.5 rounded">ALIGN PAPERS INSIDE FRAME</span>
+        <div class="lens-frame">
+            <video id="webcamVideo" autoplay playsinline></video>
+            <canvas id="capturedCanvas" class="hidden"></canvas>
+            <div id="cameraScannerGuideBox" class="guide-box">
+                <span>ALIGN PAPERS INSIDE FRAME</span>
             </div>
         </div>
-        <div class="w-full max-w-sm flex flex-col items-center pb-4">
-            <button id="btnCaptureShutter" onclick="executeHardwareSnapshot()" class="w-20 h-20 rounded-full border-4 border-white bg-white/20 flex items-center justify-center transition active:scale-95">
-                <span class="w-14 h-14 bg-white rounded-full block"></span>
+        <div style="width: 100%; max-w: 360px; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+            <button id="btnCaptureShutter" onclick="executeHardwareSnapshot()" class="shutter-btn">
+                <span class="shutter-inner"></span>
             </button>
-            <div id="postCaptureActions" class="w-full hidden gap-4 animate-fadeIn">
-                <button onclick="resetCameraModule()" class="flex-1 bg-zinc-800 border border-gray-600 text-gray-300 font-bold py-4 rounded-xl text-sm flex items-center justify-center gap-1.5"><i data-lucide="rotate-ccw" class="w-4 h-4"></i> RETAKE</button>
-                <button onclick="commitVerifiedCaptureAsset()" class="flex-1 bg-emerald-600 text-white font-black py-4 rounded-xl text-lg flex items-center justify-center gap-2 border-b-4 border-emerald-800 shadow shadow-emerald-600/30">
-                    <i data-lucide="check-circle-2" class="w-5 h-5"></i> CORRECT ✔
-                </button>
+            <div id="postCaptureActions" class="action-row">
+                <button onclick="resetCameraModule()" class="action-btn btn-retake">RETAKE</button>
+                <button onclick="commitVerifiedCaptureAsset()" class="action-btn btn-correct">CORRECT ✔</button>
             </div>
         </div>
     </div>
 
-    <div id="bureauSuccessModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-xs hidden items-center justify-center z-[10000] p-4">
-        <div class="bg-white border-4 border-emerald-600 rounded-2xl w-full max-w-md p-6 shadow-2xl text-center space-y-4 animate-fadeIn">
-            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto border-2 border-emerald-300">
-                <i data-lucide="shield-check" class="w-10 h-10"></i>
+    <div id="bureauSuccessModal" class="modal-screen">
+        <div class="modal-body">
+            <div class="modal-icon">
+                <i data-lucide="shield-check" style="width:36px; height:36px;"></i>
             </div>
-            <h3 class="text-2xl font-serif font-black text-ftc-navy uppercase tracking-tight">Evidence Submitted</h3>
-            <p class="text-sm font-semibold text-gray-700 leading-relaxed bg-slate-50 border border-gray-200 p-3 rounded-xl">
-                Your documentation has been officially submitted to the Federal Department for further investigation.
-            </p>
-            <button onclick="dismissSuccessModal()" class="w-full bg-ftc-navy hover:bg-slate-800 text-white font-black py-3 rounded-xl text-base tracking-wider transition uppercase font-mono shadow">
-                Acknowledge & Close
-            </button>
+            <h3 class="modal-title">Evidence Submitted</h3>
+            <p class="modal-text">Your documentation has been officially submitted to the Federal Department for further investigation.</p>
+            <button onclick="dismissSuccessModal()" class="modal-close-btn">Acknowledge & Close</button>
         </div>
     </div>
 
@@ -177,18 +761,16 @@
             {
                 id: "123", victimName: "Douglas F. Spaulding", victimDob: "11/14/1954", victimEmails: ["dxs42011@gmail.com", "dxs42012@gmail.com"], victimPhone: "5103813834",
                 victimAddress: "687 Franklin Avenue, Brooklyn, NY 11238", victimSsn: "***-**-3834", biometricImg: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200",
-                title: "Identity Impersonation & Fraudulent Corporate Account Proliferation", target: "Syndicate Identity Routing Networks",
-                officer: "Special Investigator Marcus Vance", status: "Active Bureau Investigation",
+                title: "Identity Impersonation & Fraudulent Corporate Account Proliferation",
                 findings: "Deep forensic tracking has established that the victim's structural identifying details were compromised and weaponized to synthesize a network of accounts.",
-                evidence: [{ date: "May 11, 2026", desc: "Cross-agency banking trace mapping data illustrating 18 illicit entity lines assigned to victim parameters", isImage: false, fileUrl: "" }]
+                evidence: [{ date: "May 11, 2026", desc: "[Initial Entry Database Registration]", isImage: false, fileUrl: "" }]
             },
             {
                 id: "dc-97224", victimName: "Eric Roger", victimDob: "04/22/1961", victimEmails: ["e.roger.bcp@proton.me"], victimPhone: "2125550143",
                 victimAddress: "455 West 23rd Street, Apt 3B, New York, NY 10011", victimSsn: "***-**-1432", biometricImg: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200", 
-                title: "Malicious Identity Hijacking & Unauthorized Lines of Credit", target: "Acme Credit Brokerage Syndicates",
-                officer: "Unassigned / Bureau Allocation Routing Pending", status: "Intake Assessment Phase",
+                title: "Malicious Identity Hijacking & Unauthorized Lines of Credit",
                 findings: "Initial file compiled. High-priority systemic review scheduled.",
-                evidence: [{ date: "May 26, 2026", desc: "Initial consumer dispute affidavit successfully indexed.", isImage: false, fileUrl: "" }]
+                evidence: [{ date: "May 26, 2026", desc: "[Initial consumer dispute affidavit indexed]", isImage: false, fileUrl: "" }]
             }
         ];
 
@@ -199,13 +781,10 @@
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('bg-slate-100', 'text-ftc-navy', 'font-bold'));
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
             
-            const targetContent = document.getElementById(tabId);
-            if(targetContent) targetContent.classList.add('active');
-            
-            const targetBtn = document.getElementById(`btn-${tabId}`);
-            if(targetBtn) targetBtn.classList.add('bg-slate-100', 'text-ftc-navy', 'font-bold');
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById(`btn-${tabId}`).classList.add('active');
             if(tabId === 'officer-dashboard-tab') renderOfficerLayout();
             lucide.createIcons();
         }
@@ -217,7 +796,7 @@
             const foundCase = cases.find(c => c.id.toLowerCase() === searchId.toLowerCase());
 
             if(!foundCase) {
-                container.innerHTML = `<div class="text-center text-red-700 p-6 bg-red-50 border-2 border-red-200 rounded-xl font-sans"><h4 class="text-xl font-bold">Case ID Not Found</h4></div>`;
+                container.innerHTML = `<div style="text-align:center; color:#9b2c2c; background:#fff5f5; border:1px solid #feb2b2; padding:20px; border-radius:12px; font-weight:bold;">Case ID Not Found</div>`;
                 return;
             }
 
@@ -225,70 +804,55 @@
             let evidenceHtml = ""; let previewGalleryHtml = "";
             
             foundCase.evidence.forEach(e => {
-                evidenceHtml += `<div class="flex items-start gap-3 bg-slate-50 p-3 rounded-lg border border-gray-200 text-sm font-sans"><span class="bg-slate-200 text-slate-800 font-mono px-2 py-0.5 rounded text-xs font-bold border border-gray-300 shrink-0">${e.date}</span><p class="text-gray-800 font-medium">${e.desc}</p></div>`;
+                evidenceHtml += `<div class="log-row"><span class="log-date">${e.date}</span><p class="log-text">${e.desc}</p></div>`;
                 if (e.isImage && e.fileUrl) {
-                    previewGalleryHtml += `<div class="bg-white border border-gray-300 rounded-xl p-2 shadow-xs flex flex-col items-center"><img src="${e.fileUrl}" class="w-full h-24 object-cover rounded-md border border-gray-200"><span class="text-xs font-bold text-gray-500 mt-2">${e.date}</span></div>`;
+                    previewGalleryHtml += `<div class="gallery-item"><img src="${e.fileUrl}"><span>${e.date}</span></div>`;
                 }
             });
 
-            if (previewGalleryHtml === "") previewGalleryHtml = `<p class="text-sm text-gray-400 italic col-span-full font-medium">No paperwork images scanned into this case file yet.</p>`;
+            if (previewGalleryHtml === "") previewGalleryHtml = `<p style="grid-column: 1/-1; font-style:italic; color:#a0aec0; font-size:13px; font-weight:bold;">No document exhibits scanned into this case file folder yet.</p>`;
             let redactedEmailStrings = foundCase.victimEmails ? foundCase.victimEmails.map(email => applyEmailPrivacyMask(email)).join(" | ") : applyEmailPrivacyMask(foundCase.victimEmail);
             let redactedPhoneString = applyPhonePrivacyMask(foundCase.victimPhone);
 
             container.innerHTML = `
-                <div class="w-full text-left bg-white border-2 border-gray-300 rounded-2xl shadow-md p-4 md:p-6 space-y-6 font-serif animate-fadeIn">
-                    <div class="flex justify-between items-start border-b-2 border-gray-200 pb-4 gap-4">
-                        <div class="space-y-1">
-                            <div class="flex items-center gap-2">
-                                <span class="bg-ftc-navy text-white text-xs px-3 py-1 font-bold font-mono rounded-md">CASE FILE ID: ${foundCase.id}</span>
-                                <span class="bg-blue-50 border border-blue-200 text-[#0071bc] text-xs font-bold px-3 py-1 font-mono rounded-md uppercase tracking-wide">${foundCase.status}</span>
+                <div class="profile-wrapper">
+                    <div class="profile-header">
+                        <div>
+                            <div class="badge-row">
+                                <span class="badge-id">CASE ID: ${foundCase.id}</span>
+                                <span class="badge-status">${foundCase.status || "Active Review"}</span>
                             </div>
-                            <h3 class="text-xl md:text-2xl font-serif font-black text-ftc-navy mt-3 leading-tight">${foundCase.title}</h3>
+                            <h3 class="profile-title-text">${foundCase.title}</h3>
                         </div>
-                        <div class="shrink-0 flex flex-col items-center">
-                            <div class="w-24 h-24 rounded-2xl border-4 border-slate-300 overflow-hidden bg-slate-50 flex items-center justify-center shadow-inner">
-                                <img src="${foundCase.biometricImg}" alt="Profile Picture" class="w-full h-full object-cover">
-                            </div>
-                            <span class="text-[9px] font-mono font-black uppercase text-gray-500 mt-2">Verified Profile</span>
+                        <div class="avatar-box">
+                            <img src="${foundCase.biometricImg}">
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-100 p-5 rounded-xl border-2 border-gray-300 text-sm font-sans shadow-inner">
-                        <div class="space-y-3">
-                            <div><label class="text-xs uppercase font-black text-gray-400 block tracking-wider">Complainant Full Legal Name</label><span class="text-xl font-black text-gray-900 block">${foundCase.victimName}</span></div>
-                            <div><label class="text-xs uppercase font-black text-gray-400 block tracking-wider">Date of Birth (DOB)</label><span class="text-base font-extrabold text-gray-800 block">${foundCase.victimDob || "Not Provided"}</span></div>
-                            <div><label class="text-xs uppercase font-black text-gray-400 block tracking-wider">Registered Mailing Address</label><span class="text-md font-extrabold text-slate-800 block">${foundCase.victimAddress}</span></div>
-                        </div>
-                        <div class="space-y-3 border-t md:border-t-0 md:border-l-2 border-gray-300 pt-3 md:pt-0 md:pl-6 font-mono">
-                            <div><label class="text-xs uppercase font-black text-red-700 block flex items-center gap-1 font-sans"><i data-lucide="eye-off" class="w-3.5 h-3.5"></i> Protected Contact Emails</label><span class="text-sm font-black text-gray-700">${redactedEmailStrings}</span></div>
-                            <div><label class="text-xs uppercase font-black text-red-700 block font-sans">Telephone Endpoint Line</label><span class="text-sm font-black text-gray-700 block">${redactedPhoneString}</span></div>
-                            <div><label class="text-xs uppercase font-black text-red-700 block font-sans">Social Security Number (SSN)</label><span class="text-sm font-black text-gray-700 block tracking-widest">${foundCase.victimSsn}</span></div>
-                        </div>
+                    <div class="ledger-box">
+                        <div class="ledger-group"><label>Full Legal Name</label><span class="ledger-value">${foundCase.victimName}</span></div>
+                        <div class="ledger-group"><label>Date of Birth (DOB)</label><span class="ledger-value">${foundCase.victimDob}</span></div>
+                        <div class="ledger-group"><label>Registered Mailing Domicile Address</label><span class="ledger-value">${foundCase.victimAddress}</span></div>
+                        <div class="ledger-group"><label>Contact Line</label><span class="ledger-value protected">${redactedPhoneString}</span></div>
+                        <div class="ledger-group" style="grid-column:span 2;"><label>Masked Email Accounts</label><span class="ledger-value protected">${redactedEmailStrings}</span></div>
+                        <div class="ledger-group" style="grid-column:span 2;"><label>Social Security Number (SSN)</label><span class="ledger-value protected" style="letter-spacing:1px;">${foundCase.victimSsn}</span></div>
                     </div>
 
-                    <div class="space-y-1 font-sans text-xs">
-                        <h4 class="text-[14px] font-black uppercase text-gray-500 tracking-wider flex items-center gap-1">
-                            <i data-lucide="file-plus" class="w-4 h-4 text-ftc-blue"></i> Upload Supporting Documents
-                        </h4>
-                        <div class="py-4 bg-blue-50 border-2 border-blue-300 rounded-2xl text-center">
-                            <button onclick="activateFullscreenCameraModule()" class="w-full max-w-md bg-[#0071bc] hover:bg-blue-800 text-white font-black text-xl py-6 px-4 rounded-2xl transition flex items-center justify-center gap-3 mx-auto shadow-lg border-b-4 border-blue-900 active:scale-95">
-                                <i data-lucide="aperture" class="w-7 h-7"></i> 📸 TAP HERE TO SCAN PAPERS
-                            </button>
-                            <div class="pt-3 max-w-sm mx-auto">
-                                <input type="file" id="fallbackFileInput" accept="image/*" onchange="handleFallbackFileSelection()" class="w-full bg-white border border-gray-300 rounded p-1 text-xs text-gray-600">
-                            </div>
+                    <div class="drop-box-card">
+                        <h4 class="drop-box-title">Upload Supporting Documents</h4>
+                        <p class="drop-box-desc">Tap the large blue button below to open your device's camera and capture paperwork snapshots continuously.</p>
+                        <button onclick="activateFullscreenCameraModule()" class="giant-scan-btn">📸 TAP HERE TO SCAN PAPERS</button>
+                        <div style="margin-top:8px;">
+                            <label style="font-size:11px; font-weight:bold; color:#e53e3e; display:block; margin-bottom:4px;">Camera blocked? Select an image file manually instead:</label>
+                            <input type="file" id="fallbackFileInput" accept="image/*" onchange="handleFallbackFileSelection()" style="font-size:12px; background:white; padding:4px; border:1px solid #cbd5e0; border-radius:4px; max-width:280px;">
                         </div>
                     </div>
 
-                    <div class="space-y-1 font-sans">
-                        <h4 class="text-[11px] font-black uppercase text-gray-400 tracking-wider flex items-center gap-1"><i data-lucide="layout-grid" class="w-4 h-4 text-[#0071bc]"></i> Document Exhibit Preview Gallery</h4>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-3 border border-gray-200 rounded shadow-inner" id="galleryContainer">${previewGalleryHtml}</div>
-                    </div>
+                    <p class="section-title">Upload Supporting Documents Log Gallery</p>
+                    <div class="gallery-grid">${previewGalleryHtml}</div>
 
-                    <div class="space-y-1 font-sans">
-                        <h4 class="text-[11px] font-black uppercase text-gray-400 tracking-wider flex items-center gap-1"><i data-lucide="paperclip" class="w-4 h-4 text-[#0071bc]"></i> Chronological Submission Logs</h4>
-                        <div class="space-y-2">${evidenceHtml}</div>
-                    </div>
+                    <p class="section-title">Chronological Submission History Logs</p>
+                    <div style="display:flex; flex-direction:column; gap:8px;">${evidenceHtml}</div>
                 </div>
             `;
             lucide.createIcons();
@@ -296,28 +860,25 @@
 
         function activateFullscreenCameraModule() {
             resetCameraModule();
-            const overlay = document.getElementById('fullscreenCameraOverlay');
-            overlay.classList.add('active');
+            document.getElementById('fullscreenCameraOverlay').style.display = 'flex';
             initializeUniversalCameraLens();
         }
 
         function deactivateFullscreenCamera() {
             terminateWebcamHardware();
-            document.getElementById('fullscreenCameraOverlay').classList.remove('active');
+            document.getElementById('fullscreenCameraOverlay').style.display = 'none';
             resetCameraModule();
         }
 
         function initializeUniversalCameraLens() {
             const video = document.getElementById('webcamVideo');
-            const optimalConstraints = { video: { facingMode: "environment" } };
-
-            navigator.mediaDevices.getUserMedia(optimalConstraints)
+            navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
                 .then(stream => { videoStreamRef = stream; video.srcObject = stream; })
                 .catch(() => {
                     navigator.mediaDevices.getUserMedia({ video: true })
                         .then(s => { videoStreamRef = s; video.srcObject = s; })
                         .catch(() => {
-                            alert("Webcam interface restricted.");
+                            alert("Webcam channel blocked by device policy.");
                             deactivateFullscreenCamera();
                         });
                 });
@@ -334,12 +895,11 @@
 
             base64CapturedOutputString = canvas.toDataURL('image/jpeg');
 
-            video.classList.add('hidden');
+            video.style.display = 'none';
             canvas.classList.remove('hidden');
-            document.getElementById('cameraScannerGuideBox').classList.add('hidden');
-            document.getElementById('btnCaptureShutter').classList.add('hidden');
-            document.getElementById('postCaptureActions').classList.remove('hidden');
-            document.getElementById('postCaptureActions').classList.add('flex');
+            document.getElementById('cameraScannerGuideBox').style.display = 'none';
+            document.getElementById('btnCaptureShutter').style.display = 'none';
+            document.getElementById('postCaptureActions').style.display = 'flex';
         }
 
         function resetCameraModule() {
@@ -347,11 +907,10 @@
             const canvas = document.getElementById('capturedCanvas');
             base64CapturedOutputString = "";
             canvas.classList.add('hidden');
-            video.classList.remove('hidden');
-            document.getElementById('cameraScannerGuideBox').classList.remove('hidden');
-            document.getElementById('btnCaptureShutter').classList.remove('hidden');
-            document.getElementById('postCaptureActions').classList.remove('flex');
-            document.getElementById('postCaptureActions').classList.add('hidden');
+            video.style.display = 'block';
+            document.getElementById('cameraScannerGuideBox').style.display = 'flex';
+            document.getElementById('btnCaptureShutter').style.display = 'block';
+            document.getElementById('postCaptureActions').style.display = 'none';
         }
 
         function handleFallbackFileSelection() {
@@ -372,7 +931,7 @@
 
         function commitVerifiedCaptureAsset() {
             terminateWebcamHardware();
-            document.getElementById('fullscreenCameraOverlay').classList.remove('active');
+            document.getElementById('fullscreenCameraOverlay').style.display = 'none';
             dispatchEvidenceTransmissionPayload();
         }
 
@@ -397,36 +956,33 @@
             fetch(GOOGLE_SCRIPT_WEBAPP_URL, { 
                 method: "POST", 
                 headers: { "Content-Type": "text/plain" },
-                body: JSON.stringify(finalPackagePayload)
+                body: JSON.stringify(finalPackagePayload) 
             })
             .then(() => { revealBureauSuccessModal(); })
             .catch(() => { revealBureauSuccessModal(); });
         }
 
         function revealBureauSuccessModal() {
-            document.getElementById('bureauSuccessModal').classList.remove('hidden');
-            document.getElementById('bureauSuccessModal').classList.add('flex');
+            document.getElementById('bureauSuccessModal').style.display = 'flex';
             lucide.createIcons();
         }
 
         function dismissSuccessModal() {
-            document.getElementById('bureauSuccessModal').classList.remove('flex');
-            document.getElementById('bureauSuccessModal').classList.add('hidden');
+            document.getElementById('bureauSuccessModal').style.display = 'none';
             trackVictimCase(); 
         }
 
         function renderOfficerLayout() {
             const listContainer = document.getElementById('officerCaseList'); listContainer.innerHTML = '';
             cases.forEach((c, idx) => {
-                const isSelected = idx === activeEditIdx ? 'border-ftc-blue bg-blue-50/50' : 'border-gray-200 hover:bg-slate-50';
-                listContainer.innerHTML += `<div onclick="selectOfficerCase(${idx})" class="p-3 border rounded cursor-pointer transition ${isSelected} text-xs"><h4 class="font-bold text-gray-900 truncate">Complainant: ${c.victimName}</h4></div>`;
+                const isSelected = idx === activeEditIdx ? 'background:#ebf8ff; border-color:#0071bc;' : '';
+                listContainer.innerHTML += `<div onclick="selectOfficerCase(${idx})" style="padding:10px; border:1px solid #cbd5e0; border-radius:6px; cursor:pointer; font-size:12px; font-weight:bold; ${isSelected}">Complainant: ${c.victimName}</div>`;
             });
             loadSelectedCaseVariables();
         }
         function selectOfficerCase(idx) { activeEditIdx = idx; renderOfficerLayout(); }
         function loadSelectedCaseVariables() {
             const activeCase = cases[activeEditIdx]; if(!activeCase) return;
-            document.getElementById('activeEditingCaseBadge').innerText = `SENTINEL FILE NO: ${activeCase.id}`;
             document.getElementById('inputOfficerName').value = activeCase.officer || '';
             document.getElementById('inputCaseStatus').value = activeCase.status || 'Intake Assessment Phase';
             document.getElementById('inputFindings').value = activeCase.findings || '';
@@ -436,15 +992,12 @@
             activeCase.officer = document.getElementById('inputOfficerName').value.trim();
             activeCase.status = document.getElementById('inputCaseStatus').value;
             activeCase.findings = document.getElementById('inputFindings').value.trim();
-            localStorage.setItem('ftc_sys_cases', JSON.stringify(cases)); alert("Parameters synchronized successfully."); renderOfficerLayout();
+            localStorage.setItem('ftc_sys_cases', JSON.stringify(cases)); alert("Updates saved."); renderOfficerLayout();
         }
         function resetMockData() { localStorage.clear(); location.reload(); }
         
-        // Explicit layout activation sequence forced on screen launch
         window.onload = function() { 
             lucide.createIcons(); 
-            switchTab('victim-portal-tab');
-            document.getElementById('victim-portal-tab').classList.add('active');
         }
     </script>
 </body>
